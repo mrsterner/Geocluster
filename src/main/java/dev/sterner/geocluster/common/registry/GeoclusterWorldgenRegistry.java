@@ -2,6 +2,7 @@ package dev.sterner.geocluster.common.registry;
 
 import com.google.common.collect.Lists;
 import dev.sterner.geocluster.Geocluster;
+import dev.sterner.geocluster.common.world.ReplaceOresFeature;
 import dev.sterner.geocluster.mixin.BiomeModificationContextImplMixin;
 import net.fabricmc.fabric.api.biome.v1.*;
 import net.minecraft.tag.TagKey;

@@ -1,5 +1,10 @@
 package dev.sterner.geocluster.api;
 
+import dev.sterner.geocluster.Geocluster;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.StructureWorldAccess;
+import org.jetbrains.annotations.Nullable;
+
 import java.util.ArrayList;
 
 public class DepositCache {
@@ -23,7 +28,7 @@ public class DepositCache {
     }
 
     @Nullable
-    public IDeposit pick(WorldGenLevel level, BlockPos pos) {
+    public IDeposit pick(StructureWorldAccess level, BlockPos pos) {
         @SuppressWarnings("unchecked")
         ArrayList<IDeposit> choices = (ArrayList<IDeposit>) this.deposits.clone();
         // Dimension Filtering done here!
@@ -47,7 +52,7 @@ public class DepositCache {
             rng -= wt;
         }
 
-        Geolosys.getInstance().LOGGER.error("Could not reach decision on pluton to generate at PlutonRegistry#pick");
+        Geocluster.LOGGER.error("Could not reach decision on deposit to generate at DepositCache#pick");
         return null;
     }
 }
