@@ -1,6 +1,8 @@
 package dev.sterner.geocluster.client.network;
 
 import dev.sterner.geocluster.Geocluster;
+import dev.sterner.geocluster.client.IOreManager;
+import dev.sterner.geocluster.client.OreFoundToast;
 import dev.sterner.geocluster.common.utils.GeoclusterUtils;
 import dev.sterner.geocluster.common.utils.PacketUtils;
 import io.netty.buffer.Unpooled;
@@ -10,6 +12,8 @@ import net.minecraft.block.BlockState;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayNetworkHandler;
 import net.minecraft.client.network.ClientPlayerEntity;
+import net.minecraft.client.toast.AdvancementToast;
+import net.minecraft.client.toast.RecipeToast;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.NbtCompound;
@@ -17,6 +21,7 @@ import net.minecraft.network.PacketByteBuf;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.MutableText;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.math.Direction;
 
 import java.util.HashSet;
 
@@ -39,17 +44,16 @@ public class S2CProspectingPacket {
                 ClientPlayerEntity clientPlayerEntity = client.player;
                 if (clientPlayerEntity != null) {
                     if (!direction.equals("")) {
-                        sendProspectingMessage(clientPlayerEntity, "geocluster.pro_pick.tooltip.found", PacketUtils.messagify(blocks), direction);
+                        for(BlockState blockState : blocks){
+                            ((IOreManager) client).getManager().add(new OreFoundToast(blockState, Direction.byName(direction)));
+                        }
                     } else {
-                        sendProspectingMessage(clientPlayerEntity, "geocluster.pro_pick.tooltip.found_surface", PacketUtils.messagify(blocks));
+                        for(BlockState blockState : blocks){
+                            ((IOreManager) client).getManager().add(new OreFoundToast(blockState, null));
+                        }
                     }
                 }
             });
         }
-    }
-
-    private static void sendProspectingMessage(ClientPlayerEntity player, String key, Object... messageDecorators) {
-        MutableText msg = GeoclusterUtils.tryTranslate(key, messageDecorators);
-        player.sendMessage(msg, true);
     }
 }

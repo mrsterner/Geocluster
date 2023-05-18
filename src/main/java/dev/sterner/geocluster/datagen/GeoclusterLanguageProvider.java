@@ -14,8 +14,8 @@ public class GeoclusterLanguageProvider extends FabricLanguageProvider {
     public void generateTranslations(TranslationBuilder builder) {
         builder.add("itemGroup.geocluster.geocluster", "Geocluster");
         builder.add("geocluster.pro_pick.tooltip.nonefound_surface", "Nothing found in this area");
-        builder.add("geocluster.pro_pick.tooltip.found_surface", "%s found in this area");
-        builder.add("geocluster.pro_pick.tooltip.found", "Found %s %s from you");
+        builder.add("geocluster.pro_pick.tooltip.found_surface", "Found in this area");
+        builder.add("geocluster.pro_pick.tooltip.found", "Found %s from you");
 
         builder.add(PROSPECTORS_PICK, "Prospectors Pick");
         builder.add(COPPER_SAMPLE, "Copper Sample");
