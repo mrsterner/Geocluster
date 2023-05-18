@@ -1,0 +1,31 @@
+{
+  "type": "geocluster:deposit_sparse",
+  "config": {
+    "yMin": -60,
+    "yMax": 15,
+    "size": 64,
+    "spread": 48,
+    "biomeTag": "#minecraft:is_overworld",
+    "blocks": {
+      "default": [
+        {
+          "block": "redstone_ore",
+          "chance": 1.0
+        }
+      ],
+      "minecraft:deepslate": [
+        {
+          "block": "deepslate_redstone_ore",
+          "chance": 1.0
+        }
+      ]
+    },
+    "samples": [
+      {
+        "block": "geocluster:redstone_ore_sample",
+        "chance": 1.0
+      }
+    ],
+    "generationWeight": 4
+  }
+}

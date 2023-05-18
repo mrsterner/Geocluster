@@ -40,12 +40,12 @@ public class DepositCache {
 
         int totalWt = 0;
         for (IDeposit d : choices) {
-            totalWt += d.getGenWt();
+            totalWt += d.getGenWeight();
         }
 
         int rng = level.getRandom().nextInt(totalWt);
         for (IDeposit d : choices) {
-            int wt = d.getGenWt();
+            int wt = d.getGenWeight();
             if (rng < wt) {
                 return d;
             }

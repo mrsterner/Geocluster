@@ -11,6 +11,7 @@ import net.minecraft.world.gen.feature.PlacedFeature;
 public interface GeoclusterTagRegistry {
     TagKey<PlacedFeature> ORES_TO_REMOVE = TagKey.of(Registry.PLACED_FEATURE_KEY, Geocluster.id("ores_to_remove"));
 
+    TagKey<Block> STONE = TagKey.of(Registry.BLOCK_KEY, new Identifier("c", "stone"));
     TagKey<Block> SUPPORTS_SAMPLE = TagKey.of(Registry.BLOCK_KEY, Geocluster.id("supports_sample"));
 
     TagKey<Block> ORES = TagKey.of(Registry.BLOCK_KEY, new Identifier("c", "ores"));

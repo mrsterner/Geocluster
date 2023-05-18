@@ -1,7 +1,7 @@
 package dev.sterner.geocluster.api;
 
-import dev.sterner.geocluster.common.components.IWorldDepositComponent;
 import dev.sterner.geocluster.common.components.IWorldChunkComponent;
+import dev.sterner.geocluster.common.components.IWorldDepositComponent;
 import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.registry.RegistryEntry;
@@ -13,11 +13,11 @@ import java.util.HashSet;
 public interface IDeposit {
     int generate(StructureWorldAccess level, BlockPos pos, IWorldDepositComponent deposits, IWorldChunkComponent chunksGenerated);
 
-    void afterGen(StructureWorldAccess level, BlockPos pos, IWorldDepositComponent deposits, IWorldChunkComponent chunksGenerated);
+    void generatePost(StructureWorldAccess level, BlockPos pos, IWorldDepositComponent deposits, IWorldChunkComponent chunksGenerated);
 
     HashSet<BlockState> getAllOres();
 
-    int getGenWt();
+    int getGenWeight();
 
     boolean canPlaceInBiome(RegistryEntry<Biome> biome);
 

@@ -1,0 +1,9 @@
+{
+  "variants": {
+    "": [
+      {
+        "model": "geocluster:block/uranium_ore_sample"
+      }
+    ]
+  }
+}

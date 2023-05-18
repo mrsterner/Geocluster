@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_deepslate_platinum_ore": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "geocluster:deepslate_platinum_ore"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "minecraft:platinum_ingot_from_blasting_deepslate_platinum_ore"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_deepslate_platinum_ore",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "minecraft:platinum_ingot_from_blasting_deepslate_platinum_ore"
+    ]
+  }
+}

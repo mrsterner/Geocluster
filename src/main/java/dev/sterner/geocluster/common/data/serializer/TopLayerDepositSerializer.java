@@ -9,7 +9,7 @@ public class TopLayerDepositSerializer {
         return TopLayerDeposit.deserialize(json);
     }
 
-    public JsonElement serialize(TopLayerDeposit dep) {
-        return dep.serialize();
+    public JsonElement serialize(TopLayerDeposit topLayerDeposit) {
+        return topLayerDeposit.serialize();
     }
 }

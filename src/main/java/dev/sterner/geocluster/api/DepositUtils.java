@@ -12,7 +12,6 @@ import org.jetbrains.annotations.Nullable;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
-import java.util.random.RandomGenerator;
 
 public class DepositUtils {
 
@@ -34,12 +33,11 @@ public class DepositUtils {
     }
 
     public static HashSet<BlockState> getDefaultMatchers() {
-        // If the cached data isn't there yet, load it.
         if (defaultMatchersCached == null) {
             defaultMatchersCached = new HashSet<>();
             GeoclusterConfig.DEFAULT_REPLACEMENT_MATS.forEach(s -> {
                 Block block = Registry.BLOCK.get(new Identifier(s));
-                if (block == null || !addDefaultMatcher(block)) {
+                if (!addDefaultMatcher(block)) {
                     Geocluster.LOGGER.warn(String.format(s + "&s is not a valid block. Please verify.", s));
                 }
             });

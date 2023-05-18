@@ -9,7 +9,7 @@ public class DenseDepositSerializer {
         return DenseDeposit.deserialize(json);
     }
 
-    public JsonElement serialize(DenseDeposit dep) {
-        return dep.serialize();
+    public JsonElement serialize(DenseDeposit denseDeposit) {
+        return denseDeposit.serialize();
     }
 }

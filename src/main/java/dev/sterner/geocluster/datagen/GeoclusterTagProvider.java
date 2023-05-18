@@ -1,10 +1,10 @@
 package dev.sterner.geocluster.datagen;
 
-import dev.sterner.geocluster.common.registry.GeoclusterObjects;
 import dev.sterner.geocluster.common.registry.GeoclusterTagRegistry;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
 import net.minecraft.block.Block;
+import net.minecraft.block.Blocks;
 import net.minecraft.tag.BlockTags;
 import org.jetbrains.annotations.Nullable;
 
@@ -21,9 +21,18 @@ public class GeoclusterTagProvider {
         protected void generateTags() {
             for (Block block : BLOCKS.keySet()) {
                 getOrCreateTagBuilder(BlockTags.PICKAXE_MINEABLE).add(block);
-                getOrCreateTagBuilder(BlockTags.NEEDS_IRON_TOOL).add(block);
                 getOrCreateTagBuilder(GeoclusterTagRegistry.ORES).add(block);
+                if (!block.equals(ANCIENT_DEBRIS_ORE)) {
+                    getOrCreateTagBuilder(BlockTags.NEEDS_IRON_TOOL).add(block);
+                } else {
+                    getOrCreateTagBuilder(BlockTags.NEEDS_DIAMOND_TOOL).add(block);
+                }
             }
+
+            getOrCreateTagBuilder(BlockTags.DIRT);
+            getOrCreateTagBuilder(BlockTags.SAND);
+            getOrCreateTagBuilder(GeoclusterTagRegistry.STONE).add(Blocks.STONE).add(Blocks.ANDESITE).add(Blocks.GRANITE).add(Blocks.DIORITE).add(Blocks.DEEPSLATE);
+            getOrCreateTagBuilder(GeoclusterTagRegistry.SUPPORTS_SAMPLE).addTag(BlockTags.DIRT).addTag(BlockTags.SAND).add(Blocks.GRAVEL).addTag(GeoclusterTagRegistry.STONE);
         }
     }
 

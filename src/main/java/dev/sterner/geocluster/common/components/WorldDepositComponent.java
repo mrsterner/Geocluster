@@ -102,7 +102,7 @@ public class WorldDepositComponent implements AutoSyncedComponent, IWorldDeposit
 
         @Override
         public String toString() {
-            return "[" + this.pos.getX() + " " + this.pos.getY() + " " + this.pos.getZ() + "]: " + Registry.BLOCK.getKey(this.state.getBlock());
+            return "[" + this.pos.getX() + " " + this.pos.getY() + " " + this.pos.getZ() + "]: " + Registry.BLOCK.getId(this.state.getBlock());
         }
     }
 }

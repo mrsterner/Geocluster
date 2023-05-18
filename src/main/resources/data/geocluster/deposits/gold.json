@@ -1,0 +1,38 @@
+{
+  "type": "geocluster:deposit_dense",
+  "config": {
+    "yMin": -64,
+    "yMax": 32,
+    "size": 40,
+    "biomeTag": "#minecraft:is_overworld",
+    "blocks": {
+      "default": [
+        {
+          "block": "gold_ore",
+          "chance": 0.85
+        },
+        {
+          "block": null,
+          "chance": 0.15
+        }
+      ],
+      "minecraft:deepslate": [
+        {
+          "block": "deepslate_gold_ore",
+          "chance": 0.85
+        },
+        {
+          "block": null,
+          "chance": 0.15
+        }
+      ]
+    },
+    "samples": [
+      {
+        "block": "geocluster:gold_ore_sample",
+        "chance": 1.0
+      }
+    ],
+    "generationWeight": 4
+  }
+}

@@ -18,6 +18,24 @@
     "geocluster:titanium_ore",
     "geocluster:deepslate_titanium_ore",
     "geocluster:nickel_ore",
-    "geocluster:deepslate_nickel_ore"
+    "geocluster:deepslate_nickel_ore",
+    "geocluster:copper_ore_sample",
+    "geocluster:iron_ore_sample",
+    "geocluster:gold_ore_sample",
+    "geocluster:zinc_ore_sample",
+    "geocluster:silver_ore_sample",
+    "geocluster:lead_ore_sample",
+    "geocluster:aluminium_ore_sample",
+    "geocluster:uranium_ore_sample",
+    "geocluster:tin_ore_sample",
+    "geocluster:platinum_ore_sample",
+    "geocluster:titanium_ore_sample",
+    "geocluster:nickel_ore_sample",
+    "geocluster:coal_ore_sample",
+    "geocluster:redstone_ore_sample",
+    "geocluster:lapis_ore_sample",
+    "geocluster:emerald_ore_sample",
+    "geocluster:diamond_ore_sample",
+    "geocluster:ancient_debris_ore_sample"
   ]
 }

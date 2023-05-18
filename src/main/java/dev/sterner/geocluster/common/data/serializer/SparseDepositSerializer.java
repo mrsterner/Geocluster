@@ -9,7 +9,7 @@ public class SparseDepositSerializer {
         return SparseDeposit.deserialize(json);
     }
 
-    public JsonElement serialize(SparseDeposit dep) {
-        return dep.serialize();
+    public JsonElement serialize(SparseDeposit sparseDeposit) {
+        return sparseDeposit.serialize();
     }
 }

@@ -1,0 +1,39 @@
+{
+  "type": "geocluster:deposit_layer",
+  "config": {
+    "yMin": -4,
+    "yMax": 32,
+    "radius": 3,
+    "depth": 4,
+    "biomeTag": "#minecraft:is_overworld",
+    "blocks": {
+      "default": [
+        {
+          "block": "coal_ore",
+          "chance": 0.85
+        },
+        {
+          "block": null,
+          "chance": 0.15
+        }
+      ],
+      "minecraft:deepslate": [
+        {
+          "block": "deepslate_coal_ore",
+          "chance": 0.85
+        },
+        {
+          "block": null,
+          "chance": 0.15
+        }
+      ]
+    },
+    "samples": [
+      {
+        "block": "geocluster:coal_ore_sample",
+        "chance": 1.0
+      }
+    ],
+    "generationWeight": 7
+  }
+}

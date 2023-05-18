@@ -1,0 +1,9 @@
+{
+  "variants": {
+    "": [
+      {
+        "model": "geocluster:block/lapis_ore_sample"
+      }
+    ]
+  }
+}

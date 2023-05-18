@@ -1,0 +1,9 @@
+{
+  "variants": {
+    "": [
+      {
+        "model": "geocluster:block/silver_ore_sample"
+      }
+    ]
+  }
+}

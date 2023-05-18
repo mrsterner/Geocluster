@@ -1,0 +1,9 @@
+{
+  "variants": {
+    "": [
+      {
+        "model": "geocluster:block/tin_ore_sample"
+      }
+    ]
+  }
+}

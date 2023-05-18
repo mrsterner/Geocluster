@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:blasting",
+  "cookingtime": 100,
+  "experience": 1.0,
+  "group": "uranium_ingot",
+  "ingredient": {
+    "item": "geocluster:deepslate_uranium_ore"
+  },
+  "result": "geocluster:uranium_ingot"
+}

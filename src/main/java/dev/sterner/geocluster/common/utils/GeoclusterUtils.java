@@ -23,7 +23,7 @@ public class GeoclusterUtils {
     }
 
     public static String getRegistryName(Block block) {
-        return Objects.requireNonNull(Registry.BLOCK.getKey(block)).toString();
+        return Objects.requireNonNull(Registry.BLOCK.getId(block)).toString();
     }
 
     public static String getRegistryName(BlockState state) {

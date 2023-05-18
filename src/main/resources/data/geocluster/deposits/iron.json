@@ -1,0 +1,30 @@
+{
+  "type": "geocluster:deposit_dike",
+  "config": {
+    "yMin": 32,
+    "yMax": 60,
+    "baseRadius": 2,
+    "biomeTag": "#minecraft:is_overworld",
+    "blocks": {
+      "default": [
+        {
+          "block": "iron_ore",
+          "chance": 1.0
+        }
+      ],
+      "minecraft:deepslate": [
+        {
+          "block": "deepslate_iron_ore",
+          "chance": 1.0
+        }
+      ]
+    },
+    "samples": [
+      {
+        "block": "geocluster:iron_ore_sample",
+        "chance": 1.0
+      }
+    ],
+    "generationWeight": 6
+  }
+}

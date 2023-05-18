@@ -47,6 +47,7 @@ dependencies {
 	//CCA
 	modImplementation("dev.onyxstudios.cardinal-components-api:cardinal-components-base:${project.cca}")
 	modImplementation("dev.onyxstudios.cardinal-components-api:cardinal-components-world:${project.cca}")
+	modImplementation("dev.onyxstudios.cardinal-components-api:cardinal-components-chunk:${project.cca}")
 
 	//MidnightLib
 	modImplementation include ("maven.modrinth:midnightlib:${project.midnightlib_version}")

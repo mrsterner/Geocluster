@@ -1,0 +1,9 @@
+{
+  "variants": {
+    "": [
+      {
+        "model": "geocluster:block/nickel_ore_sample"
+      }
+    ]
+  }
+}

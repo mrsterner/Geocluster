@@ -2,10 +2,29 @@ package dev.sterner.geocluster.api.deposits;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import dev.sterner.geocluster.Geocluster;
+import dev.sterner.geocluster.GeoclusterConfig;
+import dev.sterner.geocluster.api.DepositUtils;
 import dev.sterner.geocluster.api.IDeposit;
+import dev.sterner.geocluster.common.components.IWorldChunkComponent;
+import dev.sterner.geocluster.common.components.IWorldDepositComponent;
+import dev.sterner.geocluster.common.utils.FeatureUtils;
+import dev.sterner.geocluster.common.utils.GeoclusterUtils;
+import dev.sterner.geocluster.common.utils.SampleUtils;
+import dev.sterner.geocluster.common.utils.SerializerUtils;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
+import net.minecraft.state.property.Properties;
 import net.minecraft.tag.TagKey;
+import net.minecraft.util.Identifier;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.ChunkPos;
+import net.minecraft.util.math.random.Random;
+import net.minecraft.util.registry.Registry;
+import net.minecraft.util.registry.RegistryEntry;
+import net.minecraft.world.StructureWorldAccess;
 import net.minecraft.world.biome.Biome;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -69,18 +88,10 @@ public class LayerDeposit implements IDeposit {
         }
     }
 
-    /**
-     * Uses {@link DepositUtils#pick(HashMap, float, RandomSource)} to find a random ore block to
-     * return.
-     *
-     * @return the random ore block chosen (based on weight) Can be null to
-     * represent "density" of the ore -- null results should be used to
-     * determine if the block in the world should be replaced. If null,
-     * don't replace 😉
-     */
+
     @Nullable
-    public BlockState getOre(BlockState currentState, RandomSource rand) {
-        String res = Utils.getRegistryName(currentState);
+    public BlockState getOre(BlockState currentState, Random rand) {
+        String res = GeoclusterUtils.getRegistryName(currentState);
         if (this.oreToWtMap.containsKey(res)) {
             // Return a choice from a specialized set here
             HashMap<BlockState, Float> mp = this.oreToWtMap.get(res);
@@ -89,17 +100,8 @@ public class LayerDeposit implements IDeposit {
         return DepositUtils.pick(this.oreToWtMap.get("default"), this.cumulOreWtMap.get("default"), rand);
     }
 
-    /**
-     * Uses {@link DepositUtils#pick(HashMap, float, RandomSource)} to find a random pluton sample
-     * to return.
-     *
-     * @return the random pluton sample chosen (based on weight) Can be null to
-     * represent "density" of the samples -- null results should be used to
-     * determine if the sample in the world should be replaced. If null,
-     * don't replace 😉
-     */
     @Nullable
-    public BlockState getSample(RandomSource rand) {
+    public BlockState getSample(Random rand) {
         return DepositUtils.pick(this.sampleToWtMap, this.sumWtSamples, rand);
     }
 
@@ -108,13 +110,13 @@ public class LayerDeposit implements IDeposit {
     public HashSet<BlockState> getAllOres() {
         HashSet<BlockState> ret = new HashSet<BlockState>();
         this.oreToWtMap.values().forEach(x -> ret.addAll(x.keySet()));
-        ret.remove(Blocks.AIR.defaultBlockState());
+        ret.remove(Blocks.AIR.getDefaultState());
         return ret.isEmpty() ? null : ret;
     }
 
     @Override
-    public boolean canPlaceInBiome(Holder<Biome> b) {
-        return b.is(this.biomeTag);
+    public boolean canPlaceInBiome(RegistryEntry<Biome> b) {
+        return b.isIn(this.biomeTag);
     }
 
     @Override
@@ -137,7 +139,7 @@ public class LayerDeposit implements IDeposit {
      * ]
      */
     @Override
-    public int generate(WorldGenLevel level, BlockPos pos, IDepositCapability deposits, IChunkGennedCapability chunksGenerated) {
+    public int generate(StructureWorldAccess level, BlockPos pos, IWorldDepositComponent deposits, IWorldChunkComponent chunksGenerated) {
         /* Dimension checking is done in PlutonRegistry#pick */
         /* Check biome allowance */
         if (!this.canPlaceInBiome(level.getBiome(pos))) {
@@ -148,10 +150,10 @@ public class LayerDeposit implements IDeposit {
 
         ChunkPos thisChunk = new ChunkPos(pos);
 
-        int x = ((thisChunk.getMinBlockX() + thisChunk.getMaxBlockX()) / 2) - level.getRandom().nextInt(8) + level.getRandom().nextInt(16);
+        int x = ((thisChunk.getStartX() + thisChunk.getEndX()) / 2) - level.getRandom().nextInt(8) + level.getRandom().nextInt(16);
         int y = this.yMin + level.getRandom().nextInt(Math.abs(this.yMax - this.yMin));
-        int z = ((thisChunk.getMinBlockZ() + thisChunk.getMaxBlockZ()) / 2) - level.getRandom().nextInt(8) + level.getRandom().nextInt(16);
-        int max = Utils.getTopSolidBlock(level, pos).getY();
+        int z = ((thisChunk.getStartZ() + thisChunk.getEndZ()) / 2) - level.getRandom().nextInt(8) + level.getRandom().nextInt(16);
+        int max = GeoclusterUtils.getTopSolidBlock(level, pos).getY();
         if (y > max) {
             y = Math.max(yMin, max);
         }
@@ -166,7 +168,7 @@ public class LayerDeposit implements IDeposit {
                         continue;
                     }
 
-                    BlockPos placePos = basePos.offset(dX, dY, dZ);
+                    BlockPos placePos = basePos.add(dX, dY, dZ);
                     BlockState current = level.getBlockState(placePos);
                     BlockState tmp = this.getOre(current, level.getRandom());
                     if (tmp == null) {
@@ -175,7 +177,7 @@ public class LayerDeposit implements IDeposit {
 
                     // Skip this block if it can't replace the target block or doesn't have a
                     // manually-configured replacer in the blocks object
-                    if (!(this.getBlockStateMatchers().contains(current) || this.oreToWtMap.containsKey(Utils.getRegistryName(current)))) {
+                    if (!(this.getBlockStateMatchers().contains(current) || this.oreToWtMap.containsKey(GeoclusterUtils.getRegistryName(current)))) {
                         continue;
                     }
 
@@ -192,14 +194,14 @@ public class LayerDeposit implements IDeposit {
      * Handles what to do after the world has generated
      */
     @Override
-    public void afterGen(WorldGenLevel level, BlockPos pos, IDepositCapability deposits, IChunkGennedCapability chunksGenerated) {
+    public void afterGen(StructureWorldAccess level, BlockPos pos, IWorldDepositComponent deposits, IWorldChunkComponent chunksGenerated) {
         // Debug the pluton
-        if (CommonConfig.DEBUG_WORLD_GEN.get()) {
-            Geolosys.getInstance().LOGGER.info("Generated {} in Chunk {} (Pos [{} {} {}])", this.toString(), new ChunkPos(pos), pos.getX(), pos.getY(), pos.getZ());
+        if (GeoclusterConfig.DEBUG_WORLD_GEN) {
+            Geocluster.LOGGER.info("Generated {} in Chunk {} (Pos [{} {} {}])", this, new ChunkPos(pos), pos.getX(), pos.getY(), pos.getZ());
         }
 
         ChunkPos thisChunk = new ChunkPos(pos);
-        int maxSampleCnt = Math.min(CommonConfig.MAX_SAMPLES_PER_CHUNK.get(), (this.radius / CommonConfig.MAX_SAMPLES_PER_CHUNK.get()) + (this.radius % CommonConfig.MAX_SAMPLES_PER_CHUNK.get()));
+        int maxSampleCnt = Math.min(GeoclusterConfig.MAX_SAMPLES_PER_CHUNK, (this.radius / GeoclusterConfig.MAX_SAMPLES_PER_CHUNK) + (this.radius % GeoclusterConfig.MAX_SAMPLES_PER_CHUNK));
         for (int i = 0; i < maxSampleCnt; i++) {
             BlockState tmp = this.getSample(level.getRandom());
             if (tmp == null) {
@@ -211,8 +213,8 @@ public class LayerDeposit implements IDeposit {
                 continue;
             }
 
-            if (SampleUtils.isInWater(level, samplePos) && tmp.hasProperty(BlockStateProperties.WATERLOGGED)) {
-                tmp = tmp.setValue(BlockStateProperties.WATERLOGGED, Boolean.TRUE);
+            if (SampleUtils.isInWater(level, samplePos) && tmp.contains(Properties.WATERLOGGED)) {
+                tmp = tmp.with(Properties.WATERLOGGED, Boolean.TRUE);
             }
 
             FeatureUtils.enqueueBlockPlacement(level, thisChunk, samplePos, tmp, deposits, chunksGenerated);
@@ -239,7 +241,7 @@ public class LayerDeposit implements IDeposit {
             int radius = json.get("radius").getAsInt();
             int depth = json.get("depth").getAsInt();
             int genWt = json.get("generationWeight").getAsInt();
-            TagKey<Biome> biomeTag = TagKey.create(Registry.BIOME_REGISTRY, new ResourceLocation(json.get("biomeTag").getAsString().replace("#", "")));
+            TagKey<Biome> biomeTag = TagKey.of(Registry.BIOME_KEY, new Identifier(json.get("biomeTag").getAsString().replace("#", "")));
             // Block State Matchers
             HashSet<BlockState> blockStateMatchers = DepositUtils.getDefaultMatchers();
             if (json.has("blockStateMatchers")) {
@@ -248,7 +250,7 @@ public class LayerDeposit implements IDeposit {
 
             return new LayerDeposit(oreBlocks, sampleBlocks, yMin, yMax, radius, depth, genWt, biomeTag, blockStateMatchers);
         } catch (Exception e) {
-            Geolosys.getInstance().LOGGER.error("Failed to parse: {}", e.getMessage());
+            Geocluster.LOGGER.error("Failed to parse: {}", e.getMessage());
             return null;
         }
     }
@@ -265,7 +267,7 @@ public class LayerDeposit implements IDeposit {
         config.addProperty("radius", this.radius);
         config.addProperty("depth", this.depth);
         config.addProperty("generationWeight", this.genWt);
-        config.addProperty("biomeTag", this.biomeTag.location().toString());
+        config.addProperty("biomeTag", this.biomeTag.id().toString());
 
         // Glue the two parts of this together.
         json.addProperty("type", JSON_TYPE);

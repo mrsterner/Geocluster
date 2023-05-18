@@ -1,0 +1,9 @@
+{
+  "variants": {
+    "": [
+      {
+        "model": "geocluster:block/zinc_ore_sample"
+      }
+    ]
+  }
+}

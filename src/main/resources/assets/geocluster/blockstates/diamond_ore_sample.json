@@ -1,0 +1,9 @@
+{
+  "variants": {
+    "": [
+      {
+        "model": "geocluster:block/diamond_ore_sample"
+      }
+    ]
+  }
+}

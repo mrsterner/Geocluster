@@ -7,7 +7,9 @@ import net.minecraft.data.server.recipe.RecipeJsonProvider;
 import net.minecraft.item.ItemConvertible;
 import net.minecraft.item.Items;
 
+import java.util.List;
 import java.util.function.Consumer;
+
 import static dev.sterner.geocluster.common.registry.GeoclusterObjects.*;
 
 public class GeoclusterRecipeProvider extends FabricRecipeProvider {
@@ -48,5 +50,17 @@ public class GeoclusterRecipeProvider extends FabricRecipeProvider {
         offerSmelting(exporter, PLATINUM_ORES, PLATINUM_INGOT, 1.0F, 200, "platinum_ingot");
         offerSmelting(exporter, TITANIUM_ORES, TITANIUM_INGOT, 1.0F, 200, "titanium_ingot");
         offerSmelting(exporter, NICKEL_ORES, NICKEL_INGOT, 1.0F, 200, "nickel_ingot");
+        offerSmelting(exporter, List.of(RAW_ANCIENT_DEBRIS), Items.NETHERITE_SCRAP, 1.0F, 200, "netherite_scrap");
+
+        offerBlasting(exporter, ZINC_ORES, ZINC_INGOT, 1.0F, 100, "zinc_ingot");
+        offerBlasting(exporter, SILVER_ORES, SILVER_INGOT, 1.0F, 100, "silver_ingot");
+        offerBlasting(exporter, LEAD_ORES, LEAD_INGOT, 1.0F, 100, "lead_ingot");
+        offerBlasting(exporter, ALUMINIUM_ORES, ALUMINIUM_INGOT, 1.0F, 100, "aluminium_ingot");
+        offerBlasting(exporter, URANIUM_ORES, URANIUM_INGOT, 1.0F, 100, "uranium_ingot");
+        offerBlasting(exporter, TIN_ORES, TIN_INGOT, 1.0F, 100, "tin_ingot");
+        offerBlasting(exporter, PLATINUM_ORES, PLATINUM_INGOT, 1.0F, 100, "platinum_ingot");
+        offerBlasting(exporter, TITANIUM_ORES, TITANIUM_INGOT, 1.0F, 100, "titanium_ingot");
+        offerBlasting(exporter, NICKEL_ORES, NICKEL_INGOT, 1.0F, 100, "nickel_ingot");
+        offerBlasting(exporter, List.of(RAW_ANCIENT_DEBRIS), Items.NETHERITE_SCRAP, 1.0F, 100, "netherite_scrap");
     }
 }

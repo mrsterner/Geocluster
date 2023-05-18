@@ -2,15 +2,27 @@ package dev.sterner.geocluster.api.deposits;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import dev.sterner.geocluster.Geocluster;
+import dev.sterner.geocluster.GeoclusterConfig;
 import dev.sterner.geocluster.api.DepositUtils;
 import dev.sterner.geocluster.api.IDeposit;
+import dev.sterner.geocluster.common.components.IWorldChunkComponent;
+import dev.sterner.geocluster.common.components.IWorldDepositComponent;
+import dev.sterner.geocluster.common.utils.FeatureUtils;
 import dev.sterner.geocluster.common.utils.GeoclusterUtils;
+import dev.sterner.geocluster.common.utils.SampleUtils;
+import dev.sterner.geocluster.common.utils.SerializerUtils;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
+import net.minecraft.state.property.Properties;
 import net.minecraft.tag.TagKey;
+import net.minecraft.util.Identifier;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.math.random.Random;
+import net.minecraft.util.registry.Registry;
 import net.minecraft.util.registry.RegistryEntry;
+import net.minecraft.world.StructureWorldAccess;
 import net.minecraft.world.biome.Biome;
 import org.jetbrains.annotations.Nullable;
 
@@ -125,7 +137,7 @@ public class DikeDeposit implements IDeposit {
      * generation code in
      */
     @Override
-    public int generate(WorldGenLevel level, BlockPos pos, IDepositCapability deposits, IChunkGennedCapability chunksGenerated) {
+    public int generate(StructureWorldAccess level, BlockPos pos, IWorldDepositComponent deposits, IWorldChunkComponent chunksGenerated) {
         /* Dimension checking is done in PlutonRegistry#pick */
         /* Check biome allowance */
         if (!this.canPlaceInBiome(level.getBiome(pos))) {
@@ -134,11 +146,11 @@ public class DikeDeposit implements IDeposit {
 
         ChunkPos thisChunk = new ChunkPos(pos);
         int height = Math.abs((this.yMax - this.yMin));
-        int x = thisChunk.getMinBlockX() + level.getRandom().nextInt(16);
-        int z = thisChunk.getMinBlockZ() + level.getRandom().nextInt(16);
+        int x = thisChunk.getStartX() + level.getRandom().nextInt(16);
+        int z = thisChunk.getStartZ() + level.getRandom().nextInt(16);
         int yMin = this.yMin + level.getRandom().nextInt(height / 4);
         int yMax = this.yMax - level.getRandom().nextInt(height / 4);
-        int max = Utils.getTopSolidBlock(level, pos).getY();
+        int max = GeoclusterUtils.getTopSolidBlock(level, pos).getY();
         if (yMin > max) {
             yMin = Math.max(yMin, max);
         } else if (yMin == yMax) {
@@ -168,7 +180,7 @@ public class DikeDeposit implements IDeposit {
 
                     // Skip this block if it can't replace the target block or doesn't have a
                     // manually-configured replacer in the blocks object
-                    if (!(this.getBlockStateMatchers().contains(current) || this.oreToWtMap.containsKey(Utils.getRegistryName(current)))) {
+                    if (!(this.getBlockStateMatchers().contains(current) || this.oreToWtMap.containsKey(GeoclusterUtils.getRegistryName(current)))) {
                         continue;
                     }
 
@@ -197,14 +209,14 @@ public class DikeDeposit implements IDeposit {
      * Handles what to do after the world has generated
      */
     @Override
-    public void afterGen(WorldGenLevel level, BlockPos pos, IDepositCapability deposits, IChunkGennedCapability chunksGenerated) {
+    public void afterGen(StructureWorldAccess level, BlockPos pos, IWorldDepositComponent deposits, IWorldChunkComponent chunksGenerated) {
         // Debug the pluton
-        if (CommonConfig.DEBUG_WORLD_GEN.get()) {
-            Geolosys.getInstance().LOGGER.info("Generated {} in Chunk {} (Pos [{} {} {}])", this.toString(), new ChunkPos(pos), pos.getX(), pos.getY(), pos.getZ());
+        if (GeoclusterConfig.DEBUG_WORLD_GEN) {
+            Geocluster.LOGGER.info("Generated {} in Chunk {} (Pos [{} {} {}])", this, new ChunkPos(pos), pos.getX(), pos.getY(), pos.getZ());
         }
 
         ChunkPos thisChunk = new ChunkPos(pos);
-        int maxSampleCnt = Math.min(CommonConfig.MAX_SAMPLES_PER_CHUNK.get(), (this.baseRadius / CommonConfig.MAX_SAMPLES_PER_CHUNK.get()) + (this.baseRadius % CommonConfig.MAX_SAMPLES_PER_CHUNK.get()));
+        int maxSampleCnt = Math.min(GeoclusterConfig.MAX_SAMPLES_PER_CHUNK, (this.baseRadius / GeoclusterConfig.MAX_SAMPLES_PER_CHUNK) + (this.baseRadius % GeoclusterConfig.MAX_SAMPLES_PER_CHUNK));
         maxSampleCnt = Math.max(maxSampleCnt, 1);
         for (int i = 0; i < maxSampleCnt; i++) {
             BlockState tmp = this.getSample(level.getRandom());
@@ -217,8 +229,8 @@ public class DikeDeposit implements IDeposit {
                 continue;
             }
 
-            if (SampleUtils.isInWater(level, samplePos) && tmp.hasProperty(BlockStateProperties.WATERLOGGED)) {
-                tmp = tmp.setValue(BlockStateProperties.WATERLOGGED, Boolean.TRUE);
+            if (SampleUtils.isInWater(level, samplePos) && tmp.contains(Properties.WATERLOGGED)) {
+                tmp = tmp.with(Properties.WATERLOGGED, Boolean.TRUE);
             }
 
             FeatureUtils.enqueueBlockPlacement(level, thisChunk, samplePos, tmp, deposits, chunksGenerated);
@@ -244,7 +256,7 @@ public class DikeDeposit implements IDeposit {
             int yMax = json.get("yMax").getAsInt();
             int baseRadius = json.get("baseRadius").getAsInt();
             int genWt = json.get("generationWeight").getAsInt();
-            TagKey<Biome> biomeTag = TagKey.create(Registry.BIOME_REGISTRY, new ResourceLocation(json.get("biomeTag").getAsString().replace("#", "")));
+            TagKey<Biome> biomeTag = TagKey.of(Registry.BIOME_KEY, new Identifier(json.get("biomeTag").getAsString().replace("#", "")));
 
             // Block State Matchers
             HashSet<BlockState> blockStateMatchers = DepositUtils.getDefaultMatchers();
@@ -254,7 +266,7 @@ public class DikeDeposit implements IDeposit {
 
             return new DikeDeposit(oreBlocks, sampleBlocks, yMin, yMax, baseRadius, genWt, biomeTag, blockStateMatchers);
         } catch (Exception e) {
-            Geolosys.getInstance().LOGGER.error("Failed to parse: {}", e.getMessage());
+            Geocluster.LOGGER.error("Failed to parse: {}", e.getMessage());
             return null;
         }
     }
@@ -270,7 +282,7 @@ public class DikeDeposit implements IDeposit {
         config.addProperty("yMax", this.yMax);
         config.addProperty("baseRadius", this.baseRadius);
         config.addProperty("generationWeight", this.genWt);
-        config.addProperty("biomeTag", this.biomeTag.location().toString());
+        config.addProperty("biomeTag", this.biomeTag.id().toString());
         // Glue the two parts of this together.
         json.addProperty("type", JSON_TYPE);
         json.add("config", config);

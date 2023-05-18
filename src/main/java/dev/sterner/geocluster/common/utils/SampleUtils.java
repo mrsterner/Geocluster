@@ -29,14 +29,8 @@ public class SampleUtils {
         int zCenter = (chunkPos.getStartZ() + chunkPos.getEndZ()) / 2;
 
         // Only put things in the negative X|Z if the spread is provided.
-        int blockPosX = xCenter
-                + (level.getRandom().nextInt(usedSpread) * ((level.getRandom().nextBoolean()) ? 1 : -1));
-        int blockPosZ = zCenter
-                + (level.getRandom().nextInt(usedSpread) * ((level.getRandom().nextBoolean()) ? 1 : -1));
-
-        if (!world.isChunkLoaded(chunkPos.x, chunkPos.z)) {
-            return null;
-        }
+        int blockPosX = xCenter + (level.getRandom().nextInt(usedSpread) * ((level.getRandom().nextBoolean()) ? 1 : -1));
+        int blockPosZ = zCenter + (level.getRandom().nextInt(usedSpread) * ((level.getRandom().nextBoolean()) ? 1 : -1));
 
         BlockPos searchPos = new BlockPos(blockPosX, world.getHeight(), blockPosZ);
 

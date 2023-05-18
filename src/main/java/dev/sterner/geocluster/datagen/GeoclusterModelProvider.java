@@ -41,6 +41,8 @@ public class GeoclusterModelProvider extends FabricModelProvider {
 
         generator.registerSimpleCubeAll(NICKEL_ORE);
         generator.registerSimpleCubeAll(DEEPSLATE_NICKEL_ORE);
+
+        generator.registerSimpleCubeAll(ANCIENT_DEBRIS_ORE);
     }
 
     @Override
@@ -64,6 +66,7 @@ public class GeoclusterModelProvider extends FabricModelProvider {
         generator.register(RAW_TITANIUM, Models.GENERATED);
         generator.register(RAW_NICKEL, Models.GENERATED);
         generator.register(RAW_SILVER, Models.GENERATED);
+        generator.register(RAW_ANCIENT_DEBRIS, Models.GENERATED);
 
         generator.register(COPPER_NUGGET, Models.GENERATED);
         generator.register(ZINC_NUGGET, Models.GENERATED);

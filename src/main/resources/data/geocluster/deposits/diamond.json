@@ -1,0 +1,38 @@
+{
+  "type": "geocluster:deposit_dike",
+  "config": {
+    "yMin": -64,
+    "yMax": 10,
+    "baseRadius": 3,
+    "biomeTag": "#minecraft:is_overworld",
+    "blocks": {
+      "default": [
+        {
+          "block": "diamond_ore",
+          "chance": 0.5
+        },
+        {
+          "block": null,
+          "chance": 0.5
+        }
+      ],
+      "minecraft:deepslate": [
+        {
+          "block": "deepslate_diamond_ore",
+          "chance": 0.5
+        },
+        {
+          "block": null,
+          "chance": 0.5
+        }
+      ]
+    },
+    "samples": [
+      {
+        "block": "geocluster:diamond_ore_sample",
+        "chance": 1.0
+      }
+    ],
+    "generationWeight": 2
+  }
+}

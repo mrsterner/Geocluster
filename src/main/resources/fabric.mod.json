@@ -3,13 +3,13 @@
 	"id": "geocluster",
 	"version": "${version}",
 	"name": "Geocluster",
-	"description": "This is an example description! Tell everyone what your mod is about!",
+	"description": "Change ore generation to be more realistic",
 	"authors": [
 		"MrSterner"
 	],
 	"contact": {
 		"homepage": "https://fabricmc.net/",
-		"sources": "https://github.com/FabricMC/fabric-example-mod"
+		"sources": "https://github.com/mrsterner/geocluster"
 	},
 	"license": "CC0-1.0",
 	"icon": "assets/geocluster/icon.png",
@@ -18,7 +18,7 @@
 		"main": [
 			"dev.sterner.geocluster.Geocluster"
 		],
-		"cardinal-components-entity": [
+		"cardinal-components-world": [
 			"dev.sterner.geocluster.common.components.GeoclusterComponents"
 		],
 		"fabric-datagen": [
@@ -38,8 +38,10 @@
 	"suggests": {
 		"another-mod": "*"
 	},
-	"cardinal-components": [
-		"geocluster:chunk",
-		"geocluster:deposit"
-	]
+	"custom": {
+		"cardinal-components": [
+			"geocluster:chunk",
+			"geocluster:deposit"
+		]
+	}
 }

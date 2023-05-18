@@ -6,8 +6,8 @@ import dev.sterner.geocluster.Geocluster;
 import dev.sterner.geocluster.GeoclusterConfig;
 import dev.sterner.geocluster.api.DepositUtils;
 import dev.sterner.geocluster.api.IDeposit;
-import dev.sterner.geocluster.common.components.IWorldDepositComponent;
 import dev.sterner.geocluster.common.components.IWorldChunkComponent;
+import dev.sterner.geocluster.common.components.IWorldDepositComponent;
 import dev.sterner.geocluster.common.utils.FeatureUtils;
 import dev.sterner.geocluster.common.utils.GeoclusterUtils;
 import dev.sterner.geocluster.common.utils.SampleUtils;
@@ -30,7 +30,6 @@ import org.jetbrains.annotations.Nullable;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
-import java.util.random.RandomGenerator;
 
 public class DenseDeposit implements IDeposit {
 
@@ -60,7 +59,7 @@ public class DenseDeposit implements IDeposit {
 
         // Verify that blocks.default exists.
         if (!this.oreToWtMap.containsKey("default")) {
-            throw new RuntimeException("Pluton blocks should always have a default key");
+            throw new RuntimeException("Cluster blocks should always have a default key");
         }
 
         for (Map.Entry<String, HashMap<BlockState, Float>> i : this.oreToWtMap.entrySet()) {
@@ -74,7 +73,7 @@ public class DenseDeposit implements IDeposit {
             }
 
             if (!DepositUtils.nearlyEquals(this.cumulOreWtMap.get(i.getKey()), 1.0F)) {
-                throw new RuntimeException("Sum of weights for pluton blocks should equal 1.0");
+                throw new RuntimeException("Sum of weights for clusters blocks should equal 1.0");
             }
         }
 
@@ -83,7 +82,7 @@ public class DenseDeposit implements IDeposit {
         }
 
         if (!DepositUtils.nearlyEquals(sumWtSamples, 1.0F)) {
-            throw new RuntimeException("Sum of weights for pluton samples should equal 1.0");
+            throw new RuntimeException("Sum of weights for clusters samples should equal 1.0");
         }
     }
 
@@ -176,10 +175,10 @@ public class DenseDeposit implements IDeposit {
     }
 
     @Override
-    public void afterGen(StructureWorldAccess level, BlockPos pos, IWorldDepositComponent deposits, IWorldChunkComponent chunksGenerated) {
+    public void generatePost(StructureWorldAccess level, BlockPos pos, IWorldDepositComponent deposits, IWorldChunkComponent chunksGenerated) {
         // Debug the cluster
         if (GeoclusterConfig.DEBUG_WORLD_GEN) {
-            Geocluster.LOGGER.info("Generated {} in Chunk {} (Pos [{} {} {}])", this.toString(), new ChunkPos(pos), pos.getX(), pos.getY(), pos.getZ());
+            Geocluster.LOGGER.info("Generated {} in Chunk {} (Pos [{} {} {}])", this, new ChunkPos(pos), pos.getX(), pos.getY(), pos.getZ());
         }
 
         ChunkPos thisChunk = new ChunkPos(pos);
@@ -191,6 +190,7 @@ public class DenseDeposit implements IDeposit {
             }
 
             BlockPos samplePos = SampleUtils.getSamplePosition(level, new ChunkPos(pos));
+
             if (samplePos == null || SampleUtils.inNonWaterFluid(level, samplePos)) {
                 continue;
             }
@@ -213,7 +213,7 @@ public class DenseDeposit implements IDeposit {
     }
 
     @Override
-    public int getGenWt() {
+    public int getGenWeight() {
         return this.genWt;
     }
 
@@ -233,7 +233,6 @@ public class DenseDeposit implements IDeposit {
         }
 
         try {
-            // Plutons 101 -- basics and intro to getting one gen'd
             HashMap<String, HashMap<BlockState, Float>> oreBlocks = SerializerUtils.buildMultiBlockMatcherMap(json.get("blocks").getAsJsonObject());
             HashMap<BlockState, Float> sampleBlocks = SerializerUtils.buildMultiBlockMap(json.get("samples").getAsJsonArray());
             int yMin = json.get("yMin").getAsInt();
@@ -242,7 +241,7 @@ public class DenseDeposit implements IDeposit {
             int genWt = json.get("generationWeight").getAsInt();
             TagKey<Biome> biomeTag = TagKey.of(Registry.BIOME_KEY, new Identifier(json.get("biomeTag").getAsString().replace("#", "")));
 
-            // Block State Matchers
+
             HashSet<BlockState> blockStateMatchers = DepositUtils.getDefaultMatchers();
             if (json.has("blockStateMatchers")) {
                 blockStateMatchers = SerializerUtils.toBlockStateList(json.get("blockStateMatchers").getAsJsonArray());
@@ -259,7 +258,6 @@ public class DenseDeposit implements IDeposit {
         JsonObject json = new JsonObject();
         JsonObject config = new JsonObject();
 
-        // Add basics of Plutons
         config.add("blocks", SerializerUtils.deconstructMultiBlockMatcherMap(this.oreToWtMap));
         config.add("samples", SerializerUtils.deconstructMultiBlockMap(this.sampleToWtMap));
         config.addProperty("yMin", this.yMin);
@@ -267,7 +265,6 @@ public class DenseDeposit implements IDeposit {
         config.addProperty("size", this.size);
         config.addProperty("generationWeight", this.genWt);
         config.addProperty("biomeTag", this.biomeTag.id().toString());
-        // Glue the two parts of this together.
         json.addProperty("type", JSON_TYPE);
         json.add("config", config);
         return json;

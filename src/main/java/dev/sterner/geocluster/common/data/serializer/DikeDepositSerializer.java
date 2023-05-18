@@ -9,7 +9,7 @@ public class DikeDepositSerializer {
         return DikeDeposit.deserialize(json);
     }
 
-    public JsonElement serialize(DikeDeposit dep) {
-        return dep.serialize();
+    public JsonElement serialize(DikeDeposit dikeDeposit) {
+        return dikeDeposit.serialize();
     }
 }

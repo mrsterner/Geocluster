@@ -1,0 +1,9 @@
+{
+  "variants": {
+    "": [
+      {
+        "model": "geocluster:block/titanium_ore_sample"
+      }
+    ]
+  }
+}

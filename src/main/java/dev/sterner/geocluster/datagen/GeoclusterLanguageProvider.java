@@ -14,6 +14,27 @@ public class GeoclusterLanguageProvider extends FabricLanguageProvider {
     public void generateTranslations(TranslationBuilder builder) {
         builder.add("itemGroup.geocluster.geocluster", "Geocluster");
 
+        builder.add(COPPER_SAMPLE, "Copper Sample");
+        builder.add(IRON_SAMPLE, "Iron Sample");
+        builder.add(GOLD_SAMPLE, "Gold Sample");
+        builder.add(ZINC_SAMPLE, "Zinc Sample");
+        builder.add(LEAD_SAMPLE, "Lead Sample");
+        builder.add(SILVER_SAMPLE, "Silver Sample");
+        builder.add(ALUMINIUM_SAMPLE, "Aluminium Sample");
+        builder.add(URANIUM_SAMPLE, "Uranium Sample");
+        builder.add(TIN_SAMPLE, "Tin Sample");
+        builder.add(PLATINUM_SAMPLE, "Platinum Sample");
+        builder.add(TITANIUM_SAMPLE, "Titanium Sample");
+        builder.add(NICKEL_SAMPLE, "Nickel Sample");
+
+        builder.add(COAL_SAMPLE, "Coal Sample");
+        builder.add(REDSTONE_SAMPLE, "Redstone Sample");
+        builder.add(LAPIS_LAZULI_SAMPLE, "Lapis Lazuli Sample");
+        builder.add(EMERALD_SAMPLE, "Emerald Sample");
+        builder.add(DIAMOND_SAMPLE, "Diamond Sample");
+        builder.add(ANCIENT_DEBRIS_SAMPLE, "Ancient Debris Sample");
+
+
         builder.add(ZINC_INGOT, "Zinc Ingot");
         builder.add(SILVER_INGOT, "Silver Ingot");
         builder.add(LEAD_INGOT, "Lead Ingot");
@@ -64,5 +85,8 @@ public class GeoclusterLanguageProvider extends FabricLanguageProvider {
         builder.add(DEEPSLATE_PLATINUM_ORE, "Deepslate Platinum Ore");
         builder.add(DEEPSLATE_TITANIUM_ORE, "Deepslate Titanium Ore");
         builder.add(DEEPSLATE_NICKEL_ORE, "Deepslate Nickel Ore");
+
+        builder.add(ANCIENT_DEBRIS_ORE, "Ancient Debris Ore");
+        builder.add(RAW_ANCIENT_DEBRIS, "Raw Ancient Debris");
     }
 }

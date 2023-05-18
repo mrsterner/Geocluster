@@ -1,4 +1,9 @@
-// 1.19.2	2023-05-18T01:22:06.54845882	Tags for minecraft:block
-445055be7ad8a598f3a61bcfd5d0ddac371e8731 data/minecraft/tags/blocks/mineable/pickaxe.json
-445055be7ad8a598f3a61bcfd5d0ddac371e8731 data/minecraft/tags/blocks/needs_iron_tool.json
-445055be7ad8a598f3a61bcfd5d0ddac371e8731 data/c/tags/blocks/ores.json
+// 1.19.2	2023-05-18T18:22:24.28581394	Tags for minecraft:block
+8a23702b05296c8af5014d6aa6e9265ded85c7d9 data/minecraft/tags/blocks/sand.json
+4e8c84359549ced0cc4273f4a86d905a5aefb8cf data/minecraft/tags/blocks/mineable/pickaxe.json
+4e8c84359549ced0cc4273f4a86d905a5aefb8cf data/c/tags/blocks/ores.json
+cf744b3dc06e20a8ae04ef94399a4517837f28ed data/minecraft/tags/blocks/needs_iron_tool.json
+8a23702b05296c8af5014d6aa6e9265ded85c7d9 data/minecraft/tags/blocks/dirt.json
+d4cb35dc31158278b8d4663768bed4bdea2d2c81 data/geocluster/tags/blocks/supports_sample.json
+d703ff99433715388b9bdf40121d34f2c77eccf4 data/c/tags/blocks/stone.json
+b9f100093c9c96a9175f23e5b27a2e0f7013eec8 data/minecraft/tags/blocks/needs_diamond_tool.json
