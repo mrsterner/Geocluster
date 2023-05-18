@@ -1,0 +1,23 @@
+{
+  "replace": false,
+  "values": [
+    "geocluster:zinc_ore",
+    "geocluster:deepslate_zinc_ore",
+    "geocluster:silver_ore",
+    "geocluster:deepslate_silver_ore",
+    "geocluster:lead_ore",
+    "geocluster:deepslate_lead_ore",
+    "geocluster:aluminium_ore",
+    "geocluster:deepslate_aluminium_ore",
+    "geocluster:uranium_ore",
+    "geocluster:deepslate_uranium_ore",
+    "geocluster:tin_ore",
+    "geocluster:deepslate_tin_ore",
+    "geocluster:platinum_ore",
+    "geocluster:deepslate_platinum_ore",
+    "geocluster:titanium_ore",
+    "geocluster:deepslate_titanium_ore",
+    "geocluster:nickel_ore",
+    "geocluster:deepslate_nickel_ore"
+  ]
+}

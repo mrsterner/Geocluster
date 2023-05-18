@@ -1,8 +1,8 @@
 {
 	"schemaVersion": 1,
-	"id": "lithosphere",
+	"id": "geocluster",
 	"version": "${version}",
-	"name": "Lithosphere",
+	"name": "Geocluster",
 	"description": "This is an example description! Tell everyone what your mod is about!",
 	"authors": [
 		"MrSterner"
@@ -12,18 +12,21 @@
 		"sources": "https://github.com/FabricMC/fabric-example-mod"
 	},
 	"license": "CC0-1.0",
-	"icon": "assets/lithosphere/icon.png",
+	"icon": "assets/geocluster/icon.png",
 	"environment": "*",
 	"entrypoints": {
 		"main": [
-			"dev.sterner.Lithosphere"
+			"dev.sterner.geocluster.Geocluster"
 		],
 		"cardinal-components-entity": [
-			"dev.sterner.common.components.LithosphereComponents"
+			"dev.sterner.geocluster.common.components.GeoclusterComponents"
+		],
+		"fabric-datagen": [
+			"dev.sterner.geocluster.datagen.GeoclusterDatagen"
 		]
 	},
 	"mixins": [
-		"lithosphere.mixins.json"
+		"geocluster.mixins.json"
 	],
 	"depends": {
 		"fabricloader": ">=0.14.19",
@@ -31,12 +34,12 @@
 		"java": ">=17",
 		"fabric-api": "*"
 	},
-	"access_widener": "lithosphere.accesswidener",
+	"access_widener": "geocluster.accesswidener",
 	"suggests": {
 		"another-mod": "*"
 	},
 	"cardinal-components": [
-		"lithosphere:chunk",
-		"lithosphere:deposit"
+		"geocluster:chunk",
+		"geocluster:deposit"
 	]
 }

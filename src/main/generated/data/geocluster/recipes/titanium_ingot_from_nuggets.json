@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "titanium_ingot",
+  "key": {
+    "#": {
+      "item": "geocluster:titanium_nugget"
+    }
+  },
+  "pattern": [
+    "###",
+    "###",
+    "###"
+  ],
+  "result": {
+    "item": "geocluster:titanium_ingot"
+  }
+}

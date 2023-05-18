@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "geocluster:aluminium_ingot"
+    }
+  ],
+  "result": {
+    "count": 9,
+    "item": "geocluster:aluminium_nugget"
+  }
+}

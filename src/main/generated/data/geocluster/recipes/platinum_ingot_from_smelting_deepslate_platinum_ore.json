@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:smelting",
+  "cookingtime": 200,
+  "experience": 1.0,
+  "group": "platinum_ingot",
+  "ingredient": {
+    "item": "geocluster:deepslate_platinum_ore"
+  },
+  "result": "geocluster:platinum_ingot"
+}

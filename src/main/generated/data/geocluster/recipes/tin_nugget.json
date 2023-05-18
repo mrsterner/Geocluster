@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "geocluster:tin_ingot"
+    }
+  ],
+  "result": {
+    "count": 9,
+    "item": "geocluster:tin_nugget"
+  }
+}

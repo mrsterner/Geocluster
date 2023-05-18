@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "zinc_ingot",
+  "key": {
+    "#": {
+      "item": "geocluster:zinc_nugget"
+    }
+  },
+  "pattern": [
+    "###",
+    "###",
+    "###"
+  ],
+  "result": {
+    "item": "geocluster:zinc_ingot"
+  }
+}

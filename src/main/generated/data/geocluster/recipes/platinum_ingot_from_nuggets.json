@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "platinum_ingot",
+  "key": {
+    "#": {
+      "item": "geocluster:platinum_nugget"
+    }
+  },
+  "pattern": [
+    "###",
+    "###",
+    "###"
+  ],
+  "result": {
+    "item": "geocluster:platinum_ingot"
+  }
+}
