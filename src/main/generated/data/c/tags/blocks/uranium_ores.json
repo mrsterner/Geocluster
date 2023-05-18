@@ -1,0 +1,7 @@
+{
+  "replace": false,
+  "values": [
+    "geocluster:uranium_ore",
+    "geocluster:deepslate_uranium_ore"
+  ]
+}

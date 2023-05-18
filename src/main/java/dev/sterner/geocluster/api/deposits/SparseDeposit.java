@@ -83,7 +83,8 @@ public class SparseDeposit extends Deposit implements IDeposit {
         return b.isIn(this.biomeTag);
     }
 
-    public int getGenWeight() {
+    @Override
+    public int getWeight() {
         return this.weight;
     }
 
@@ -94,33 +95,31 @@ public class SparseDeposit extends Deposit implements IDeposit {
 
     @Override
     public int generate(StructureWorldAccess level, BlockPos pos, IWorldDepositComponent deposits, IWorldChunkComponent chunksGenerated) {
-        if (!this.canPlaceInBiome(level.getBiome(pos))) {
+        if (!canPlaceInBiome(level.getBiome(pos))) {
             return 0;
         }
 
-        int totlPlaced = 0;
-        int totlPnding = 0;
-        int randY = this.yMin + level.getRandom().nextInt(this.yMax - this.yMin);
+        int totalPlaced = 0;
+        int totalPending = 0;
+        int randomY = yMin + level.getRandom().nextInt(yMax - yMin);
         int max = GeoclusterUtils.getTopSolidBlock(level, pos).getY();
-        if (randY > max) {
-            randY = Math.max(yMin, max);
-        }
+        randomY = Math.max(randomY, max);
 
-        float ranFlt = level.getRandom().nextFloat() * (float) Math.PI;
-        double x1 = (float) (pos.getX() + 8) + MathHelper.sin(ranFlt) * (float) this.size / 8.0F;
-        double x2 = (float) (pos.getX() + 8) - MathHelper.sin(ranFlt) * (float) this.size / 8.0F;
-        double z1 = (float) (pos.getZ() + 8) + MathHelper.cos(ranFlt) * (float) this.size / 8.0F;
-        double z2 = (float) (pos.getZ() + 8) - MathHelper.cos(ranFlt) * (float) this.size / 8.0F;
-        double y1 = randY + level.getRandom().nextInt(3) - 2;
-        double y2 = randY + level.getRandom().nextInt(3) - 2;
+        float randomFloat = level.getRandom().nextFloat() * (float) Math.PI;
+        double x1 = pos.getX() + 8 + MathHelper.sin(randomFloat) * size / 8.0F;
+        double x2 = pos.getX() + 8 - MathHelper.sin(randomFloat) * size / 8.0F;
+        double z1 = pos.getZ() + 8 + MathHelper.cos(randomFloat) * size / 8.0F;
+        double z2 = pos.getZ() + 8 - MathHelper.cos(randomFloat) * size / 8.0F;
+        double y1 = randomY + level.getRandom().nextInt(3) - 2;
+        double y2 = randomY + level.getRandom().nextInt(3) - 2;
 
-        for (int i = 0; i < this.size; ++i) {
-            float radScl = (float) i / (float) this.size;
-            double xn = x1 + (x2 - x1) * (double) radScl;
-            double yn = y1 + (y2 - y1) * (double) radScl;
-            double zn = z1 + (z2 - z1) * (double) radScl;
-            double noise = level.getRandom().nextDouble() * (double) this.size / 16.0D;
-            double radius = (double) (MathHelper.sin((float) Math.PI * radScl) + 1.0F) * noise + 1.0D;
+        for (int i = 0; i < size; i++) {
+            float radialScale = (float) i / size;
+            double xn = x1 + (x2 - x1) * radialScale;
+            double yn = y1 + (y2 - y1) * radialScale;
+            double zn = z1 + (z2 - z1) * radialScale;
+            double noise = level.getRandom().nextDouble() * size / 16.0D;
+            double radius = (MathHelper.sin((float) Math.PI * radialScale) + 1.0F) * noise + 1.0D;
             int xmin = MathHelper.floor(xn - radius / 2.0D);
             int ymin = MathHelper.floor(yn - radius / 2.0D);
             int zmin = MathHelper.floor(zn - radius / 2.0D);
@@ -128,36 +127,32 @@ public class SparseDeposit extends Deposit implements IDeposit {
             int ymax = MathHelper.floor(yn + radius / 2.0D);
             int zmax = MathHelper.floor(zn + radius / 2.0D);
 
-            for (int x = xmin; x <= xmax; ++x) {
-                double layerRadX = ((double) x + 0.5D - xn) / (radius / 2.0D);
+            for (int x = xmin; x <= xmax; x++) {
+                double layerRadX = (x + 0.5D - xn) / (radius / 2.0D);
 
                 if (layerRadX * layerRadX < 1.0D) {
-                    for (int y = ymin; y <= ymax; ++y) {
-                        double layerRadY = ((double) y + 0.5D - yn) / (radius / 2.0D);
+                    for (int y = ymin; y <= ymax; y++) {
+                        double layerRadY = (y + 0.5D - yn) / (radius / 2.0D);
 
                         if (layerRadX * layerRadX + layerRadY * layerRadY < 1.0D) {
-                            for (int z = zmin; z <= zmax; ++z) {
-                                double layerRadZ = ((double) z + 0.5D - zn) / (radius / 2.0D);
+                            for (int z = zmin; z <= zmax; z++) {
+                                double layerRadZ = (z + 0.5D - zn) / (radius / 2.0D);
 
                                 if (layerRadX * layerRadX + layerRadY * layerRadY + layerRadZ * layerRadZ < 1.0D) {
-
-                                    int xSpread = level.getRandom().nextInt(this.spread) * (level.getRandom().nextBoolean() ? 1 : -1);
-                                    int zSpread = level.getRandom().nextInt(this.spread) * (level.getRandom().nextBoolean() ? 1 : -1);
+                                    int xSpread = level.getRandom().nextInt(spread) * (level.getRandom().nextBoolean() ? 1 : -1);
+                                    int zSpread = level.getRandom().nextInt(spread) * (level.getRandom().nextBoolean() ? 1 : -1);
 
                                     BlockPos placePos = new BlockPos(x + xSpread, y, z + zSpread);
                                     BlockState current = level.getBlockState(placePos);
-                                    BlockState tmp = this.getOre(current, level.getRandom());
-                                    if (tmp == null) {
-                                        continue;
-                                    }
-                                    if (!(this.getBlockStateMatchers().contains(current) || this.oreToWeightMap.containsKey(GeoclusterUtils.getRegistryName(current)))) {
+                                    BlockState tmp = getOre(current, level.getRandom());
+                                    if (tmp == null || !(getBlockStateMatchers().contains(current) || oreToWeightMap.containsKey(GeoclusterUtils.getRegistryName(current)))) {
                                         continue;
                                     }
 
                                     if (FeatureUtils.enqueueBlockPlacement(level, placePos, tmp, deposits, chunksGenerated)) {
-                                        totlPlaced++;
+                                        totalPlaced++;
                                     } else {
-                                        totlPnding++;
+                                        totalPending++;
                                     }
                                 }
                             }
@@ -167,7 +162,7 @@ public class SparseDeposit extends Deposit implements IDeposit {
             }
         }
 
-        return totlPlaced + totlPnding;
+        return totalPlaced + totalPending;
     }
 
     @Override
@@ -223,7 +218,7 @@ public class SparseDeposit extends Deposit implements IDeposit {
         config.addProperty("yMax", this.yMax);
         config.addProperty("size", this.size);
         config.addProperty("spread", this.spread);
-        config.addProperty("generationWeight", this.getGenWeight());
+        config.addProperty("generationWeight", this.getWeight());
         config.addProperty("biomeTag", this.biomeTag.id().toString());
         json.addProperty("type", JSON_TYPE);
         json.add("config", config);

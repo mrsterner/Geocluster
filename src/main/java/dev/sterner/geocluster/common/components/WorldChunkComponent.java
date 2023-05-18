@@ -11,10 +11,10 @@ import java.util.concurrent.ConcurrentHashMap;
 public class WorldChunkComponent implements AutoSyncedComponent, IWorldChunkComponent {
 
     private final ConcurrentHashMap.KeySetView<ChunkPos, Boolean> generatedChunks;
-    private final World chunk;
+    private final World world;
 
-    public WorldChunkComponent(World chunk) {
-        this.chunk = chunk;
+    public WorldChunkComponent(World world) {
+        this.world = world;
         this.generatedChunks = ConcurrentHashMap.newKeySet();
     }
 

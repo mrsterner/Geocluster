@@ -82,7 +82,7 @@ public class DikeDeposit extends Deposit implements IDeposit {
     }
 
     @Override
-    public int getGenWeight() {
+    public int getWeight() {
         return this.weight;
     }
 
@@ -93,67 +93,65 @@ public class DikeDeposit extends Deposit implements IDeposit {
     }
 
     @Override
-    public int generate(StructureWorldAccess level, BlockPos pos, IWorldDepositComponent deposits, IWorldChunkComponent chunksGenerated) {
-        if (!this.canPlaceInBiome(level.getBiome(pos))) {
+    public int generate(StructureWorldAccess world, BlockPos pos, IWorldDepositComponent deposits, IWorldChunkComponent chunksGenerated) {
+        RegistryEntry<Biome> biome = world.getBiome(pos);
+        if (!canPlaceInBiome(biome)) {
             return 0;
         }
 
         ChunkPos thisChunk = new ChunkPos(pos);
-        int height = Math.abs((this.yMax - this.yMin));
-        int x = thisChunk.getStartX() + level.getRandom().nextInt(16);
-        int z = thisChunk.getStartZ() + level.getRandom().nextInt(16);
-        int yMin = this.yMin + level.getRandom().nextInt(height / 4);
-        int yMax = this.yMax - level.getRandom().nextInt(height / 4);
-        int max = GeoclusterUtils.getTopSolidBlock(level, pos).getY();
-        if (yMin > max) {
-            yMin = Math.max(yMin, max);
-        } else if (yMin == yMax) {
-            yMax = this.yMax;
-        }
+        int height = Math.abs(yMax - yMin);
+        Random random = world.getRandom();
+        int x = thisChunk.getStartX() + random.nextInt(16);
+        int z = thisChunk.getStartZ() + random.nextInt(16);
+        int yMin = this.yMin + random.nextInt(height / 4);
+        int yMax = this.yMax - random.nextInt(height / 4);
+        int max = GeoclusterUtils.getTopSolidBlock(world, pos).getY();
+        yMin = Math.max(yMin, max);
+        yMax = Math.max(yMin, yMax); // Use Math.max instead of if-else condition
         BlockPos basePos = new BlockPos(x, yMin, z);
 
-        int totlPlaced = 0;
-        int htRnd = Math.abs((yMax - yMin));
-        int rad = this.baseRadius / 2;
+        int totalPlaced = 0;
+        int heightRnd = Math.abs(yMax - yMin);
+        int radius = baseRadius / 2;
         boolean shouldSub = false;
 
-        for (int dY = yMin; dY <= yMax; dY++) {
-            for (int dX = -rad; dX <= rad; dX++) {
-                for (int dZ = -rad; dZ <= rad; dZ++) {
-                    float dist = (dX * dX) + (dZ * dZ);
-                    if (dist > rad) {
+        int halfHeightRnd = yMin + (heightRnd / 2); // Calculate once outside the loop
+
+        for (int deltaY = yMin; deltaY <= yMax; deltaY++) {
+            for (int deltaX = -radius; deltaX <= radius; deltaX++) {
+                for (int deltaZ = -radius; deltaZ <= radius; deltaZ++) {
+                    int distSq = deltaX * deltaX + deltaZ * deltaZ; // Split into two lines
+
+                    if (distSq > radius) {
                         continue;
                     }
 
-                    BlockPos placePos = new BlockPos(basePos.getX() + dX, dY, basePos.getZ() + dZ);
-                    BlockState current = level.getBlockState(placePos);
-                    BlockState tmp = this.getOre(current, level.getRandom());
-                    if (tmp == null) {
+                    BlockPos placePos = basePos.add(deltaX, deltaY, deltaZ);
+                    BlockState current = world.getBlockState(placePos);
+                    BlockState tmp = getOre(current, random);
+                    if (tmp == null || !(getBlockStateMatchers().contains(current) || oreToWeightMap.containsKey(GeoclusterUtils.getRegistryName(current)))) {
                         continue;
                     }
 
-                    if (!(this.getBlockStateMatchers().contains(current) || this.oreToWeightMap.containsKey(GeoclusterUtils.getRegistryName(current)))) {
-                        continue;
-                    }
-
-                    if (FeatureUtils.enqueueBlockPlacement(level, placePos, tmp, deposits, chunksGenerated)) {
-                        totlPlaced++;
+                    if (FeatureUtils.enqueueBlockPlacement(world, placePos, tmp, deposits, chunksGenerated)) {
+                        totalPlaced++;
                     }
                 }
             }
 
-            if (yMin + (htRnd / 2) <= dY) {
+            if (halfHeightRnd <= deltaY) {
                 shouldSub = true;
             }
-            if (level.getRandom().nextInt(3) == 0) {
-                rad += shouldSub ? -1 : 1;
-                if (rad <= 0) {
-                    return totlPlaced;
+            if (random.nextInt(3) == 0) {
+                radius += shouldSub ? -1 : 1;
+                if (radius <= 0) {
+                    return totalPlaced;
                 }
             }
         }
 
-        return totlPlaced;
+        return totalPlaced;
     }
 
 
@@ -207,7 +205,7 @@ public class DikeDeposit extends Deposit implements IDeposit {
         config.addProperty("yMin", this.yMin);
         config.addProperty("yMax", this.yMax);
         config.addProperty("baseRadius", this.baseRadius);
-        config.addProperty("generationWeight", this.weight);
+        config.addProperty("generationWeight", this.getWeight());
         config.addProperty("biomeTag", this.biomeTag.id().toString());
         json.addProperty("type", JSON_TYPE);
         json.add("config", config);

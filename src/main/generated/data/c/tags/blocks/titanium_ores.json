@@ -1,0 +1,7 @@
+{
+  "replace": false,
+  "values": [
+    "geocluster:titanium_ore",
+    "geocluster:deepslate_titanium_ore"
+  ]
+}

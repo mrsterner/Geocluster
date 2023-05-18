@@ -29,16 +29,14 @@ public class WorldDepositComponent implements AutoSyncedComponent, IWorldDeposit
     @Override
     public void readFromNbt(NbtCompound tag) {
         tag.getKeys().forEach(chunkPosAsString -> {
-            // Parse out the ChunkPos
             String[] parts = chunkPosAsString.split("_");
             ChunkPos cp = new ChunkPos(Integer.parseInt(parts[0]), Integer.parseInt(parts[1]));
-            // Parse out the pending block objects
             NbtList pending = tag.getList(chunkPosAsString, 10);
             ConcurrentLinkedQueue<PendingBlock> lq = new ConcurrentLinkedQueue<>();
             pending.forEach(x -> {
-                PendingBlock pb = PendingBlock.deserialize(x);
-                if (pb != null) {
-                    lq.add(pb);
+                PendingBlock pendingBlock = PendingBlock.readNbt(x);
+                if (pendingBlock != null) {
+                    lq.add(pendingBlock);
                 }
             });
             this.pendingBlocks.put(cp, lq);
@@ -49,10 +47,10 @@ public class WorldDepositComponent implements AutoSyncedComponent, IWorldDeposit
     public void writeToNbt(NbtCompound tag) {
         NbtCompound compound = new NbtCompound();
         this.pendingBlocks.forEach((pos, pending) -> {
-            NbtList p = new NbtList();
+            NbtList nbtList = new NbtList();
             String key = pos.x + "_" + pos.z;
-            pending.forEach(pb -> p.add(pb.serialize()));
-            compound.put(key, p);
+            pending.forEach(pendingBlock -> nbtList.add(pendingBlock.writeNbt()));
+            compound.put(key, nbtList);
         });
     }
 
@@ -81,7 +79,7 @@ public class WorldDepositComponent implements AutoSyncedComponent, IWorldDeposit
 
     public record PendingBlock(BlockPos pos, BlockState state) {
 
-        public NbtCompound serialize() {
+        public NbtCompound writeNbt() {
             NbtCompound tmp = new NbtCompound();
             NbtCompound posTag = NbtHelper.fromBlockPos(this.pos);
             NbtCompound stateTag = NbtHelper.fromBlockState(this.state);
@@ -91,7 +89,7 @@ public class WorldDepositComponent implements AutoSyncedComponent, IWorldDeposit
         }
 
         @Nullable
-        public static PendingBlock deserialize(NbtElement element) {
+        public static PendingBlock readNbt(NbtElement element) {
             if (element instanceof NbtCompound tag) {
                 BlockPos pos = NbtHelper.toBlockPos(tag.getCompound("pos"));
                 BlockState state = NbtHelper.toBlockState(tag.getCompound("state"));

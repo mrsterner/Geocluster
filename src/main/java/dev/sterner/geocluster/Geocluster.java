@@ -1,9 +1,8 @@
 package dev.sterner.geocluster;
 
 import dev.sterner.geocluster.api.GeoclusterAPI;
-import dev.sterner.geocluster.client.IOreManager;
-import dev.sterner.geocluster.client.OreFoundManager;
-import dev.sterner.geocluster.client.OreFoundToast;
+import dev.sterner.geocluster.client.IOreToastManager;
+import dev.sterner.geocluster.client.OreToastManager;
 import dev.sterner.geocluster.client.network.S2CProspectingPacket;
 import dev.sterner.geocluster.common.data.WorldGenDataReloadListener;
 import dev.sterner.geocluster.common.registry.GeoclusterObjects;
@@ -15,9 +14,7 @@ import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
 import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
-import net.minecraft.block.Blocks;
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.toast.AdvancementToast;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
@@ -56,7 +53,7 @@ public class Geocluster implements ModInitializer, ClientModInitializer {
     }
 
     private void renderFoundOres(MatrixStack matrixStack, float v) {
-        OreFoundManager manager = ((IOreManager) MinecraftClient.getInstance()).getManager();
+        OreToastManager manager = ((IOreToastManager) MinecraftClient.getInstance()).getManager();
         manager.draw(matrixStack);
     }
 }

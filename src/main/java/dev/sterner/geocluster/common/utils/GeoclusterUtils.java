@@ -3,7 +3,6 @@ package dev.sterner.geocluster.common.utils;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.item.ItemStack;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableTextContent;
@@ -14,13 +13,6 @@ import net.minecraft.world.WorldView;
 import java.util.Objects;
 
 public class GeoclusterUtils {
-    public static ItemStack blockStateToStack(BlockState state) {
-        return new ItemStack(state.getBlock().asItem(), 1);
-    }
-
-    public static boolean doStatesMatch(BlockState state1, BlockState state2) {
-        return getRegistryName(state1).equals(getRegistryName(state2));
-    }
 
     public static String getRegistryName(Block block) {
         return Objects.requireNonNull(Registry.BLOCK.getId(block)).toString();

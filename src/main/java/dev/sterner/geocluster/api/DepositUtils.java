@@ -20,12 +20,12 @@ public class DepositUtils {
     @Nullable
     public static BlockState pick(HashMap<BlockState, Float> map, Random random) {
         float rng = random.nextFloat();
-        for (Map.Entry<BlockState, Float> e : map.entrySet()) {
-            float wt = e.getValue();
-            if (rng < wt) {
-                return e.getKey();
+        for (Map.Entry<BlockState, Float> entry : map.entrySet()) {
+            float weight = entry.getValue();
+            if (rng < weight) {
+                return entry.getKey();
             }
-            rng -= wt;
+            rng -= weight;
         }
 
         Geocluster.LOGGER.error("Could not reach decision on block to place at Utils#pick");

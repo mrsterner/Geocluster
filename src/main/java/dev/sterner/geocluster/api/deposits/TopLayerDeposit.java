@@ -34,16 +34,16 @@ public class TopLayerDeposit extends Deposit implements IDeposit {
     private final int radius;
     private final int depth;
     private final float sampleChance;
-    private final int genWt;
+    private final int weight;
     private final HashSet<BlockState> blockStateMatchers;
     private final TagKey<Biome> biomeTag;
 
-    public TopLayerDeposit(HashMap<String, HashMap<BlockState, Float>> oreBlocks, HashMap<BlockState, Float> sampleBlocks, int radius, int depth, float sampleChance, int genWt, TagKey<Biome> biomeTag, HashSet<BlockState> blockStateMatchers) {
+    public TopLayerDeposit(HashMap<String, HashMap<BlockState, Float>> oreBlocks, HashMap<BlockState, Float> sampleBlocks, int radius, int depth, float sampleChance, int weight, TagKey<Biome> biomeTag, HashSet<BlockState> blockStateMatchers) {
         super(oreBlocks, sampleBlocks);
         this.radius = radius;
         this.depth = depth;
         this.sampleChance = sampleChance;
-        this.genWt = genWt;
+        this.weight = weight;
         this.biomeTag = biomeTag;
         this.blockStateMatchers = blockStateMatchers;
 
@@ -77,8 +77,8 @@ public class TopLayerDeposit extends Deposit implements IDeposit {
     }
 
     @Override
-    public int getGenWeight() {
-        return this.genWt;
+    public int getWeight() {
+        return this.weight;
     }
 
 
@@ -89,23 +89,23 @@ public class TopLayerDeposit extends Deposit implements IDeposit {
 
     @Override
     public int generate(StructureWorldAccess level, BlockPos pos, IWorldDepositComponent deposits, IWorldChunkComponent chunksGenerated) {
-        if (!this.canPlaceInBiome(level.getBiome(pos))) {
+        if (!canPlaceInBiome(level.getBiome(pos))) {
             return 0;
         }
 
-        int totlPlaced = 0;
+        int totalPlaced = 0;
         ChunkPos thisChunk = new ChunkPos(pos);
 
-        int x = ((thisChunk.getStartX() + thisChunk.getEndX()) / 2) - level.getRandom().nextInt(8) + level.getRandom().nextInt(16);
-        int z = ((thisChunk.getStartZ() + thisChunk.getEndZ()) / 2) - level.getRandom().nextInt(8) + level.getRandom().nextInt(16);
-        int radX = (this.radius / 2) + level.getRandom().nextInt(this.radius / 2);
-        int radZ = (this.radius / 2) + level.getRandom().nextInt(this.radius / 2);
+        int x = (thisChunk.getStartX() + thisChunk.getEndX()) / 2 - level.getRandom().nextInt(8) + level.getRandom().nextInt(16);
+        int z = (thisChunk.getStartZ() + thisChunk.getEndZ()) / 2 - level.getRandom().nextInt(8) + level.getRandom().nextInt(16);
+        int radX = this.radius / 2 + level.getRandom().nextInt(this.radius / 2);
+        int radZ = this.radius / 2 + level.getRandom().nextInt(this.radius / 2);
 
         BlockPos basePos = new BlockPos(x, 0, z);
 
         for (int dX = -radX; dX <= radX; dX++) {
             for (int dZ = -radZ; dZ <= radZ; dZ++) {
-                if (((dX * dX) + (dZ * dZ)) > this.radius + level.getRandom().nextInt(Math.max(1, this.radius / 2))) {
+                if (dX * dX + dZ * dZ > this.radius + level.getRandom().nextInt(Math.max(1, this.radius / 2))) {
                     continue;
                 }
 
@@ -114,7 +114,7 @@ public class TopLayerDeposit extends Deposit implements IDeposit {
                 for (int i = 0; i < this.depth; i++) {
                     BlockPos placePos = baseForXZ.down(i);
                     BlockState current = level.getBlockState(placePos);
-                    BlockState tmp = this.getOre(current, level.getRandom());
+                    BlockState tmp = getOre(current, level.getRandom());
                     boolean isTop = i == 0;
 
                     if (tmp == null) {
@@ -123,16 +123,16 @@ public class TopLayerDeposit extends Deposit implements IDeposit {
                         tmp = tmp.with(Properties.BOTTOM, !isTop);
                     }
 
-                    if (!(this.getBlockStateMatchers().contains(current) || this.oreToWeightMap.containsKey(GeoclusterUtils.getRegistryName(current)))) {
+                    if (!(getBlockStateMatchers().contains(current) || oreToWeightMap.containsKey(GeoclusterUtils.getRegistryName(current)))) {
                         continue;
                     }
 
                     if (FeatureUtils.enqueueBlockPlacement(level, placePos, tmp, deposits, chunksGenerated)) {
-                        totlPlaced++;
+                        totalPlaced++;
                         if (isTop && level.getRandom().nextFloat() <= this.sampleChance) {
-                            BlockState smpl = this.getSample(level.getRandom());
-                            if (smpl != null) {
-                                FeatureUtils.enqueueBlockPlacement(level, placePos.up(), smpl, deposits, chunksGenerated);
+                            BlockState sample = getSample(level.getRandom());
+                            if (sample != null) {
+                                FeatureUtils.enqueueBlockPlacement(level, placePos.up(), sample, deposits, chunksGenerated);
                                 FeatureUtils.fixSnowyBlock(level, placePos);
                             }
                         }
@@ -141,7 +141,7 @@ public class TopLayerDeposit extends Deposit implements IDeposit {
             }
         }
 
-        return totlPlaced;
+        return totalPlaced;
     }
 
     @Override
@@ -191,7 +191,7 @@ public class TopLayerDeposit extends Deposit implements IDeposit {
         config.addProperty("radius", this.radius);
         config.addProperty("depth", this.depth);
         config.addProperty("chanceForSample", this.sampleChance);
-        config.addProperty("generationWeight", this.genWt);
+        config.addProperty("generationWeight", this.getWeight());
         config.addProperty("biomeTag", this.biomeTag.id().toString());
         json.addProperty("type", JSON_TYPE);
         json.add("config", config);

@@ -33,6 +33,16 @@ public class GeoclusterTagProvider {
             getOrCreateTagBuilder(BlockTags.SAND);
             getOrCreateTagBuilder(GeoclusterTagRegistry.STONE).add(Blocks.STONE).add(Blocks.ANDESITE).add(Blocks.GRANITE).add(Blocks.DIORITE).add(Blocks.DEEPSLATE);
             getOrCreateTagBuilder(GeoclusterTagRegistry.SUPPORTS_SAMPLE).addTag(BlockTags.DIRT).addTag(BlockTags.SAND).add(Blocks.GRAVEL).addTag(GeoclusterTagRegistry.STONE);
+
+            getOrCreateTagBuilder(GeoclusterTagRegistry.ZINC_ORES).add(ZINC_ORE).add(DEEPSLATE_ZINC_ORE);
+            getOrCreateTagBuilder(GeoclusterTagRegistry.SILVER_ORES).add(SILVER_ORE).add(DEEPSLATE_SILVER_ORE);
+            getOrCreateTagBuilder(GeoclusterTagRegistry.LEAD_ORES).add(LEAD_ORE).add(DEEPSLATE_LEAD_ORE);
+            getOrCreateTagBuilder(GeoclusterTagRegistry.ALUMINIUM_ORES).add(ALUMINIUM_ORE).add(DEEPSLATE_ALUMINIUM_ORE);
+            getOrCreateTagBuilder(GeoclusterTagRegistry.URANIUM_ORES).add(URANIUM_ORE).add(DEEPSLATE_URANIUM_ORE);
+            getOrCreateTagBuilder(GeoclusterTagRegistry.TIN_ORES).add(TIN_ORE).add(DEEPSLATE_TIN_ORE);
+            getOrCreateTagBuilder(GeoclusterTagRegistry.TITANIUM_ORES).add(TITANIUM_ORE).add(DEEPSLATE_TITANIUM_ORE);
+            getOrCreateTagBuilder(GeoclusterTagRegistry.PLATINUM_ORES).add(PLATINUM_ORE).add(DEEPSLATE_PLATINUM_ORE);
+            getOrCreateTagBuilder(GeoclusterTagRegistry.NICKEL_ORES).add(NICKEL_ORE).add(DEEPSLATE_NICKEL_ORE);
         }
     }
 

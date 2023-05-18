@@ -12,14 +12,14 @@ import net.minecraft.util.math.MathHelper;
 
 import java.util.*;
 
-public class OreFoundManager extends DrawableHelper {
+public class OreToastManager extends DrawableHelper {
     private static final int SPACES = 5;
     final MinecraftClient client;
-    private final List<Entry<?>> visibleEntries = new ArrayList();
+    private final List<Entry<?>> visibleEntries = new ArrayList<>();
     private final BitSet occupiedSpaces = new BitSet(SPACES);
     private final Deque<IOreToast> toastQueue = Queues.newArrayDeque();
 
-    public OreFoundManager(MinecraftClient client) {
+    public OreToastManager(MinecraftClient client) {
         this.client = client;
     }
 
@@ -45,7 +45,7 @@ public class OreFoundManager extends DrawableHelper {
                     int k = toast.getRequiredSpaceCount();
                     int j = this.getTopIndex(k);
                     if (j != -1) {
-                        this.visibleEntries.add(new Entry(toast, j, k));
+                        this.visibleEntries.add(new Entry<>(toast, j, k));
                         this.occupiedSpaces.set(j, j + k);
                         return true;
                     } else {
@@ -73,12 +73,6 @@ public class OreFoundManager extends DrawableHelper {
 
     private int getEmptySpaceCount() {
         return 5 - this.occupiedSpaces.cardinality();
-    }
-
-    public void clear() {
-        this.occupiedSpaces.clear();
-        this.visibleEntries.clear();
-        this.toastQueue.clear();
     }
 
     public void add(IOreToast toast) {
@@ -126,7 +120,7 @@ public class OreFoundManager extends DrawableHelper {
             matrixStack.push();
             matrixStack.translate((float) x - (float) this.instance.getWidth() * this.getDisappearProgress(l), client.getWindow().getScaledHeight() - 32 - this.topIndex * 24, 800.0);
             RenderSystem.applyModelViewMatrix();
-            IOreToast.Visibility visibility = this.instance.draw(matrices, OreFoundManager.this, l - this.showTime);
+            IOreToast.Visibility visibility = this.instance.draw(matrices, OreToastManager.this, l - this.showTime);
             matrixStack.pop();
             RenderSystem.applyModelViewMatrix();
             if (visibility != this.visibility) {

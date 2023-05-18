@@ -10,7 +10,7 @@ import net.minecraft.nbt.NbtList;
 import java.util.HashSet;
 
 public class PacketUtils {
-    public static NbtCompound encodeBlocks(HashSet<BlockState> blocks) {
+    public static NbtCompound fromBlockSet(HashSet<BlockState> blocks) {
         NbtCompound comp = new NbtCompound();
         NbtList list = new NbtList();
         for (BlockState b : blocks) {
@@ -20,7 +20,7 @@ public class PacketUtils {
         return comp;
     }
 
-    public static HashSet<BlockState> decodeBlocks(NbtCompound comp) {
+    public static HashSet<BlockState> toBlockSet(NbtCompound comp) {
         HashSet<BlockState> ret = new HashSet<BlockState>();
         NbtList list = comp.getList("Blocks", 10);
         list.forEach((c) -> {
@@ -32,20 +32,5 @@ public class PacketUtils {
         });
 
         return ret;
-    }
-
-    public static String messagify(HashSet<BlockState> blocks) {
-        StringBuilder sb = new StringBuilder();
-        int idx = 0;
-        for (BlockState b : blocks) {
-            sb.append(new ItemStack(b.getBlock()).getName().getString().replace("[", "").replace("]", ""));
-            if ((idx + 2) == blocks.size()) {
-                sb.append(" & ");
-            } else if ((idx + 1) != blocks.size()) {
-                sb.append(", ");
-            }
-            idx++;
-        }
-        return sb.toString();
     }
 }

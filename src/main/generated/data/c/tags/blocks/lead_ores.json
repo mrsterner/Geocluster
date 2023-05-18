@@ -1,0 +1,7 @@
+{
+  "replace": false,
+  "values": [
+    "geocluster:lead_ore",
+    "geocluster:deepslate_lead_ore"
+  ]
+}

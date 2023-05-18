@@ -2,10 +2,7 @@ package dev.sterner.geocluster.client;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.minecraft.client.toast.Toast;
-import net.minecraft.client.toast.ToastManager;
 import net.minecraft.client.util.math.MatrixStack;
-import net.minecraft.util.Identifier;
 import net.minecraft.util.math.MathHelper;
 
 public interface IOreToast {
@@ -24,7 +21,7 @@ public interface IOreToast {
         return BASE_HEIGHT;
     }
 
-    IOreToast.Visibility draw(MatrixStack matrices, OreFoundManager oreFoundManager, long l);
+    IOreToast.Visibility draw(MatrixStack matrices, OreToastManager oreToastManager, long l);
 
     default int getRequiredSpaceCount() {
         return MathHelper.ceilDiv(this.getHeight(), BASE_HEIGHT);

@@ -85,7 +85,7 @@ public class LayerDeposit extends Deposit implements IDeposit {
     }
 
     @Override
-    public int getGenWeight() {
+    public int getWeight() {
         return this.weight;
     }
 
@@ -96,50 +96,47 @@ public class LayerDeposit extends Deposit implements IDeposit {
 
     @Override
     public int generate(StructureWorldAccess level, BlockPos pos, IWorldDepositComponent deposits, IWorldChunkComponent chunksGenerated) {
-        if (!this.canPlaceInBiome(level.getBiome(pos))) {
+        if (!canPlaceInBiome(level.getBiome(pos))) {
             return 0;
         }
 
-        int totlPlaced = 0;
+        int totalPlaced = 0;
 
         ChunkPos thisChunk = new ChunkPos(pos);
 
-        int x = ((thisChunk.getStartX() + thisChunk.getEndX()) / 2) - level.getRandom().nextInt(8) + level.getRandom().nextInt(16);
+        int centerX = (thisChunk.getStartX() + thisChunk.getEndX()) / 2;
+        int centerZ = (thisChunk.getStartZ() + thisChunk.getEndZ()) / 2;
+
+        int x = centerX - level.getRandom().nextInt(8) + level.getRandom().nextInt(16);
         int y = this.yMin + level.getRandom().nextInt(Math.abs(this.yMax - this.yMin));
-        int z = ((thisChunk.getStartZ() + thisChunk.getEndZ()) / 2) - level.getRandom().nextInt(8) + level.getRandom().nextInt(16);
+        int z = centerZ - level.getRandom().nextInt(8) + level.getRandom().nextInt(16);
         int max = GeoclusterUtils.getTopSolidBlock(level, pos).getY();
-        if (y > max) {
-            y = Math.max(yMin, max);
-        }
+        y = Math.max(y, max);
 
         BlockPos basePos = new BlockPos(x, y, z);
 
         for (int dX = -this.radius; dX <= this.radius; dX++) {
             for (int dZ = -this.radius; dZ <= this.radius; dZ++) {
                 for (int dY = 0; dY < depth; dY++) {
-                    float dist = dX * dX + dZ * dZ;
-                    if (dist > this.radius * 2) {
+                    float distSq = dX * dX + dZ * dZ;
+                    if (distSq > this.radius * 2) {
                         continue;
                     }
 
                     BlockPos placePos = basePos.add(dX, dY, dZ);
                     BlockState current = level.getBlockState(placePos);
-                    BlockState tmp = this.getOre(current, level.getRandom());
-                    if (tmp == null) {
-                        continue;
-                    }
-
-                    if (!(this.getBlockStateMatchers().contains(current) || this.oreToWeightMap.containsKey(GeoclusterUtils.getRegistryName(current)))) {
+                    BlockState tmp = getOre(current, level.getRandom());
+                    if (tmp == null || !(getBlockStateMatchers().contains(current) || oreToWeightMap.containsKey(GeoclusterUtils.getRegistryName(current)))) {
                         continue;
                     }
 
                     if (FeatureUtils.enqueueBlockPlacement(level, placePos, tmp, deposits, chunksGenerated)) {
-                        totlPlaced++;
+                        totalPlaced++;
                     }
                 }
             }
         }
-        return totlPlaced;
+        return totalPlaced;
     }
 
     @Override
@@ -193,7 +190,7 @@ public class LayerDeposit extends Deposit implements IDeposit {
         config.addProperty("yMax", this.yMax);
         config.addProperty("radius", this.radius);
         config.addProperty("depth", this.depth);
-        config.addProperty("generationWeight", this.weight);
+        config.addProperty("generationWeight", this.getWeight());
         config.addProperty("biomeTag", this.biomeTag.id().toString());
 
         json.addProperty("type", JSON_TYPE);

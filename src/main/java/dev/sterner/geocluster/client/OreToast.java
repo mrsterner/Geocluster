@@ -3,7 +3,6 @@ package dev.sterner.geocluster.client;
 import com.google.common.collect.Lists;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.datafixers.util.Pair;
-import dev.sterner.geocluster.common.utils.GeoclusterUtils;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.font.TextRenderer;
 import net.minecraft.client.util.math.MatrixStack;
@@ -14,16 +13,16 @@ import net.minecraft.util.math.Direction;
 
 import java.util.List;
 
-public class OreFoundToast implements IOreToast {
+public class OreToast implements IOreToast {
     private boolean justUpdated;
     private final List<Pair<BlockState, Direction>> blockStates = Lists.newArrayList();
 
-    public OreFoundToast(BlockState blockState, Direction direction) {
+    public OreToast(BlockState blockState, Direction direction) {
         this.blockStates.add(Pair.of(blockState, direction));
     }
 
     @Override
-    public Visibility draw(MatrixStack matrices, OreFoundManager oreFoundManager, long startTime) {
+    public Visibility draw(MatrixStack matrices, OreToastManager oreToastManager, long startTime) {
         if (this.justUpdated) {
             this.justUpdated = false;
         }
@@ -33,7 +32,7 @@ public class OreFoundToast implements IOreToast {
         } else {
             Pair<BlockState, Direction> pair = this.blockStates.get((int)(startTime / Math.max(1L, 5000L / (long)this.blockStates.size()) % (long)this.blockStates.size()));
             BlockState blockState = pair.getFirst();
-            TextRenderer textRenderer = oreFoundManager.client.textRenderer;
+            TextRenderer textRenderer = oreToastManager.client.textRenderer;
             MutableText msg;
             if(pair.getSecond() == null){
                 msg = Text.translatable("geocluster.pro_pick.tooltip.found_surface");
@@ -50,7 +49,7 @@ public class OreFoundToast implements IOreToast {
 
             ItemStack itemStack = blockState.getBlock().asItem().getDefaultStack();
             RenderSystem.applyModelViewMatrix();
-            oreFoundManager.getClient().getItemRenderer().renderInGui(itemStack, 8, 8);
+            oreToastManager.getClient().getItemRenderer().renderInGui(itemStack, 8, 8);
             return startTime >= 5000L ? IOreToast.Visibility.HIDE : IOreToast.Visibility.SHOW;
         }
     }

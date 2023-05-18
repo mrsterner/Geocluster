@@ -1,0 +1,7 @@
+{
+  "replace": false,
+  "values": [
+    "geocluster:nickel_ore",
+    "geocluster:deepslate_nickel_ore"
+  ]
+}

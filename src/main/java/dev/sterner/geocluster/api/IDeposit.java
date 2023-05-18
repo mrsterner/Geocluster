@@ -17,7 +17,7 @@ public interface IDeposit {
 
     HashSet<BlockState> getAllOres();
 
-    int getGenWeight();
+    int getWeight();
 
     boolean canPlaceInBiome(RegistryEntry<Biome> biome);
 

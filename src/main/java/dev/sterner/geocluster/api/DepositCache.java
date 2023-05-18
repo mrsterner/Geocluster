@@ -6,6 +6,7 @@ import net.minecraft.world.StructureWorldAccess;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class DepositCache {
     private ArrayList<IDeposit> deposits;
@@ -27,28 +28,23 @@ public class DepositCache {
         this.deposits.add(ore);
     }
 
-    @SuppressWarnings("unchecked")
-    @Nullable
     public IDeposit pick(StructureWorldAccess level, BlockPos pos) {
-        ArrayList<IDeposit> choices = (ArrayList<IDeposit>) this.deposits.clone();
-        choices.removeIf((dep) -> !dep.canPlaceInBiome(level.getBiome(pos)));
+        List<IDeposit> choices = new ArrayList<>(deposits);
+        choices.removeIf(dep -> !dep.canPlaceInBiome(level.getBiome(pos)));
 
-        if (choices.size() == 0) {
+        if (choices.isEmpty()) {
             return null;
         }
 
-        int totalWt = 0;
-        for (IDeposit d : choices) {
-            totalWt += d.getGenWeight();
-        }
+        int totalWeight = choices.stream().mapToInt(IDeposit::getWeight).sum();
+        int rng = level.getRandom().nextInt(totalWeight);
 
-        int rng = level.getRandom().nextInt(totalWt);
         for (IDeposit d : choices) {
-            int wt = d.getGenWeight();
-            if (rng < wt) {
+            int weight = d.getWeight();
+            if (rng < weight) {
                 return d;
             }
-            rng -= wt;
+            rng -= weight;
         }
 
         Geocluster.LOGGER.error("Could not reach decision on deposit to generate at DepositCache#pick");

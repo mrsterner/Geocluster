@@ -35,7 +35,7 @@ public class SerializerUtils {
     }
 
     public static HashSet<BlockState> toBlockStateList(JsonArray arr) {
-        HashSet<BlockState> ret = new HashSet<BlockState>();
+        HashSet<BlockState> ret = new HashSet<>();
 
         for (String s : toStringArray(arr)) {
             ret.add(fromString(s));
@@ -45,7 +45,7 @@ public class SerializerUtils {
     }
 
     public static HashMap<BlockState, Float> buildMultiBlockMap(JsonArray arr) {
-        HashMap<BlockState, Float> ret = new HashMap<BlockState, Float>();
+        HashMap<BlockState, Float> ret = new HashMap<>();
 
         for (JsonElement j : arr) {
             JsonObject pair = j.getAsJsonObject();
@@ -72,15 +72,15 @@ public class SerializerUtils {
         return ret;
     }
 
-    public static HashMap<String, HashMap<BlockState, Float>> buildMultiBlockMatcherMap(JsonObject obj) {
-        HashMap<String, HashMap<BlockState, Float>> ret = new HashMap<>();
+    public static HashMap<String, HashMap<BlockState, Float>> buildMultiBlockMatcherMap(JsonObject jsonObject) {
+        HashMap<String, HashMap<BlockState, Float>> map = new HashMap<>();
 
-        obj.keySet().forEach((key) -> {
-            HashMap<BlockState, Float> value = buildMultiBlockMap(obj.get(key).getAsJsonArray());
-            ret.put(key, value);
+        jsonObject.keySet().forEach((key) -> {
+            HashMap<BlockState, Float> value = buildMultiBlockMap(jsonObject.get(key).getAsJsonArray());
+            map.put(key, value);
         });
 
-        return ret;
+        return map;
     }
 
     public static JsonObject deconstructMultiBlockMatcherMap(HashMap<String, HashMap<BlockState, Float>> in) {
