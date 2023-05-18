@@ -27,11 +27,10 @@ public class DepositCache {
         this.deposits.add(ore);
     }
 
+    @SuppressWarnings("unchecked")
     @Nullable
     public IDeposit pick(StructureWorldAccess level, BlockPos pos) {
-        @SuppressWarnings("unchecked")
         ArrayList<IDeposit> choices = (ArrayList<IDeposit>) this.deposits.clone();
-        // Dimension Filtering done here!
         choices.removeIf((dep) -> !dep.canPlaceInBiome(level.getBiome(pos)));
 
         if (choices.size() == 0) {

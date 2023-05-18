@@ -18,6 +18,9 @@
 		"main": [
 			"dev.sterner.geocluster.Geocluster"
 		],
+		"client": [
+			"dev.sterner.geocluster.Geocluster"
+		],
 		"cardinal-components-world": [
 			"dev.sterner.geocluster.common.components.GeoclusterComponents"
 		],

@@ -21,16 +21,14 @@ public class FeatureUtils {
             int j = ChunkSectionPos.getSectionCoord(pos.getZ());
             int k = Math.abs(center.x - i);
             int l = Math.abs(center.z - j);
-            // writeRadiusCutoff is not accessible, so use a constant 1 for 3x3 generation.
             return k <= 1 && l <= 1;
         } else {
-            // All feature levels *should* be WorldGenRegions (this has not thrown yet)
             Geocluster.LOGGER.error("level was not WorldGenRegion");
             return false;
         }
     }
 
-    public static boolean enqueueBlockPlacement(StructureWorldAccess level, ChunkPos chunk, BlockPos pos, BlockState state, IWorldDepositComponent depositComponent, @Nullable IWorldChunkComponent chunkComponent) {
+    public static boolean enqueueBlockPlacement(StructureWorldAccess level, BlockPos pos, BlockState state, IWorldDepositComponent depositComponent, @Nullable IWorldChunkComponent chunkComponent) {
         if (chunkComponent != null && chunkComponent.hasChunkGenerated(new ChunkPos(pos))) {
             Chunk chunkaccess = level.getChunk(pos);
             BlockState blockstate = chunkaccess.setBlockState(pos, state, false);

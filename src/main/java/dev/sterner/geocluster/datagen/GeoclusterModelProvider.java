@@ -78,5 +78,6 @@ public class GeoclusterModelProvider extends FabricModelProvider {
         generator.register(PLATINUM_NUGGET, Models.GENERATED);
         generator.register(TITANIUM_NUGGET, Models.GENERATED);
         generator.register(NICKEL_NUGGET, Models.GENERATED);
+        generator.register(PROSPECTORS_PICK, Models.GENERATED);
     }
 }

@@ -4,6 +4,7 @@ import com.google.common.collect.ImmutableList;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
 import net.minecraft.data.server.recipe.RecipeJsonProvider;
+import net.minecraft.data.server.recipe.ShapedRecipeJsonBuilder;
 import net.minecraft.item.ItemConvertible;
 import net.minecraft.item.Items;
 
@@ -62,5 +63,12 @@ public class GeoclusterRecipeProvider extends FabricRecipeProvider {
         offerBlasting(exporter, TITANIUM_ORES, TITANIUM_INGOT, 1.0F, 100, "titanium_ingot");
         offerBlasting(exporter, NICKEL_ORES, NICKEL_INGOT, 1.0F, 100, "nickel_ingot");
         offerBlasting(exporter, List.of(RAW_ANCIENT_DEBRIS), Items.NETHERITE_SCRAP, 1.0F, 100, "netherite_scrap");
+
+        ShapedRecipeJsonBuilder.create(PROSPECTORS_PICK).input('I', Items.IRON_INGOT).input('N', Items.IRON_NUGGET).input('S', Items.STICK)
+                .pattern("NI")
+                .pattern(" S")
+                .criterion("has_raw_iron", conditionsFromItem(Items.RAW_IRON))
+                .offerTo(exporter);
+
     }
 }

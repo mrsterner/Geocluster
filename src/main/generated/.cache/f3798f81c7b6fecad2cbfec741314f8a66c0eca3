@@ -1,4 +1,4 @@
-// 1.19.2	2023-05-18T18:22:24.281771929	Models
+// 1.19.2	2023-05-18T20:39:06.148715008	Models
 6553299208fc60bb3adaff27912415726a8b384d assets/geocluster/models/block/platinum_ore.json
 28f324ae1e2a2f62a1f329c6e7d759385d845c1a assets/geocluster/models/item/deepslate_uranium_ore.json
 c9b48504836fbaa8c923fa4d01daaa1437429d33 assets/geocluster/models/block/deepslate_platinum_ore.json
@@ -13,6 +13,7 @@ d6793ec9a6aee8aaefd351a7dbf8c92f705c91e8 assets/geocluster/models/item/raw_zinc.
 258a7662e2db3e847f6c853f37e052e292570d90 assets/geocluster/blockstates/tin_ore.json
 7a871d17f94935ee25f6faa780d4952dd8a5298e assets/geocluster/models/item/silver_ingot.json
 f84fd7c3b17fb9e27864a291be43a1b4ee267bb5 assets/geocluster/models/item/raw_titanium.json
+4a39e8b49d1e29beb65c7b333ff06ec8ad13d932 assets/geocluster/models/item/prospectors_pick.json
 56ee74728073e59d5cb21173504ea0441fecf911 assets/geocluster/models/block/deepslate_aluminium_ore.json
 d8f63154f1ca08399d75cbdc0cb0e62fa2bdf400 assets/geocluster/models/item/raw_lead.json
 1fccb667fdb36e7782ec44318bf54a5b87555c00 assets/geocluster/models/block/deepslate_lead_ore.json
@@ -45,8 +46,8 @@ d53db809338ff0906d4a87d943d42434b4688522 assets/geocluster/models/block/ancient_
 2bbd45da5d953f12a8533c9eae232d987d287aec assets/geocluster/models/item/uranium_nugget.json
 25d52200f48b478a1c06744ccd3e9c93bfd9dba4 assets/geocluster/models/item/nickel_ingot.json
 148745403f0a37fc8c4fbec0dd54ea57098030e7 assets/geocluster/blockstates/deepslate_tin_ore.json
-881d2428afbc51dd0c43c9ff6d39a6c30fd86fe1 assets/geocluster/blockstates/uranium_ore.json
 3924a84570564f7db278f01f8630412d2f7d30fb assets/geocluster/blockstates/platinum_ore.json
+881d2428afbc51dd0c43c9ff6d39a6c30fd86fe1 assets/geocluster/blockstates/uranium_ore.json
 063a72995a7f29ef46c2bb3f415745e3c0708d06 assets/geocluster/models/item/aluminium_ore.json
 88606e0f2ce71c513ac9030a837e85e5b047543f assets/geocluster/models/item/uranium_ingot.json
 b33b42b2921284d787884b5bdcc569902dc5d4a4 assets/geocluster/blockstates/deepslate_aluminium_ore.json

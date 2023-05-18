@@ -23,7 +23,6 @@ import java.util.List;
 public interface GeoclusterWorldgenRegistry {
     List<PlacementModifier> placement = Lists.newArrayList(HeightRangePlacementModifier.uniform(YOffset.fixed(-64), YOffset.fixed(320)));
 
-
     Feature<DefaultFeatureConfig> DEPOSIT_FEATURE = registerFeature("deposits", new DepositFeature(DefaultFeatureConfig.CODEC));
     RegistryEntry<ConfiguredFeature<DefaultFeatureConfig, ?>> CONFIGURED_DEPOSIT_FEATURE = registerConfigured("deposits_configured", DEPOSIT_FEATURE);
     RegistryEntry<PlacedFeature> PLACED_DEPOSIT_FEATURE = PlacedFeatures.register("geocluster:deposits_placed", CONFIGURED_DEPOSIT_FEATURE, placement);

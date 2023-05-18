@@ -48,7 +48,7 @@ public class DepositFeature extends Feature<DefaultFeatureConfig> {
                 boolean anyGenerated = deposit.generate(world, pos, depositComponent, chunkComponent) > 0;
                 if (anyGenerated) {
                     placedPluton = true;
-                    deposit.afterGen(world, pos, depositComponent, chunkComponent);
+                    deposit.generatePost(world, pos, depositComponent, chunkComponent);
                 }
             }
         }
@@ -65,7 +65,7 @@ public class DepositFeature extends Feature<DefaultFeatureConfig> {
         if (cgCap.hasChunkGenerated(cp) && q.size() > 0) {
             Geocluster.LOGGER.info("Chunk [{}, {}] has already generated but we're trying to place pending blocks anyways", cp.x, cp.z);
         }
-        q.forEach(x -> FeatureUtils.enqueueBlockPlacement(worldAccess, cp, x.pos(), x.state(), depCap, cgCap));
+        q.forEach(x -> FeatureUtils.enqueueBlockPlacement(worldAccess, x.pos(), x.state(), depCap, cgCap));
         depCap.removePendingBlocksForChunk(cp);
         return q.size() > 0;
     }

@@ -18,7 +18,7 @@ public class DepositUtils {
     private static HashSet<BlockState> defaultMatchersCached = null;
 
     @Nullable
-    public static BlockState pick(HashMap<BlockState, Float> map, float totl, Random random) {
+    public static BlockState pick(HashMap<BlockState, Float> map, Random random) {
         float rng = random.nextFloat();
         for (Map.Entry<BlockState, Float> e : map.entrySet()) {
             float wt = e.getValue();
@@ -32,6 +32,7 @@ public class DepositUtils {
         return null;
     }
 
+    @SuppressWarnings("unchecked")
     public static HashSet<BlockState> getDefaultMatchers() {
         if (defaultMatchersCached == null) {
             defaultMatchersCached = new HashSet<>();
@@ -55,10 +56,6 @@ public class DepositUtils {
         return false;
     }
 
-    /**
-     * Returns true if a and b are within epsilon of each other, where epsilon is the minimum
-     * representable value by a 32-bit floating point number.
-     */
     public static boolean nearlyEquals(float a, float b) {
         return Math.abs(a - b) <= Float.MIN_VALUE;
     }

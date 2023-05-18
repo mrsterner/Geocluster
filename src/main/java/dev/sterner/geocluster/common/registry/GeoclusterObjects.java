@@ -2,6 +2,7 @@ package dev.sterner.geocluster.common.registry;
 
 import dev.sterner.geocluster.Geocluster;
 import dev.sterner.geocluster.common.blocks.SampleBlock;
+import dev.sterner.geocluster.common.items.ProspectorsPickItem;
 import net.minecraft.block.*;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
@@ -15,6 +16,8 @@ import java.util.Map;
 public interface GeoclusterObjects {
     Map<Block, Identifier> BLOCKS = new LinkedHashMap<>();
     Map<Item, Identifier> ITEMS = new LinkedHashMap<>();
+
+    Item PROSPECTORS_PICK = register("prospectors_pick", new ProspectorsPickItem());
 
     Item ZINC_INGOT = register("zinc_ingot", new Item(settings()));
     Item SILVER_INGOT = register("silver_ingot", new Item(settings()));
