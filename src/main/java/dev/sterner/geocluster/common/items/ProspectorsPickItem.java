@@ -88,11 +88,10 @@ public class ProspectorsPickItem extends Item {
             }
         }
 
+        var optional = foundBlockPos.stream().findAny();
         if (!foundBlocks.isEmpty()) {
             S2CProspectingPacket.send(player, foundBlocks, facing.getOpposite().getName());
-            foundBlockPos.forEach((_pos) -> {
-                world.playSound(null, _pos, SoundEvents.BLOCK_ANVIL_PLACE, SoundCategory.PLAYERS, 0.15F, 2F);
-            });
+            optional.ifPresent(blockPos -> world.playSound(null, blockPos, SoundEvents.BLOCK_ANVIL_PLACE, SoundCategory.PLAYERS, 0.15F, 2F));
             return;
         }
         prospectChunk(world, pos, player);

@@ -42,6 +42,9 @@ public class GeoclusterModelProvider extends FabricModelProvider {
         generator.registerSimpleCubeAll(NICKEL_ORE);
         generator.registerSimpleCubeAll(DEEPSLATE_NICKEL_ORE);
 
+        generator.registerSimpleCubeAll(QUARTZ_ORE);
+        generator.registerSimpleCubeAll(DEEPSLATE_QUARTZ_ORE);
+
         generator.registerSimpleCubeAll(ANCIENT_DEBRIS_ORE);
     }
 

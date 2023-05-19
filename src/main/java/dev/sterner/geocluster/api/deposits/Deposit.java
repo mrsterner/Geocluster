@@ -1,7 +1,6 @@
 package dev.sterner.geocluster.api.deposits;
 
 import dev.sterner.geocluster.api.DepositUtils;
-import dev.sterner.geocluster.common.blocks.SampleBlock;
 import dev.sterner.geocluster.common.components.IWorldChunkComponent;
 import dev.sterner.geocluster.common.components.IWorldDepositComponent;
 import dev.sterner.geocluster.common.utils.FeatureUtils;
@@ -65,7 +64,7 @@ public abstract class Deposit {
                 continue;
             }
 
-            BlockPos samplePos = SampleUtils.getSamplePosition(world, new ChunkPos(pos));
+            BlockPos samplePos = SampleUtils.getSamplePosition(world, new ChunkPos(pos), pos);
 
             if (samplePos == null || SampleUtils.inNonWaterFluid(world, samplePos)) {
                 continue;

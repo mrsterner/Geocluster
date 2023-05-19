@@ -31,6 +31,7 @@ public interface IOreToast {
     enum Visibility {
         SHOW(),
         HIDE();
+
         Visibility() {
         }
     }

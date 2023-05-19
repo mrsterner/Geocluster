@@ -3,7 +3,6 @@ package dev.sterner.geocluster.client.toast;
 import com.google.common.collect.Queues;
 import com.mojang.blaze3d.systems.RenderSystem;
 import dev.sterner.geocluster.GeoclusterConfig;
-import dev.sterner.geocluster.common.utils.GeoclusterUtils;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.MinecraftClient;
@@ -12,7 +11,10 @@ import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Util;
 import net.minecraft.util.math.MathHelper;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.BitSet;
+import java.util.Deque;
+import java.util.List;
 
 public class OreToastManager extends DrawableHelper {
     private static final int SPACES = 5;
@@ -27,13 +29,16 @@ public class OreToastManager extends DrawableHelper {
 
     public void draw(MatrixStack matrices) {
         if (!this.client.options.hudHidden) {
+            System.out.println("Q: " + toastQueue);
+            System.out.println("V: " + visibleEntries);
+
             int i = this.client.getWindow().getScaledWidth();
             this.visibleEntries.removeIf((visibleEntry) -> {
 
 
                 if (visibleEntry != null) {
                     boolean bl = visibleEntry.draw(i, matrices);
-                    if(bl){
+                    if (bl) {
                         this.occupiedSpaces.clear(visibleEntry.topIndex, visibleEntry.topIndex + visibleEntry.requiredSpaceCount);
                         return true;
                     }
@@ -47,16 +52,33 @@ public class OreToastManager extends DrawableHelper {
                     int k = toast.getRequiredSpaceCount();
                     int j = this.getTopIndex(k);
                     if (j != -1) {
-                        this.visibleEntries.add(new Entry<>(toast, j, k));
-                        this.occupiedSpaces.set(j, j + k);
-                        return true;
-                    } else {
-                        return false;
+                        if (!findEntryByToast(toast)) {
+                            Entry<IOreToast> entry = new Entry<>(toast, j, k);
+                            this.visibleEntries.add(entry);
+                            this.occupiedSpaces.set(j, j + k);
+                            return true;
+                        }
                     }
+                    return false;
                 });
             }
 
         }
+    }
+
+    private boolean findEntryByToast(IOreToast toast) {
+        boolean bl = false;
+        for (Entry<?> entry : this.visibleEntries) {
+            if (toast instanceof OreToast oreToast && entry.getToast() instanceof OreToast storedToast) {
+                var states = oreToast.getStates();
+                var storedStates = storedToast.getStates();
+                if (listsHaveSameElements(states, storedStates)) {
+                    bl = true;
+                    break;
+                }
+            }
+        }
+        return bl;
     }
 
     private int getTopIndex(int requiredSpaces) {
@@ -73,12 +95,32 @@ public class OreToastManager extends DrawableHelper {
         return -1;
     }
 
+    public static <T> boolean listsHaveSameElements(List<T> list1, List<T> list2) {
+        if (list1.size() != list2.size()) {
+            return false;
+        }
+
+        List<T> copiedList = new ArrayList<>(list1);
+
+        for (T element : list2) {
+            if (copiedList.contains(element)) {
+                copiedList.remove(element);
+            } else {
+                return false;
+            }
+        }
+
+        return copiedList.isEmpty();
+    }
+
     private int getEmptySpaceCount() {
         return 5 - this.occupiedSpaces.cardinality();
     }
 
     public void add(IOreToast toast) {
-        this.toastQueue.add(toast);
+        if (!findEntryByToast(toast)) {
+            toastQueue.add(toast);
+        }
     }
 
     public MinecraftClient getClient() {
@@ -103,9 +145,13 @@ public class OreToastManager extends DrawableHelper {
         }
 
         private float getDisappearProgress(long time) {
-            float f = MathHelper.clamp((float)(time - this.startTime) / DISAPPEAR_TIME, 0.0F, 1.0F);
+            float f = MathHelper.clamp((float) (time - this.startTime) / DISAPPEAR_TIME, 0.0F, 1.0F);
             f *= f;
             return this.visibility == IOreToast.Visibility.HIDE ? 1.0F - f : f;
+        }
+
+        public IOreToast getToast() {
+            return instance;
         }
 
         public boolean draw(int x, MatrixStack matrices) {
@@ -120,7 +166,7 @@ public class OreToastManager extends DrawableHelper {
 
             MatrixStack matrixStack = RenderSystem.getModelViewStack();
             matrixStack.push();
-            if(GeoclusterConfig.PROSPECTORS_POPUP_RIGHT){
+            if (GeoclusterConfig.PROSPECTORS_POPUP_RIGHT) {
                 matrixStack.translate((float) x - (float) this.instance.getWidth() * this.getDisappearProgress(l), client.getWindow().getScaledHeight() - 32 - this.topIndex * 24, 800.0);
             } else {
                 matrixStack.translate((float) (client.getWindow().getScaledWidth() - x) + (float) this.instance.getWidth() * this.getDisappearProgress(l) - (float) this.instance.getWidth(), client.getWindow().getScaledHeight() - 32 - this.topIndex * 24, 800.0);
@@ -131,7 +177,7 @@ public class OreToastManager extends DrawableHelper {
             matrixStack.pop();
             RenderSystem.applyModelViewMatrix();
             if (visibility != this.visibility) {
-                this.startTime = l - (long)((int)((1.0F - this.getDisappearProgress(l)) * 600.0F));
+                this.startTime = l - (long) ((int) ((1.0F - this.getDisappearProgress(l)) * 600.0F));
                 this.visibility = visibility;
             }
             return this.visibility == IOreToast.Visibility.HIDE && l - this.startTime > 600L;

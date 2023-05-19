@@ -5,7 +5,7 @@
     "yMax": 64,
     "size": 30,
     "spread": 24,
-    "biomeTag": "#minecraft:is_overworld",
+    "biomeTag": "#c:is_dry/overworld",
     "blocks": {
       "default": [
         {

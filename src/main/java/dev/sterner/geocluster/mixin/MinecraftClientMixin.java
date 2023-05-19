@@ -15,12 +15,12 @@ public abstract class MinecraftClientMixin implements IOreToastManager {
     private OreToastManager manager;
 
     @Inject(method = "<init>", at = @At("TAIL"))
-    private void injectManager(RunArgs args, CallbackInfo ci){
+    private void injectManager(RunArgs args, CallbackInfo ci) {
         manager = new OreToastManager(MinecraftClient.class.cast(this));
     }
 
     @Override
-    public OreToastManager getManager(){
+    public OreToastManager getManager() {
         return this.manager;
     }
 }

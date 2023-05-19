@@ -95,8 +95,8 @@ public class LayerDeposit extends Deposit implements IDeposit {
     }
 
     @Override
-    public int generate(StructureWorldAccess level, BlockPos pos, IWorldDepositComponent deposits, IWorldChunkComponent chunksGenerated) {
-        if (!canPlaceInBiome(level.getBiome(pos))) {
+    public int generate(StructureWorldAccess world, BlockPos pos, IWorldDepositComponent deposits, IWorldChunkComponent chunksGenerated) {
+        if (!canPlaceInBiome(world.getBiome(pos))) {
             return 0;
         }
 
@@ -107,10 +107,10 @@ public class LayerDeposit extends Deposit implements IDeposit {
         int centerX = (thisChunk.getStartX() + thisChunk.getEndX()) / 2;
         int centerZ = (thisChunk.getStartZ() + thisChunk.getEndZ()) / 2;
 
-        int x = centerX - level.getRandom().nextInt(8) + level.getRandom().nextInt(16);
-        int y = this.yMin + level.getRandom().nextInt(Math.abs(this.yMax - this.yMin));
-        int z = centerZ - level.getRandom().nextInt(8) + level.getRandom().nextInt(16);
-        int max = GeoclusterUtils.getTopSolidBlock(level, pos).getY();
+        int x = centerX - world.getRandom().nextInt(8) + world.getRandom().nextInt(16);
+        int y = this.yMin + world.getRandom().nextInt(Math.abs(this.yMax - this.yMin));
+        int z = centerZ - world.getRandom().nextInt(8) + world.getRandom().nextInt(16);
+        int max = GeoclusterUtils.getTopSolidBlock(world, pos).getY();
         y = Math.max(y, max);
 
         BlockPos basePos = new BlockPos(x, y, z);
@@ -124,13 +124,13 @@ public class LayerDeposit extends Deposit implements IDeposit {
                     }
 
                     BlockPos placePos = basePos.add(dX, dY, dZ);
-                    BlockState current = level.getBlockState(placePos);
-                    BlockState tmp = getOre(current, level.getRandom());
+                    BlockState current = world.getBlockState(placePos);
+                    BlockState tmp = getOre(current, world.getRandom());
                     if (tmp == null || !(getBlockStateMatchers().contains(current) || oreToWeightMap.containsKey(GeoclusterUtils.getRegistryName(current)))) {
                         continue;
                     }
 
-                    if (FeatureUtils.enqueueBlockPlacement(level, placePos, tmp, deposits, chunksGenerated)) {
+                    if (FeatureUtils.enqueueBlockPlacement(world, placePos, tmp, deposits, chunksGenerated)) {
                         totalPlaced++;
                     }
                 }

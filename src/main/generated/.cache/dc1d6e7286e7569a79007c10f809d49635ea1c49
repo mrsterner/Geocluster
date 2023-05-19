@@ -1,8 +1,9 @@
-// 1.19.2	2023-05-19T03:34:41.856188973	Block Loot Tables
+// 1.19.2	2023-05-19T18:12:03.165758064	Block Loot Tables
 850635597111485571ac57488642599b02199e53 data/geocluster/loot_tables/blocks/redstone_ore_sample.json
 4112859031a550c9e939edfd123475c377d23945 data/geocluster/loot_tables/blocks/aluminium_ore_sample.json
 245dd24c5405f614c796362a77137aa248fb0af6 data/geocluster/loot_tables/blocks/deepslate_tin_ore.json
 f75d08156484ffdbcf2b6fcd6395cc3e7ef8693f data/geocluster/loot_tables/blocks/zinc_ore.json
+864a7da225a257fa7e2e22aae7ea65a6466a9ca8 data/geocluster/loot_tables/blocks/nether_quartz_ore_sample.json
 77272ce04bf501acff3eb206477b2e0b868c48ea data/geocluster/loot_tables/blocks/uranium_ore.json
 272fc469db57332c47943cea32a049ff5cf7b1d7 data/geocluster/loot_tables/blocks/aluminium_ore.json
 e3b74a362495b08e4ca881e5bcd8c19c8bc9b889 data/geocluster/loot_tables/blocks/deepslate_uranium_ore.json
@@ -13,8 +14,10 @@ e7ef42927cdbea55c3179486444b9ab23587a922 data/geocluster/loot_tables/blocks/silv
 ee943ca4605fd8f3091090f82c432580db1f4180 data/geocluster/loot_tables/blocks/lead_ore_sample.json
 2dc448a685685623283c379d55196187d77b4bd1 data/geocluster/loot_tables/blocks/coal_ore_sample.json
 461c076315ca0b7f4c3602f5ca35c74d2e13de2d data/geocluster/loot_tables/blocks/nether_gold_ore_sample.json
+d22d5259dce98e48582221400389e6aba7918c4a data/geocluster/loot_tables/blocks/quartz_ore.json
 9ccdc3161423ed0c32c7cfb28c2ce7f64b4c0f0c data/geocluster/loot_tables/blocks/copper_ore_sample.json
 72c3b6e384fbe3e87e159015413966f785ff50b1 data/geocluster/loot_tables/blocks/deepslate_titanium_ore.json
+aaf371031875417ccbb5185119c9831445967c6e data/geocluster/loot_tables/blocks/deepslate_quartz_ore.json
 afef182f3702656bf653be7b6111367c7ed950d6 data/geocluster/loot_tables/blocks/nickel_ore.json
 8b4a5cbaf2bf87785e511356d6bbefee2d5bd200 data/geocluster/loot_tables/blocks/lapis_ore_sample.json
 626cb7daf70919e77c90a452ba92be6c787bf556 data/geocluster/loot_tables/blocks/platinum_ore.json

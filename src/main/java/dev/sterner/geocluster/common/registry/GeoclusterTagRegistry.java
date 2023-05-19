@@ -6,10 +6,19 @@ import net.minecraft.item.Item;
 import net.minecraft.tag.TagKey;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
+import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.feature.PlacedFeature;
 
 public interface GeoclusterTagRegistry {
     TagKey<PlacedFeature> ORES_TO_REMOVE = TagKey.of(Registry.PLACED_FEATURE_KEY, Geocluster.id("ores_to_remove"));
+
+    TagKey<Biome> IS_DRY = TagKey.of(Registry.BIOME_KEY, new Identifier("c", "is_dry/overworld"));
+    TagKey<Biome> IS_HOT = TagKey.of(Registry.BIOME_KEY, new Identifier("c", "is_hot/overworld"));
+
+    TagKey<Biome> IS_SANDY = TagKey.of(Registry.BIOME_KEY, new Identifier("c", "is_sandy"));
+    TagKey<Biome> IS_SWAMP = TagKey.of(Registry.BIOME_KEY, new Identifier("c", "is_swamp"));
+    TagKey<Biome> IS_MUSHROOM = TagKey.of(Registry.BIOME_KEY, new Identifier("c", "is_mushroom"));
+    TagKey<Biome> IS_MARSHY = TagKey.of(Registry.BIOME_KEY, Geocluster.id("is_marshy"));
 
     TagKey<Block> STONE = TagKey.of(Registry.BLOCK_KEY, new Identifier("c", "stone"));
     TagKey<Block> SUPPORTS_SAMPLE = TagKey.of(Registry.BLOCK_KEY, Geocluster.id("supports_sample"));

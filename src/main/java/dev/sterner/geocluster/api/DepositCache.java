@@ -3,7 +3,6 @@ package dev.sterner.geocluster.api;
 import dev.sterner.geocluster.Geocluster;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.StructureWorldAccess;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;

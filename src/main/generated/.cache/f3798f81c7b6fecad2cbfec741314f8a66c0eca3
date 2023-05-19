@@ -1,4 +1,4 @@
-// 1.19.2	2023-05-19T03:34:41.859649566	Models
+// 1.19.2	2023-05-19T18:12:03.161022972	Models
 6553299208fc60bb3adaff27912415726a8b384d assets/geocluster/models/block/platinum_ore.json
 28f324ae1e2a2f62a1f329c6e7d759385d845c1a assets/geocluster/models/item/deepslate_uranium_ore.json
 c9b48504836fbaa8c923fa4d01daaa1437429d33 assets/geocluster/models/block/deepslate_platinum_ore.json
@@ -23,6 +23,7 @@ ae60f4ca03704b5729eb15bb7ddc157fda5739ef assets/geocluster/models/block/deepslat
 1860a22e8b2ea96aaae79735bc101498294dea51 assets/geocluster/models/item/deepslate_tin_ore.json
 6f52d815fe92f97740cd30763d20be562e600b2c assets/geocluster/models/block/tin_ore.json
 33ac56e4e94f27624fc686fafbab8b27168696ca assets/geocluster/blockstates/deepslate_uranium_ore.json
+83e87205c7f1b9fd8a683079b1babb984fd29c58 assets/geocluster/blockstates/deepslate_quartz_ore.json
 39a74a2b6c1f3cb51354b4780339432f7b0a0828 assets/geocluster/models/item/tin_ingot.json
 247d3b5b3dfff4e12eb258bb85148a5eba9b241e assets/geocluster/models/block/lead_ore.json
 6ad65fa594cfea6e0781649ffedb27068a7174fb assets/geocluster/models/block/zinc_ore.json
@@ -37,6 +38,8 @@ c1ec3c3d2181687d813dc167392bf8507e535d4c assets/geocluster/models/item/deepslate
 6035a482fb59c50002fff6db042c13cc8e5488a2 assets/geocluster/models/item/titanium_nugget.json
 306fb40a1ff0c5cabb6a0f29e3e1f5cea7d65cd8 assets/geocluster/models/item/zinc_ingot.json
 dcc879352ea9405800d3042d3c4fa544ae4113c9 assets/geocluster/models/item/raw_silver.json
+a86318d72c0d3569f1a55da2e92c9f4187359217 assets/geocluster/models/item/deepslate_quartz_ore.json
+4d6781dad06a34dbb8c6fc4d2c4a5ef1a629345a assets/geocluster/models/block/quartz_ore.json
 ff57da7b237a08e1bedd374557cde002d883bae8 assets/geocluster/blockstates/titanium_ore.json
 84334c224a42e9c72aa82f51bc2ea00fbbc54000 assets/geocluster/models/block/titanium_ore.json
 b9c9c6bd7894d4f3c2f70f83c9a800e74ba3ac5a assets/geocluster/models/block/deepslate_titanium_ore.json
@@ -45,6 +48,7 @@ b9c9c6bd7894d4f3c2f70f83c9a800e74ba3ac5a assets/geocluster/models/block/deepslat
 d53db809338ff0906d4a87d943d42434b4688522 assets/geocluster/models/block/ancient_debris_ore.json
 2bbd45da5d953f12a8533c9eae232d987d287aec assets/geocluster/models/item/uranium_nugget.json
 25d52200f48b478a1c06744ccd3e9c93bfd9dba4 assets/geocluster/models/item/nickel_ingot.json
+fd8a20a4fff4b5f6b6a0420f47df33a4b6ab370a assets/geocluster/models/block/deepslate_quartz_ore.json
 148745403f0a37fc8c4fbec0dd54ea57098030e7 assets/geocluster/blockstates/deepslate_tin_ore.json
 881d2428afbc51dd0c43c9ff6d39a6c30fd86fe1 assets/geocluster/blockstates/uranium_ore.json
 3924a84570564f7db278f01f8630412d2f7d30fb assets/geocluster/blockstates/platinum_ore.json
@@ -58,6 +62,7 @@ f889f5660d63b5133eb510cac1014be1121272f7 assets/geocluster/blockstates/lead_ore.
 23d6768d1f916565af2a6edf1b1c79bc7f42e5cd assets/geocluster/blockstates/deepslate_platinum_ore.json
 9951ba3dd09c3870f84a2c39598fcc32ec61e4b2 assets/geocluster/blockstates/aluminium_ore.json
 74f45613b95dace445b111e0c809d226103f0002 assets/geocluster/models/item/deepslate_lead_ore.json
+c75c36950d5d942802a69bbe9c84346de95e68da assets/geocluster/models/item/quartz_ore.json
 2b976fa7c11503c94501be8d91cbe27916f383dc assets/geocluster/models/item/platinum_ingot.json
 1b717e62a5db56a9d2cd3a0c331da9930b10300d assets/geocluster/models/block/deepslate_uranium_ore.json
 53cb6cc85b3bad36774667dee310ee5231df8722 assets/geocluster/models/item/deepslate_zinc_ore.json
@@ -72,6 +77,7 @@ a1d30b1425969d8d7cbc9e60319e66b22e5a0bc7 assets/geocluster/models/item/tin_ore.j
 0d0bab54a9352fc4c488e565a767148ceac71133 assets/geocluster/models/item/lead_ingot.json
 db179d416d61547bfc586a2eb34505b5b1a9b367 assets/geocluster/models/item/titanium_ingot.json
 b13bd92eb32101333b2448a03f9ff55794c3f89f assets/geocluster/models/item/raw_platinum.json
+2c388fb5965575f855c92adb1516a156ca0b1e5d assets/geocluster/blockstates/quartz_ore.json
 2df801eba81dcc698f1847221acd8d7a7bef55d8 assets/geocluster/models/item/platinum_nugget.json
 57c1e59ad8934f6127eddc907f3b44dcc92f065d assets/geocluster/models/block/silver_ore.json
 1ae2d0c3b8e61e0cd716d87c18c2d355ec075892 assets/geocluster/models/item/silver_nugget.json

@@ -5,6 +5,7 @@ import net.fabricmc.fabric.api.datagen.v1.provider.FabricBlockLootTableProvider;
 import net.minecraft.item.Items;
 
 import static dev.sterner.geocluster.common.registry.GeoclusterObjects.*;
+import static net.minecraft.item.Items.QUARTZ;
 
 public class GeoclusterLootTableProvider extends FabricBlockLootTableProvider {
     public GeoclusterLootTableProvider(FabricDataGenerator dataGenerator) {
@@ -40,6 +41,9 @@ public class GeoclusterLootTableProvider extends FabricBlockLootTableProvider {
         this.addDrop(NICKEL_ORE, b -> oreDrops(b, RAW_NICKEL));
         this.addDrop(DEEPSLATE_NICKEL_ORE, b -> oreDrops(b, RAW_NICKEL));
 
+        this.addDrop(QUARTZ_ORE, b -> oreDrops(b, QUARTZ));
+        this.addDrop(DEEPSLATE_QUARTZ_ORE, b -> oreDrops(b, QUARTZ));
+
         this.addDrop(COPPER_SAMPLE, Items.RAW_COPPER);
         this.addDrop(IRON_SAMPLE, Items.RAW_IRON);
         this.addDrop(GOLD_SAMPLE, Items.RAW_GOLD);
@@ -60,6 +64,7 @@ public class GeoclusterLootTableProvider extends FabricBlockLootTableProvider {
         this.addDrop(EMERALD_SAMPLE, Items.EMERALD);
         this.addDrop(DIAMOND_SAMPLE, Items.DIAMOND);
         this.addDrop(ANCIENT_DEBRIS_SAMPLE, RAW_ANCIENT_DEBRIS);
-        this.addDrop(QUARTZ_SAMPLE, Items.QUARTZ);
+        this.addDrop(QUARTZ_SAMPLE, QUARTZ);
+        this.addDrop(NETHER_QUARTZ_SAMPLE, QUARTZ);
     }
 }

@@ -14,12 +14,12 @@ import org.jetbrains.annotations.Nullable;
 
 public class SampleUtils {
     @Nullable
-    public static BlockPos getSamplePosition(StructureWorldAccess level, ChunkPos chunkPos) {
-        return getSamplePosition(level, chunkPos, -1);
+    public static BlockPos getSamplePosition(StructureWorldAccess level, ChunkPos chunkPos, BlockPos pos) {
+        return getSamplePosition(level, chunkPos, -1, pos);
     }
 
     @Nullable
-    public static BlockPos getSamplePosition(StructureWorldAccess worldAccess, ChunkPos chunkPos, int spread) {
+    public static BlockPos getSamplePosition(StructureWorldAccess worldAccess, ChunkPos chunkPos, int spread, BlockPos pos) {
 
         if (!(worldAccess instanceof ChunkRegion world)) {
             return null;
@@ -32,17 +32,39 @@ public class SampleUtils {
         int blockPosX = xCenter + (worldAccess.getRandom().nextInt(usedSpread) * ((worldAccess.getRandom().nextBoolean()) ? 1 : -1));
         int blockPosZ = zCenter + (worldAccess.getRandom().nextInt(usedSpread) * ((worldAccess.getRandom().nextBoolean()) ? 1 : -1));
 
-        BlockPos searchPos = new BlockPos(blockPosX, worldAccess.getTopY(Heightmap.Type.OCEAN_FLOOR_WG, blockPosX, blockPosZ), blockPosZ).down();
 
-        BlockState blockToPlaceOn = world.getBlockState(searchPos);
-        if (Block.isFaceFullSquare(blockToPlaceOn.getOutlineShape(world, searchPos), Direction.UP)) {
-            if(blockToPlaceOn.isIn(GeoclusterTagRegistry.SUPPORTS_SAMPLE)){
-                BlockPos actualPlacePos = searchPos.up();
-                if (canReplace(world, actualPlacePos)) {
-                    return actualPlacePos;
+        if (world.getDimension().hasCeiling()) {
+            BlockPos searchPos = new BlockPos(blockPosX, world.getHeight(), blockPosZ);
+
+            while (searchPos.getY() > world.getDimension().minY()) {
+                BlockState blockToPlaceOn = world.getBlockState(searchPos);
+                if (Block.isFaceFullSquare(blockToPlaceOn.getOutlineShape(world, searchPos), Direction.UP)) {
+                    if (!blockToPlaceOn.isIn(GeoclusterTagRegistry.SUPPORTS_SAMPLE)) {
+                        searchPos = searchPos.down();
+                        continue;
+                    }
+                    BlockPos actualPlacePos = searchPos.up();
+                    if (canReplace(world, actualPlacePos)) {
+                        return actualPlacePos;
+                    }
+                }
+                searchPos = searchPos.down();
+            }
+
+
+        } else {
+            BlockPos searchPos = new BlockPos(blockPosX, worldAccess.getTopY(Heightmap.Type.OCEAN_FLOOR_WG, blockPosX, blockPosZ), blockPosZ).down();
+            BlockState blockToPlaceOn = world.getBlockState(searchPos);
+            if (Block.isFaceFullSquare(blockToPlaceOn.getOutlineShape(world, searchPos), Direction.UP)) {
+                if (blockToPlaceOn.isIn(GeoclusterTagRegistry.SUPPORTS_SAMPLE)) {
+                    BlockPos actualPlacePos = searchPos.up();
+                    if (canReplace(world, actualPlacePos)) {
+                        return actualPlacePos;
+                    }
                 }
             }
         }
+
         return null;
     }
 

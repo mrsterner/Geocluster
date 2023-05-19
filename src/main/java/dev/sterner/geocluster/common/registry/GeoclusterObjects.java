@@ -78,6 +78,10 @@ public interface GeoclusterObjects {
     Block NICKEL_ORE = register("nickel_ore", new OreBlock(AbstractBlock.Settings.of(Material.STONE).requiresTool().strength(3.0F, 3.0F)), settings());
     Block DEEPSLATE_NICKEL_ORE = register("deepslate_nickel_ore", new OreBlock(AbstractBlock.Settings.copy(NICKEL_ORE).mapColor(MapColor.DEEPSLATE_GRAY).strength(4.5F, 3.0F).sounds(BlockSoundGroup.DEEPSLATE)), settings());
 
+    Block QUARTZ_ORE = register("quartz_ore", new OreBlock(AbstractBlock.Settings.of(Material.STONE).requiresTool().strength(3.0F, 3.0F)), settings());
+    Block DEEPSLATE_QUARTZ_ORE = register("deepslate_quartz_ore", new OreBlock(AbstractBlock.Settings.copy(NICKEL_ORE).mapColor(MapColor.DEEPSLATE_GRAY).strength(4.5F, 3.0F).sounds(BlockSoundGroup.DEEPSLATE)), settings());
+
+
     Block ANCIENT_DEBRIS_ORE = register("ancient_debris_ore", new OreBlock(AbstractBlock.Settings.of(Material.STONE).requiresTool().strength(3.0F, 3.0F)), settings());
 
     Block COPPER_SAMPLE = register("copper_ore_sample", new SampleBlock(), settings());
@@ -101,6 +105,7 @@ public interface GeoclusterObjects {
     Block DIAMOND_SAMPLE = register("diamond_ore_sample", new SampleBlock(), settings());
     Block ANCIENT_DEBRIS_SAMPLE = register("ancient_debris_ore_sample", new SampleBlock(), settings());
     Block QUARTZ_SAMPLE = register("quartz_ore_sample", new SampleBlock(), settings());
+    Block NETHER_QUARTZ_SAMPLE = register("nether_quartz_ore_sample", new SampleBlock(), settings());
 
 
     static Item.Settings settings() {

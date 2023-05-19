@@ -44,35 +44,41 @@ public class WorldGenDataReloadListener extends JsonDataLoader implements Identi
             try {
                 JsonObject jsonobject = json.getAsJsonObject();
                 JsonObject config = jsonobject.get("config").getAsJsonObject();
+                Geocluster.LOGGER.info("Preparing to load deposit datafile {}", identifier.toString());
 
                 switch (jsonobject.get("type").getAsString()) {
                     case "geocluster:deposit_dense" -> {
                         DenseDeposit denseDeposit = DenseSerializer.deserialize(config);
                         if (denseDeposit != null) {
+                            Geocluster.LOGGER.info(denseDeposit.toString());
                             GeoclusterAPI.depositCache.addDeposit(denseDeposit);
                         }
                     }
                     case "geocluster:deposit_layer" -> {
                         LayerDeposit layerDeposit = LayerSerializer.deserialize(config);
                         if (layerDeposit != null) {
+                            Geocluster.LOGGER.info(layerDeposit.toString());
                             GeoclusterAPI.depositCache.addDeposit(layerDeposit);
                         }
                     }
                     case "geocluster:deposit_top_layer" -> {
                         TopLayerDeposit topLayerDeposit = TopLayerSerializer.deserialize(config);
                         if (topLayerDeposit != null) {
+                            Geocluster.LOGGER.info(topLayerDeposit.toString());
                             GeoclusterAPI.depositCache.addDeposit(topLayerDeposit);
                         }
                     }
                     case "geocluster:deposit_dike" -> {
                         DikeDeposit dikeDeposit = DikeSerializer.deserialize(config);
                         if (dikeDeposit != null) {
+                            Geocluster.LOGGER.info(dikeDeposit.toString());
                             GeoclusterAPI.depositCache.addDeposit(dikeDeposit);
                         }
                     }
                     case "geocluster:deposit_sparse" -> {
                         SparseDeposit sparseDeposit = SparseSerializer.deserialize(config);
                         if (sparseDeposit != null) {
+                            Geocluster.LOGGER.info(sparseDeposit.toString());
                             GeoclusterAPI.depositCache.addDeposit(sparseDeposit);
                         }
                     }

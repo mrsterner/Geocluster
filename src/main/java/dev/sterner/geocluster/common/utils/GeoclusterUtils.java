@@ -24,7 +24,18 @@ public class GeoclusterUtils {
     }
 
     public static BlockPos getTopSolidBlock(WorldView world, BlockPos start) {
-        return new BlockPos(start.getX(), world.getTopY(Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, start.getX(), start.getZ()), start.getZ()).down();
+        if (world.getDimension().hasCeiling()) {
+            BlockPos retPos = new BlockPos(start.getX(), world.getDimension().height() - 1, start.getZ());
+            while (retPos.getY() > 0) {
+                if (world.getBlockState(retPos).getMaterial().isSolid()) {
+                    break;
+                }
+                retPos = retPos.down();
+            }
+            return retPos;
+        }
+
+        return new BlockPos(start.getX(), world.getTopY(Heightmap.Type.OCEAN_FLOOR_WG, start.getX(), start.getZ()), start.getZ()).down();
     }
 
     public static MutableText tryTranslate(String transKey, Object... values) {

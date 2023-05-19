@@ -24,6 +24,7 @@ public class GeoclusterRecipeProvider extends FabricRecipeProvider {
     private static final ImmutableList<ItemConvertible> PLATINUM_ORES = ImmutableList.of(PLATINUM_ORE, DEEPSLATE_PLATINUM_ORE, RAW_PLATINUM);
     private static final ImmutableList<ItemConvertible> TITANIUM_ORES = ImmutableList.of(TITANIUM_ORE, DEEPSLATE_TITANIUM_ORE, RAW_TITANIUM);
     private static final ImmutableList<ItemConvertible> NICKEL_ORES = ImmutableList.of(NICKEL_ORE, DEEPSLATE_NICKEL_ORE, RAW_NICKEL);
+    private static final ImmutableList<ItemConvertible> QUARTZ_ORES = ImmutableList.of(QUARTZ_ORE, DEEPSLATE_QUARTZ_ORE);
 
     public GeoclusterRecipeProvider(FabricDataGenerator dataGenerator) {
         super(dataGenerator);
@@ -52,6 +53,7 @@ public class GeoclusterRecipeProvider extends FabricRecipeProvider {
         offerSmelting(exporter, TITANIUM_ORES, TITANIUM_INGOT, 1.0F, 200, "titanium_ingot");
         offerSmelting(exporter, NICKEL_ORES, NICKEL_INGOT, 1.0F, 200, "nickel_ingot");
         offerSmelting(exporter, List.of(RAW_ANCIENT_DEBRIS), Items.NETHERITE_SCRAP, 1.0F, 200, "netherite_scrap");
+        offerSmelting(exporter, QUARTZ_ORES, Items.QUARTZ, 1.0F, 200, "quartz");
 
         offerBlasting(exporter, ZINC_ORES, ZINC_INGOT, 1.0F, 100, "zinc_ingot");
         offerBlasting(exporter, SILVER_ORES, SILVER_INGOT, 1.0F, 100, "silver_ingot");
@@ -63,6 +65,7 @@ public class GeoclusterRecipeProvider extends FabricRecipeProvider {
         offerBlasting(exporter, TITANIUM_ORES, TITANIUM_INGOT, 1.0F, 100, "titanium_ingot");
         offerBlasting(exporter, NICKEL_ORES, NICKEL_INGOT, 1.0F, 100, "nickel_ingot");
         offerBlasting(exporter, List.of(RAW_ANCIENT_DEBRIS), Items.NETHERITE_SCRAP, 1.0F, 100, "netherite_scrap");
+        offerBlasting(exporter, QUARTZ_ORES, Items.QUARTZ, 1.0F, 100, "quartz");
 
         ShapedRecipeJsonBuilder.create(PROSPECTORS_PICK).input('I', Items.IRON_INGOT).input('N', Items.IRON_NUGGET).input('S', Items.STICK)
                 .pattern("NI")

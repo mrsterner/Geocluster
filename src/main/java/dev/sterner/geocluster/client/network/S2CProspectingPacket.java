@@ -32,18 +32,18 @@ public class S2CProspectingPacket {
 
     public static void handle(MinecraftClient client, ClientPlayNetworkHandler network, PacketByteBuf buf, PacketSender sender) {
         NbtCompound nbtCompound = buf.readNbt();
-        if(nbtCompound != null){
+        if (nbtCompound != null) {
             HashSet<BlockState> blocks = PacketUtils.toBlockSet(nbtCompound);
             String direction = buf.readString();
             client.execute(() -> {
                 ClientPlayerEntity clientPlayerEntity = client.player;
                 if (clientPlayerEntity != null) {
                     if (!direction.equals("")) {
-                        for(BlockState blockState : blocks){
+                        for (BlockState blockState : blocks) {
                             ((IOreToastManager) client).getManager().add(new OreToast(blockState, Direction.byName(direction)));
                         }
                     } else {
-                        for(BlockState blockState : blocks){
+                        for (BlockState blockState : blocks) {
                             ((IOreToastManager) client).getManager().add(new OreToast(blockState, null));
                         }
                     }

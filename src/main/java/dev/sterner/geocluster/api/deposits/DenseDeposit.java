@@ -63,16 +63,16 @@ public class DenseDeposit extends Deposit implements IDeposit {
     }
 
     @Override
-    public int generate(StructureWorldAccess level, BlockPos pos, IWorldDepositComponent deposits, IWorldChunkComponent chunksGenerated) {
-        if (!canPlaceInBiome(level.getBiome(pos))) {
+    public int generate(StructureWorldAccess world, BlockPos pos, IWorldDepositComponent deposits, IWorldChunkComponent chunksGenerated) {
+        if (!canPlaceInBiome(world.getBiome(pos))) {
             return 0;
         }
 
         int totalPlaced = 0;
-        int max = GeoclusterUtils.getTopSolidBlock(level, pos).getY();
+        int max = GeoclusterUtils.getTopSolidBlock(world, pos).getY();
         int randY = Math.max(yMin, max);
 
-        Random random = level.getRandom();
+        Random random = world.getRandom();
         float ranFlt = random.nextFloat() * (float) Math.PI;
         double x1 = (pos.getX() + 8) + MathHelper.sin(ranFlt) * size / 8.0F;
         double x2 = (pos.getX() + 8) - MathHelper.sin(ranFlt) * size / 8.0F;
@@ -111,7 +111,7 @@ public class DenseDeposit extends Deposit implements IDeposit {
 
                                 if (Math.pow(layerRadX, 2) + Math.pow(layerRadY, 2) + Math.pow(layerRadZ, 2) < 1.0D) {
                                     BlockPos placePos = new BlockPos(x, y, z);
-                                    BlockState current = level.getBlockState(placePos);
+                                    BlockState current = world.getBlockState(placePos);
                                     BlockState tmp = getOre(current, random);
                                     if (tmp == null) {
                                         continue;
@@ -121,7 +121,7 @@ public class DenseDeposit extends Deposit implements IDeposit {
                                         continue;
                                     }
 
-                                    if (FeatureUtils.enqueueBlockPlacement(level, placePos, tmp, deposits, chunksGenerated)) {
+                                    if (FeatureUtils.enqueueBlockPlacement(world, placePos, tmp, deposits, chunksGenerated)) {
                                         totalPlaced++;
                                     }
                                 }

@@ -2,7 +2,6 @@ package dev.sterner.geocluster.common.utils;
 
 import dev.sterner.geocluster.Geocluster;
 import net.minecraft.block.BlockState;
-import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtHelper;
 import net.minecraft.nbt.NbtList;

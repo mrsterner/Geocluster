@@ -1,7 +1,7 @@
 {
   "parent": "geocluster:block/ore_sample",
   "textures": {
-    "particle": "minecraft:block/netherrack",
-    "ore": "minecraft:block/nether_quartz_ore"
+    "particle": "minecraft:block/stone",
+    "ore": "geocluster:block/quartz_ore"
   }
 }

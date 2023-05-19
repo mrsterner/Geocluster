@@ -1,25 +1,26 @@
 package dev.sterner.geocluster;
 
 import dev.sterner.geocluster.api.GeoclusterAPI;
+import dev.sterner.geocluster.client.network.S2CProspectingPacket;
 import dev.sterner.geocluster.client.toast.IOreToastManager;
 import dev.sterner.geocluster.client.toast.OreToastManager;
-import dev.sterner.geocluster.client.network.S2CProspectingPacket;
 import dev.sterner.geocluster.common.data.WorldGenDataReloadListener;
 import dev.sterner.geocluster.common.registry.GeoclusterObjects;
 import dev.sterner.geocluster.common.registry.GeoclusterWorldgenRegistry;
 import eu.midnightdust.lib.config.MidnightConfig;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.ModInitializer;
-import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
+import net.fabricmc.fabric.api.entity.event.v1.ServerPlayerEvents;
 import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.resource.ResourceType;
+import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.Identifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -47,10 +48,10 @@ public class Geocluster implements ModInitializer, ClientModInitializer {
     public void onInitializeClient() {
         ClientPlayNetworking.registerGlobalReceiver(S2CProspectingPacket.ID, S2CProspectingPacket::handle);
         HudRenderCallback.EVENT.register(this::renderFoundOres);
-        ClientTickEvents.END_CLIENT_TICK.register(this::tickManager);
+        ServerPlayerEvents.COPY_FROM.register(this::copyPlayerData);
     }
 
-    private void tickManager(MinecraftClient minecraftClient) {
+    private void copyPlayerData(ServerPlayerEntity oldPlayer, ServerPlayerEntity newPlayer, boolean alive) {
 
     }
 

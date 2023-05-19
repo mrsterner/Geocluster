@@ -1,0 +1,42 @@
+{
+  "type": "geocluster:deposit_dike",
+  "config": {
+    "blocks": {
+      "default": [
+        {
+          "block": "emerald_ore",
+          "chance": 0.15
+        },
+        {
+          "block": null,
+          "chance": 0.85
+        }
+      ],
+      "minecraft:deepslate": [
+        {
+          "block": "deepslate_emerald_ore",
+          "chance": 0.15
+        },
+        {
+          "block": null,
+          "chance": 0.85
+        }
+      ]
+    },
+    "samples": [
+      {
+        "block": "geocluster:emerald_ore_sample",
+        "chance": 0.5
+      },
+      {
+        "block": null,
+        "chance": 0.5
+      }
+    ],
+    "yMin": -52,
+    "yMax": -40,
+    "baseRadius": 6,
+    "biomeTag": "#c:is_hot/overworld",
+    "generationWeight": 2
+  }
+}

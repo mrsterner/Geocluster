@@ -107,8 +107,11 @@ public class DikeDeposit extends Deposit implements IDeposit {
         int yMin = this.yMin + random.nextInt(height / 4);
         int yMax = this.yMax - random.nextInt(height / 4);
         int max = GeoclusterUtils.getTopSolidBlock(world, pos).getY();
-        yMin = Math.max(yMin, max);
-        yMax = Math.max(yMin, yMax); // Use Math.max instead of if-else condition
+        if (yMin > max) {
+            yMin = Math.max(yMin, max);
+        } else if (yMin == yMax) {
+            yMax = this.yMax;
+        }
         BlockPos basePos = new BlockPos(x, yMin, z);
 
         int totalPlaced = 0;

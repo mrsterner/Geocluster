@@ -39,6 +39,7 @@ public class GeoclusterLanguageProvider extends FabricLanguageProvider {
         builder.add(DIAMOND_SAMPLE, "Diamond Sample");
         builder.add(ANCIENT_DEBRIS_SAMPLE, "Ancient Debris Sample");
         builder.add(QUARTZ_SAMPLE, "Quartz Sample");
+        builder.add(NETHER_QUARTZ_SAMPLE, "Quartz Sample");
 
 
         builder.add(ZINC_INGOT, "Zinc Ingot");
@@ -81,6 +82,7 @@ public class GeoclusterLanguageProvider extends FabricLanguageProvider {
         builder.add(PLATINUM_ORE, "Platinum Ore");
         builder.add(TITANIUM_ORE, "Titanium Ore");
         builder.add(NICKEL_ORE, "Nickel Ore");
+        builder.add(QUARTZ_ORE, "Quartz Ore");
 
         builder.add(DEEPSLATE_ZINC_ORE, "Deepslate Zinc Ore");
         builder.add(DEEPSLATE_SILVER_ORE, "Deepslate Silver Ore");
@@ -91,6 +93,7 @@ public class GeoclusterLanguageProvider extends FabricLanguageProvider {
         builder.add(DEEPSLATE_PLATINUM_ORE, "Deepslate Platinum Ore");
         builder.add(DEEPSLATE_TITANIUM_ORE, "Deepslate Titanium Ore");
         builder.add(DEEPSLATE_NICKEL_ORE, "Deepslate Nickel Ore");
+        builder.add(DEEPSLATE_QUARTZ_ORE, "Deepslate Quartz Ore");
 
         builder.add(ANCIENT_DEBRIS_ORE, "Ancient Debris Ore");
         builder.add(RAW_ANCIENT_DEBRIS, "Raw Ancient Debris");

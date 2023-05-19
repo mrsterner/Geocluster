@@ -30,7 +30,11 @@
     "samples": [
       {
         "block": "geocluster:diamond_ore_sample",
-        "chance": 1.0
+        "chance": 0.5
+      },
+      {
+        "block": null,
+        "chance": 0.5
       }
     ],
     "generationWeight": 2

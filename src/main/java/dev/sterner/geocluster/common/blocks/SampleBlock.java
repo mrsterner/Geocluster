@@ -34,13 +34,10 @@ public class SampleBlock extends HorizontalFacingBlock implements Waterloggable 
     public static final DirectionProperty FACING = HorizontalFacingBlock.FACING;
     private static final Settings BASE_PROPS = FabricBlockSettings.of(Material.SOIL, MapColor.GRAY).strength(0.125F, 2F).sounds(BlockSoundGroup.GRAVEL).dynamicBounds().offsetType(OffsetType.XZ);
 
-
     public SampleBlock() {
         super(BASE_PROPS);
         this.setDefaultState(this.getDefaultState().with(WATERLOGGED, Boolean.FALSE).with(FACING, Direction.NORTH));
     }
-
-
 
     @Nullable
     @Override
