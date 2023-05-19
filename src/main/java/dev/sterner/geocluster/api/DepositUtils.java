@@ -36,7 +36,7 @@ public class DepositUtils {
     public static HashSet<BlockState> getDefaultMatchers() {
         if (defaultMatchersCached == null) {
             defaultMatchersCached = new HashSet<>();
-            GeoclusterConfig.DEFAULT_REPLACEMENT_MATS.forEach(s -> {
+            GeoclusterConfig.DEFAULT_REPLACEMENT_MATERIALS.forEach(s -> {
                 Block block = Registry.BLOCK.get(new Identifier(s));
                 if (!addDefaultMatcher(block)) {
                     Geocluster.LOGGER.warn(String.format(s + "&s is not a valid block. Please verify.", s));

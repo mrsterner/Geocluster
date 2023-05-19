@@ -39,7 +39,7 @@ public class DepositFeature extends Feature<DefaultFeatureConfig> {
         boolean placedPending = placePendingBlocks(world, depositComponent, chunkComponent, pos);
 
         if (world.getRandom().nextDouble() > GeoclusterConfig.CHUNK_SKIP_CHANCE) {
-            for (int p = 0; p < GeoclusterConfig.NUMBER_PLUTONS_PER_CHUNK; p++) {
+            for (int p = 0; p < GeoclusterConfig.NUMBER_CLUSTERS_PER_CHUNK; p++) {
                 IDeposit deposit = GeoclusterAPI.depositCache.pick(world, pos);
                 if (deposit == null) {
                     continue;

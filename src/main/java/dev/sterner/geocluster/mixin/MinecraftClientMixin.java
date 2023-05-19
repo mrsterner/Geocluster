@@ -1,7 +1,7 @@
 package dev.sterner.geocluster.mixin;
 
-import dev.sterner.geocluster.client.IOreToastManager;
-import dev.sterner.geocluster.client.OreToastManager;
+import dev.sterner.geocluster.client.toast.IOreToastManager;
+import dev.sterner.geocluster.client.toast.OreToastManager;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.RunArgs;
 import org.spongepowered.asm.mixin.Mixin;

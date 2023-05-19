@@ -1,4 +1,4 @@
-package dev.sterner.geocluster.client;
+package dev.sterner.geocluster.client.toast;
 
 import com.google.common.collect.Lists;
 import com.mojang.blaze3d.systems.RenderSystem;
@@ -41,9 +41,9 @@ public class OreToast implements IOreToast {
             }
 
             matrices.push();
-            matrices.scale(0.5f,0.5f,0.5f);
-            textRenderer.drawWithShadow(matrices, blockState.getBlock().getName(), 50.0F, 20.0F, 16777215);
-            textRenderer.drawWithShadow(matrices, msg, 50.0F, 32.0F, 16777215);
+            matrices.scale(0.85f,0.85f,1);
+            textRenderer.drawWithShadow(matrices, blockState.getBlock().getName(), 30.0F, 10.0F, 16777215);
+            textRenderer.drawWithShadow(matrices, msg, 30.0F, 22.0F, 16777215);
             matrices.pop();
 
 

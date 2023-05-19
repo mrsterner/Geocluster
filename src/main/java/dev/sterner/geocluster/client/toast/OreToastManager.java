@@ -1,7 +1,9 @@
-package dev.sterner.geocluster.client;
+package dev.sterner.geocluster.client.toast;
 
 import com.google.common.collect.Queues;
 import com.mojang.blaze3d.systems.RenderSystem;
+import dev.sterner.geocluster.GeoclusterConfig;
+import dev.sterner.geocluster.common.utils.GeoclusterUtils;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.MinecraftClient;
@@ -118,7 +120,12 @@ public class OreToastManager extends DrawableHelper {
 
             MatrixStack matrixStack = RenderSystem.getModelViewStack();
             matrixStack.push();
-            matrixStack.translate((float) x - (float) this.instance.getWidth() * this.getDisappearProgress(l), client.getWindow().getScaledHeight() - 32 - this.topIndex * 24, 800.0);
+            if(GeoclusterConfig.PROSPECTORS_POPUP_RIGHT){
+                matrixStack.translate((float) x - (float) this.instance.getWidth() * this.getDisappearProgress(l), client.getWindow().getScaledHeight() - 32 - this.topIndex * 24, 800.0);
+            } else {
+                matrixStack.translate((float) (client.getWindow().getScaledWidth() - x) + (float) this.instance.getWidth() * this.getDisappearProgress(l) - (float) this.instance.getWidth(), client.getWindow().getScaledHeight() - 32 - this.topIndex * 24, 800.0);
+            }
+
             RenderSystem.applyModelViewMatrix();
             IOreToast.Visibility visibility = this.instance.draw(matrices, OreToastManager.this, l - this.showTime);
             matrixStack.pop();

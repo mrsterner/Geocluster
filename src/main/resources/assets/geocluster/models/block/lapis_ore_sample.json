@@ -1,8 +1,7 @@
 {
   "parent": "geocluster:block/ore_sample",
   "textures": {
-    "particle": "minecraft:block/gravel",
-    "ore": "block/lapis_ore",
-    "stone": "minecraft:block/gravel"
+    "particle": "minecraft:block/stone",
+    "ore": "block/lapis_ore"
   }
 }

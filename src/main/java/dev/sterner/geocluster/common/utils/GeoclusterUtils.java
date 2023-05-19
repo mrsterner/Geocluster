@@ -8,6 +8,7 @@ import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableTextContent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.registry.Registry;
+import net.minecraft.world.Heightmap;
 import net.minecraft.world.WorldView;
 
 import java.util.Objects;
@@ -23,14 +24,7 @@ public class GeoclusterUtils {
     }
 
     public static BlockPos getTopSolidBlock(WorldView world, BlockPos start) {
-        BlockPos retPos = new BlockPos(start.getX(), world.getHeight() - 1, start.getZ());
-        while (retPos.getY() > 0) {
-            if (world.getBlockState(retPos).getMaterial().isSolid()) {
-                break;
-            }
-            retPos = retPos.down();
-        }
-        return retPos;
+        return new BlockPos(start.getX(), world.getTopY(Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, start.getX(), start.getZ()), start.getZ()).down();
     }
 
     public static MutableText tryTranslate(String transKey, Object... values) {

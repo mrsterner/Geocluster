@@ -26,6 +26,9 @@
 		],
 		"fabric-datagen": [
 			"dev.sterner.geocluster.datagen.GeoclusterDatagen"
+		],
+		"modmenu": [
+			"dev.sterner.geocluster.client.GeoclusterModMenu"
 		]
 	},
 	"mixins": [

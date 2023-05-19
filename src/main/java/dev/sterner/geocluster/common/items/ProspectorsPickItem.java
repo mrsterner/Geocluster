@@ -54,8 +54,8 @@ public class ProspectorsPickItem extends Item {
                 stack.damage(1, player, (x) -> x.sendToolBreakStatus(hand));
             }
 
-            int range = GeoclusterConfig.PRO_PICK_RANGE;
-            int diam = GeoclusterConfig.PRO_PICK_DIAMETER;
+            int range = GeoclusterConfig.PROSPECTORS_PICK_RANGE;
+            int diam = GeoclusterConfig.PROSPECTORS_PICK_DIAMETER;
 
             int zStart = facing == Direction.NORTH ? 0 : facing == Direction.SOUTH ? -range : -(diam / 2);
             int zEnd = facing == Direction.NORTH ? range : facing == Direction.SOUTH ? 0 : diam / 2;

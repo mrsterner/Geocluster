@@ -1,0 +1,31 @@
+{
+  "type": "geocluster:deposit_dike",
+  "config": {
+    "yMin": -64,
+    "yMax": 64,
+    "baseRadius": 7,
+    "biomeTag": "#minecraft:is_nether",
+    "blockStateMatchers": [
+      "minecraft:netherrack",
+      "minecraft:basalt",
+      "minecraft:blackstone",
+      "minecraft:magma_block",
+      "minecraft:lava"
+    ],
+    "blocks": {
+      "default": [
+        {
+          "block": "quartz_ore",
+          "chance": 1.0
+        }
+      ]
+    },
+    "samples": [
+      {
+        "block": "geocluster:quartz_ore_sample",
+        "chance": 1.0
+      }
+    ],
+    "generationWeight": 6
+  }
+}

@@ -1,12 +1,13 @@
 package dev.sterner.geocluster;
 
 import dev.sterner.geocluster.api.GeoclusterAPI;
-import dev.sterner.geocluster.client.IOreToastManager;
-import dev.sterner.geocluster.client.OreToastManager;
+import dev.sterner.geocluster.client.toast.IOreToastManager;
+import dev.sterner.geocluster.client.toast.OreToastManager;
 import dev.sterner.geocluster.client.network.S2CProspectingPacket;
 import dev.sterner.geocluster.common.data.WorldGenDataReloadListener;
 import dev.sterner.geocluster.common.registry.GeoclusterObjects;
 import dev.sterner.geocluster.common.registry.GeoclusterWorldgenRegistry;
+import eu.midnightdust.lib.config.MidnightConfig;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
@@ -35,6 +36,7 @@ public class Geocluster implements ModInitializer, ClientModInitializer {
 
     @Override
     public void onInitialize() {
+        MidnightConfig.init(MODID, GeoclusterConfig.class);
         GeoclusterAPI.init();
         GeoclusterObjects.init();
         GeoclusterWorldgenRegistry.init();

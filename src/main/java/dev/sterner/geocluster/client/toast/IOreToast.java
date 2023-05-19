@@ -1,4 +1,4 @@
-package dev.sterner.geocluster.client;
+package dev.sterner.geocluster.client.toast;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -14,7 +14,7 @@ public interface IOreToast {
     }
 
     default int getWidth() {
-        return 100;
+        return 140;
     }
 
     default int getHeight() {

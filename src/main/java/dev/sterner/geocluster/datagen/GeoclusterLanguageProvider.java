@@ -92,5 +92,32 @@ public class GeoclusterLanguageProvider extends FabricLanguageProvider {
 
         builder.add(ANCIENT_DEBRIS_ORE, "Ancient Debris Ore");
         builder.add(RAW_ANCIENT_DEBRIS, "Raw Ancient Debris");
+
+        builder.add("geocluster.midnightconfig.CHUNK_SKIP_CHANCE", "Chance To Skip A Chunk");
+        builder.add("geocluster.midnightconfig.CHUNK_SKIP_CHANCE.tooltip", "The upper limit of RNG for generating any cluster in a given chunk.\nLarger values indicate further distance between plutons.");
+
+        builder.add("geocluster.midnightconfig.NUMBER_CLUSTERS_PER_CHUNK", "Number of Clusters per Chunk");
+        builder.add("geocluster.midnightconfig.NUMBER_CLUSTERS_PER_CHUNK.tooltip", "The number of times Geocluster will attempt to place clusters in a given chunk");
+
+        builder.add("geocluster.midnightconfig.DEBUG_WORLDGEN", "WorldGen Debug");
+        builder.add("geocluster.midnightconfig.DEBUG_WORLDGEN.tooltip", "Output info into the logs when generating Geolosys deposits");
+
+        builder.add("geocluster.midnightconfig.MAX_SAMPLES_PER_CHUNK", "Max samples per chunk");
+        builder.add("geocluster.midnightconfig.MAX_SAMPLES_PER_CHUNK.tooltip", "Maximum samples that can generate with each cluster within a chunk");
+
+        builder.add("geocluster.midnightconfig.DEFAULT_REPLACEMENT_MATERIALS", "Default Replacement Materials");
+        builder.add("geocluster.midnightconfig.DEFAULT_REPLACEMENT_MATERIALS.tooltip", "The fallback materials which a Deposit can replace if they're not specified by the deposit itself\\n\" + \"Format: Comma-delimited set of <modid:block> (see default for example)\"");
+
+        builder.add("geocluster.midnightconfig.PROSPECTORS_PICK_DETECTION_BLACKLIST", "Prospectors Pick Detection Blacklist");
+        builder.add("geocluster.midnightconfig.PROSPECTORS_PICK_DETECTION_BLACKLIST.tooltip", "A list of blocks to always ignore when prospecting, even if they're in a deposit.");
+
+        builder.add("geocluster.midnightconfig.PROSPECTORS_PICK_RANGE", "Prospectors Pick Range");
+        builder.add("geocluster.midnightconfig.PROSPECTORS_PICK_RANGE.tooltip", "The range (depth) of the prospector's pick prospecting cycle");
+
+        builder.add("geocluster.midnightconfig.PROSPECTORS_PICK_DIAMETER", "Prospectors Pick Diameter");
+        builder.add("geocluster.midnightconfig.PROSPECTORS_PICK_DIAMETER.tooltip", "The diameter of the prospector's pick prospecting cycle");
+
+        builder.add("geocluster.midnightconfig.PROSPECTORS_POPUP_RIGHT", "Prospectors Info Popup Right-side");
+        builder.add("geocluster.midnightconfig.PROSPECTORS_POPUP_RIGHT.tooltip", "If the prospectors pick should popup info on the right side of the screen");
     }
 }

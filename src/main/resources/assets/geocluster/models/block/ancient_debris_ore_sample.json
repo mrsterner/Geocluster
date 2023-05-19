@@ -1,8 +1,7 @@
 {
   "parent": "geocluster:block/ore_sample",
   "textures": {
-    "particle": "minecraft:block/gravel",
-    "ore": "geocluster:block/ancient_debris_ore",
-    "stone": "minecraft:block/gravel"
+    "particle": "minecraft:block/netherrack",
+    "ore": "geocluster:block/ancient_debris_ore"
   }
 }

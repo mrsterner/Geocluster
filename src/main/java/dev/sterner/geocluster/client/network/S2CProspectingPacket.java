@@ -1,8 +1,8 @@
 package dev.sterner.geocluster.client.network;
 
 import dev.sterner.geocluster.Geocluster;
-import dev.sterner.geocluster.client.IOreToastManager;
-import dev.sterner.geocluster.client.OreToast;
+import dev.sterner.geocluster.client.toast.IOreToastManager;
+import dev.sterner.geocluster.client.toast.OreToast;
 import dev.sterner.geocluster.common.utils.PacketUtils;
 import io.netty.buffer.Unpooled;
 import net.fabricmc.fabric.api.networking.v1.PacketSender;
