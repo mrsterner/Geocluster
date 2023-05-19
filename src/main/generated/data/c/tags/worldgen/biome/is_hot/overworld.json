@@ -1,0 +1,14 @@
+{
+  "replace": false,
+  "values": [
+    "#c:is_dry/overworld",
+    "minecraft:jungle",
+    "minecraft:sparse_jungle",
+    "minecraft:savanna",
+    "minecraft:savanna_plateau",
+    "minecraft:stony_peaks",
+    "minecraft:warm_ocean",
+    "minecraft:bamboo_jungle",
+    "minecraft:mangrove_swamp"
+  ]
+}

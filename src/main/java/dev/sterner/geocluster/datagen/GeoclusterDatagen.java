@@ -8,6 +8,7 @@ public class GeoclusterDatagen implements DataGeneratorEntrypoint {
     public void onInitializeDataGenerator(FabricDataGenerator dataGenerator) {
         GeoclusterTagProvider.GeoclusterBlockTags blockTagsProvider = new GeoclusterTagProvider.GeoclusterBlockTags(dataGenerator);
         dataGenerator.addProvider(blockTagsProvider);
+        dataGenerator.addProvider(GeoclusterTagProvider.GeoclusterBiomeTags::new);
         dataGenerator.addProvider((p) -> new GeoclusterTagProvider.GeoclusterItemTags(p, blockTagsProvider));
 
         dataGenerator.addProvider(GeoclusterLanguageProvider::new);
