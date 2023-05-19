@@ -48,11 +48,6 @@ public class Geocluster implements ModInitializer, ClientModInitializer {
     public void onInitializeClient() {
         ClientPlayNetworking.registerGlobalReceiver(S2CProspectingPacket.ID, S2CProspectingPacket::handle);
         HudRenderCallback.EVENT.register(this::renderFoundOres);
-        ServerPlayerEvents.COPY_FROM.register(this::copyPlayerData);
-    }
-
-    private void copyPlayerData(ServerPlayerEntity oldPlayer, ServerPlayerEntity newPlayer, boolean alive) {
-
     }
 
     private void renderFoundOres(MatrixStack matrixStack, float v) {
