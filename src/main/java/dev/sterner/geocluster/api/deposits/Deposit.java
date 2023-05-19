@@ -1,6 +1,7 @@
 package dev.sterner.geocluster.api.deposits;
 
 import dev.sterner.geocluster.api.DepositUtils;
+import dev.sterner.geocluster.common.blocks.SampleBlock;
 import dev.sterner.geocluster.common.components.IWorldChunkComponent;
 import dev.sterner.geocluster.common.components.IWorldDepositComponent;
 import dev.sterner.geocluster.common.utils.FeatureUtils;
@@ -9,10 +10,13 @@ import net.minecraft.block.BlockState;
 import net.minecraft.state.property.Properties;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
+import net.minecraft.util.math.Direction;
 import net.minecraft.world.StructureWorldAccess;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import static dev.sterner.geocluster.common.blocks.SampleBlock.FACING;
 
 public abstract class Deposit {
     public final HashMap<String, HashMap<BlockState, Float>> oreToWeightMap;
@@ -71,7 +75,7 @@ public abstract class Deposit {
                 tmp = tmp.with(Properties.WATERLOGGED, Boolean.TRUE);
             }
 
-            FeatureUtils.enqueueBlockPlacement(world, samplePos, tmp, deposits, chunksGenerated);
+            FeatureUtils.enqueueBlockPlacement(world, samplePos, tmp.with(FACING, Direction.fromHorizontal(world.getRandom().nextBetween(0, 3))), deposits, chunksGenerated);
             FeatureUtils.fixSnowyBlock(world, samplePos);
         }
     }

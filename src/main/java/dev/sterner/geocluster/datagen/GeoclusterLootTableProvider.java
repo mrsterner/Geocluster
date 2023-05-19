@@ -43,6 +43,7 @@ public class GeoclusterLootTableProvider extends FabricBlockLootTableProvider {
         this.addDrop(COPPER_SAMPLE, Items.RAW_COPPER);
         this.addDrop(IRON_SAMPLE, Items.RAW_IRON);
         this.addDrop(GOLD_SAMPLE, Items.RAW_GOLD);
+        this.addDrop(NETHER_GOLD_SAMPLE, Items.RAW_GOLD);
         this.addDrop(ZINC_SAMPLE, RAW_ZINC);
         this.addDrop(SILVER_SAMPLE, RAW_SILVER);
         this.addDrop(LEAD_SAMPLE, RAW_LEAD);
@@ -59,5 +60,6 @@ public class GeoclusterLootTableProvider extends FabricBlockLootTableProvider {
         this.addDrop(EMERALD_SAMPLE, Items.EMERALD);
         this.addDrop(DIAMOND_SAMPLE, Items.DIAMOND);
         this.addDrop(ANCIENT_DEBRIS_SAMPLE, RAW_ANCIENT_DEBRIS);
+        this.addDrop(QUARTZ_SAMPLE, Items.QUARTZ);
     }
 }

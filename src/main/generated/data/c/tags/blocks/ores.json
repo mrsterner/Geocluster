@@ -23,6 +23,7 @@
     "geocluster:copper_ore_sample",
     "geocluster:iron_ore_sample",
     "geocluster:gold_ore_sample",
+    "geocluster:nether_gold_ore_sample",
     "geocluster:zinc_ore_sample",
     "geocluster:silver_ore_sample",
     "geocluster:lead_ore_sample",
@@ -37,6 +38,7 @@
     "geocluster:lapis_ore_sample",
     "geocluster:emerald_ore_sample",
     "geocluster:diamond_ore_sample",
-    "geocluster:ancient_debris_ore_sample"
+    "geocluster:ancient_debris_ore_sample",
+    "geocluster:quartz_ore_sample"
   ]
 }

@@ -10,11 +10,13 @@ import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
+import net.minecraft.state.property.DirectionProperty;
 import net.minecraft.state.property.Properties;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.util.shape.VoxelShapes;
@@ -26,24 +28,28 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Random;
 
-public class SampleBlock extends Block implements Waterloggable {
+public class SampleBlock extends HorizontalFacingBlock implements Waterloggable {
 
     public static final BooleanProperty WATERLOGGED = Properties.WATERLOGGED;
+    public static final DirectionProperty FACING = HorizontalFacingBlock.FACING;
     private static final Settings BASE_PROPS = FabricBlockSettings.of(Material.SOIL, MapColor.GRAY).strength(0.125F, 2F).sounds(BlockSoundGroup.GRAVEL).dynamicBounds().offsetType(OffsetType.XZ);
 
 
     public SampleBlock() {
         super(BASE_PROPS);
-        this.setDefaultState(this.getDefaultState().with(WATERLOGGED, Boolean.FALSE));
+        this.setDefaultState(this.getDefaultState().with(WATERLOGGED, Boolean.FALSE).with(FACING, Direction.NORTH));
     }
+
+
 
     @Nullable
     @Override
     public BlockState getPlacementState(ItemPlacementContext ctx) {
+        BlockState state = this.getDefaultState();
         if (ctx.getWorld().getBlockState(ctx.getBlockPos()).getBlock() == Blocks.WATER) {
-            return this.getDefaultState().with(WATERLOGGED, Boolean.TRUE);
+            return state.with(WATERLOGGED, Boolean.TRUE).with(FACING, Direction.fromHorizontal(ctx.getWorld().random.nextBetween(0, 3)));
         }
-        return this.getDefaultState();
+        return state.with(FACING, Direction.fromHorizontal(ctx.getWorld().random.nextBetween(0, 3)));
     }
 
     @SuppressWarnings("deprecation")
@@ -84,7 +90,7 @@ public class SampleBlock extends Block implements Waterloggable {
 
     @Override
     protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
-        builder.add(WATERLOGGED);
+        builder.add(WATERLOGGED).add(FACING);
     }
 
     @Override

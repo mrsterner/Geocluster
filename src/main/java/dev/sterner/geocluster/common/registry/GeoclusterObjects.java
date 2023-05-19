@@ -80,10 +80,10 @@ public interface GeoclusterObjects {
 
     Block ANCIENT_DEBRIS_ORE = register("ancient_debris_ore", new OreBlock(AbstractBlock.Settings.of(Material.STONE).requiresTool().strength(3.0F, 3.0F)), settings());
 
-
     Block COPPER_SAMPLE = register("copper_ore_sample", new SampleBlock(), settings());
     Block IRON_SAMPLE = register("iron_ore_sample", new SampleBlock(), settings());
     Block GOLD_SAMPLE = register("gold_ore_sample", new SampleBlock(), settings());
+    Block NETHER_GOLD_SAMPLE = register("nether_gold_ore_sample", new SampleBlock(), settings());
     Block ZINC_SAMPLE = register("zinc_ore_sample", new SampleBlock(), settings());
     Block SILVER_SAMPLE = register("silver_ore_sample", new SampleBlock(), settings());
     Block LEAD_SAMPLE = register("lead_ore_sample", new SampleBlock(), settings());
@@ -100,6 +100,7 @@ public interface GeoclusterObjects {
     Block EMERALD_SAMPLE = register("emerald_ore_sample", new SampleBlock(), settings());
     Block DIAMOND_SAMPLE = register("diamond_ore_sample", new SampleBlock(), settings());
     Block ANCIENT_DEBRIS_SAMPLE = register("ancient_debris_ore_sample", new SampleBlock(), settings());
+    Block QUARTZ_SAMPLE = register("quartz_ore_sample", new SampleBlock(), settings());
 
 
     static Item.Settings settings() {

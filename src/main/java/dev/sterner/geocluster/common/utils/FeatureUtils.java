@@ -3,6 +3,7 @@ package dev.sterner.geocluster.common.utils;
 import dev.sterner.geocluster.Geocluster;
 import dev.sterner.geocluster.common.components.IWorldChunkComponent;
 import dev.sterner.geocluster.common.components.IWorldDepositComponent;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.state.property.Properties;
 import net.minecraft.util.math.BlockPos;
@@ -28,22 +29,22 @@ public class FeatureUtils {
         }
     }
 
-    public static boolean enqueueBlockPlacement(StructureWorldAccess level, BlockPos pos, BlockState state, IWorldDepositComponent depositComponent, @Nullable IWorldChunkComponent chunkComponent) {
+    public static boolean enqueueBlockPlacement(StructureWorldAccess worldAccess, BlockPos pos, BlockState state, IWorldDepositComponent depositComponent, @Nullable IWorldChunkComponent chunkComponent) {
         if (chunkComponent != null && chunkComponent.hasChunkGenerated(new ChunkPos(pos))) {
-            Chunk chunkaccess = level.getChunk(pos);
+            Chunk chunkaccess = worldAccess.getChunk(pos);
             BlockState blockstate = chunkaccess.setBlockState(pos, state, false);
             if (blockstate != null) {
-                level.toServerWorld().onBlockChanged(pos, blockstate, state);
+                worldAccess.toServerWorld().onBlockChanged(pos, blockstate, state);
             }
             return true;
         }
 
-        if (!ensureCanWriteNoThrow(level, pos)) {
+        if (!ensureCanWriteNoThrow(worldAccess, pos)) {
             depositComponent.putPendingBlock(pos, state);
             return false;
         }
 
-        if (!level.setBlockState(pos, state, 2 | 16)) {
+        if (!worldAccess.setBlockState(pos, state, Block.NOTIFY_LISTENERS)) {
             depositComponent.putPendingBlock(pos, state);
             return false;
         }
@@ -54,7 +55,7 @@ public class FeatureUtils {
     public static void fixSnowyBlock(StructureWorldAccess level, BlockPos posPlaced) {
         BlockState below = level.getBlockState(posPlaced.down());
         if (below.contains(Properties.SNOWY)) {
-            level.setBlockState(posPlaced.down(), below.with(Properties.SNOWY, Boolean.FALSE), 2 | 16);
+            level.setBlockState(posPlaced.down(), below.with(Properties.SNOWY, Boolean.FALSE), Block.NOTIFY_LISTENERS);
         }
     }
 }

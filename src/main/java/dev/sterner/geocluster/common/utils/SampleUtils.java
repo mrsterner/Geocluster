@@ -32,7 +32,7 @@ public class SampleUtils {
         int blockPosX = xCenter + (worldAccess.getRandom().nextInt(usedSpread) * ((worldAccess.getRandom().nextBoolean()) ? 1 : -1));
         int blockPosZ = zCenter + (worldAccess.getRandom().nextInt(usedSpread) * ((worldAccess.getRandom().nextBoolean()) ? 1 : -1));
 
-        BlockPos searchPos = new BlockPos(blockPosX, worldAccess.getTopY(Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, blockPosX, blockPosZ), blockPosZ).down();
+        BlockPos searchPos = new BlockPos(blockPosX, worldAccess.getTopY(Heightmap.Type.OCEAN_FLOOR_WG, blockPosX, blockPosZ), blockPosZ).down();
 
         BlockState blockToPlaceOn = world.getBlockState(searchPos);
         if (Block.isFaceFullSquare(blockToPlaceOn.getOutlineShape(world, searchPos), Direction.UP)) {

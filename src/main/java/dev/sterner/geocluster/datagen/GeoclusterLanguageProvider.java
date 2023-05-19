@@ -21,6 +21,7 @@ public class GeoclusterLanguageProvider extends FabricLanguageProvider {
         builder.add(COPPER_SAMPLE, "Copper Sample");
         builder.add(IRON_SAMPLE, "Iron Sample");
         builder.add(GOLD_SAMPLE, "Gold Sample");
+        builder.add(NETHER_GOLD_SAMPLE, "Gold Sample");
         builder.add(ZINC_SAMPLE, "Zinc Sample");
         builder.add(LEAD_SAMPLE, "Lead Sample");
         builder.add(SILVER_SAMPLE, "Silver Sample");
@@ -37,6 +38,7 @@ public class GeoclusterLanguageProvider extends FabricLanguageProvider {
         builder.add(EMERALD_SAMPLE, "Emerald Sample");
         builder.add(DIAMOND_SAMPLE, "Diamond Sample");
         builder.add(ANCIENT_DEBRIS_SAMPLE, "Ancient Debris Sample");
+        builder.add(QUARTZ_SAMPLE, "Quartz Sample");
 
 
         builder.add(ZINC_INGOT, "Zinc Ingot");

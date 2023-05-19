@@ -1,9 +1,19 @@
 {
   "variants": {
-    "": [
-      {
-        "model": "geocluster:block/tin_ore_sample"
-      }
-    ]
+    "facing=east": {
+      "model": "geocluster:block/tin_ore_sample",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "geocluster:block/tin_ore_sample"
+    },
+    "facing=south": {
+      "model": "geocluster:block/tin_ore_sample",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "geocluster:block/tin_ore_sample",
+      "y": 270
+    }
   }
 }
