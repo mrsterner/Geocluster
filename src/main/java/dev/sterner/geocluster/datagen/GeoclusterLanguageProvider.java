@@ -101,8 +101,8 @@ public class GeoclusterLanguageProvider extends FabricLanguageProvider {
         builder.add("geocluster.midnightconfig.NUMBER_CLUSTERS_PER_CHUNK", "Number of Clusters per Chunk");
         builder.add("geocluster.midnightconfig.NUMBER_CLUSTERS_PER_CHUNK.tooltip", "The number of times Geocluster will attempt to place clusters in a given chunk");
 
-        builder.add("geocluster.midnightconfig.DEBUG_WORLDGEN", "WorldGen Debug");
-        builder.add("geocluster.midnightconfig.DEBUG_WORLDGEN.tooltip", "Output info into the logs when generating Geolosys deposits");
+        builder.add("geocluster.midnightconfig.DEBUG_WORLD_GEN", "WorldGen Debug");
+        builder.add("geocluster.midnightconfig.DEBUG_WORLD_GEN.tooltip", "Output info into the logs when generating Geolosys deposits");
 
         builder.add("geocluster.midnightconfig.MAX_SAMPLES_PER_CHUNK", "Max samples per chunk");
         builder.add("geocluster.midnightconfig.MAX_SAMPLES_PER_CHUNK.tooltip", "Maximum samples that can generate with each cluster within a chunk");
