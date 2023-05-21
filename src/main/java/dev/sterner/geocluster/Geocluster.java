@@ -15,6 +15,7 @@ import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
 import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.toast.ToastManager;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
@@ -49,7 +50,9 @@ public class Geocluster implements ModInitializer, ClientModInitializer {
     }
 
     private void renderFoundOres(MatrixStack matrixStack, float v) {
-        OreToastManager manager = ((IOreToastManager) MinecraftClient.getInstance()).getManager();
-        manager.draw(matrixStack);
+        if (!MinecraftClient.getInstance().skipGameRender) {
+            OreToastManager manager = ((IOreToastManager) MinecraftClient.getInstance()).getManager();
+            manager.draw(matrixStack);
+        }
     }
 }

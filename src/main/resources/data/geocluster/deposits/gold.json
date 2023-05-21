@@ -3,7 +3,7 @@
   "config": {
     "yMin": -64,
     "yMax": 32,
-    "size": 40,
+    "size": 32,
     "biomeTag": "#minecraft:is_overworld",
     "blocks": {
       "default": [

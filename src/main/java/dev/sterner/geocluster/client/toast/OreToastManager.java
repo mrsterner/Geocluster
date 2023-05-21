@@ -29,8 +29,6 @@ public class OreToastManager extends DrawableHelper {
 
     public void draw(MatrixStack matrices) {
         if (!this.client.options.hudHidden) {
-            System.out.println("Q: " + toastQueue);
-            System.out.println("V: " + visibleEntries);
 
             int i = this.client.getWindow().getScaledWidth();
             this.visibleEntries.removeIf((visibleEntry) -> {
