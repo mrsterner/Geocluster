@@ -47,6 +47,7 @@ public interface GeoclusterWorldgenRegistry {
     }
 
     private static Iterable<RegistryEntry<PlacedFeature>> getPlacedFeaturesByTag(BiomeModificationContext ctx, TagKey<PlacedFeature> placedFeatureTagKey) {
+
         DynamicRegistryManager dynamicRegistryManager = ((BiomeModificationContextImplMixin) ctx).getRegistries();
         Registry<PlacedFeature> placedFeatureRegistry = dynamicRegistryManager.get(Registry.PLACED_FEATURE_KEY);
         return placedFeatureRegistry.iterateEntries(placedFeatureTagKey);

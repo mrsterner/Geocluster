@@ -33,7 +33,7 @@ public class WorldGenDataReloadListener extends JsonDataLoader implements Identi
 
     @Override
     public Identifier getFabricId() {
-        return null;
+        return Geocluster.id("deposits");
     }
 
     @Override
