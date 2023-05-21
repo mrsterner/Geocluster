@@ -20,6 +20,8 @@ public interface GeoclusterTagRegistry {
     TagKey<Biome> IS_MUSHROOM = TagKey.of(Registry.BIOME_KEY, new Identifier("c", "is_mushroom"));
     TagKey<Biome> IS_MARSHY = TagKey.of(Registry.BIOME_KEY, Geocluster.id("is_marshy"));
 
+    TagKey<Biome> IS_PLAINS = TagKey.of(Registry.BIOME_KEY, Geocluster.id("is_plains"));
+
     TagKey<Block> STONE = TagKey.of(Registry.BLOCK_KEY, new Identifier("c", "stone"));
     TagKey<Block> SUPPORTS_SAMPLE = TagKey.of(Registry.BLOCK_KEY, Geocluster.id("supports_sample"));
 

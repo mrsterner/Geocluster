@@ -28,10 +28,14 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 
 public class SparseDeposit extends Deposit implements IDeposit {
     public static final String JSON_TYPE = "geocluster:deposit_sparse";
-
+    public final HashMap<String, HashMap<BlockState, Float>> oreToWeightMap;
+    public final HashMap<BlockState, Float> sampleToWeightMap;
+    public final HashMap<String, Float> cumulativeOreWeightMap = new HashMap<>();
+    public float sumWeightSamples = 0.0F;
     private final int yMin;
     private final int yMax;
     private final int size;
@@ -41,7 +45,8 @@ public class SparseDeposit extends Deposit implements IDeposit {
     private final TagKey<Biome> biomeTag;
 
     public SparseDeposit(HashMap<String, HashMap<BlockState, Float>> oreBlocks, HashMap<BlockState, Float> sampleBlocks, int yMin, int yMax, int size, int spread, int weight, TagKey<Biome> biomeTag, HashSet<BlockState> blockStateMatchers) {
-        super(oreBlocks, sampleBlocks);
+        this.oreToWeightMap = oreBlocks;
+        this.sampleToWeightMap = sampleBlocks;
         this.yMin = yMin;
         this.yMax = yMax;
         this.size = size;
@@ -50,7 +55,33 @@ public class SparseDeposit extends Deposit implements IDeposit {
         this.biomeTag = biomeTag;
         this.blockStateMatchers = blockStateMatchers;
 
-        Deposit.checkDefault(oreToWeightMap, sampleToWeightMap, cumulativeOreWeightMap, sumWeightSamples);
+        // Verify that blocks.default exists.
+        if (!this.oreToWeightMap.containsKey("default")) {
+            throw new RuntimeException("Cluster blocks should always have a default key");
+        }
+
+        for (Map.Entry<String, HashMap<BlockState, Float>> i : this.oreToWeightMap.entrySet()) {
+            if (!this.cumulativeOreWeightMap.containsKey(i.getKey())) {
+                this.cumulativeOreWeightMap.put(i.getKey(), 0.0F);
+            }
+
+            for (Map.Entry<BlockState, Float> j : i.getValue().entrySet()) {
+                float v = this.cumulativeOreWeightMap.get(i.getKey());
+                this.cumulativeOreWeightMap.put(i.getKey(), v + j.getValue());
+            }
+
+            if (!DepositUtils.nearlyEquals(this.cumulativeOreWeightMap.get(i.getKey()), 1.0F)) {
+                throw new RuntimeException("Sum of weights for cluster blocks should equal 1.0" + ", is " + i.getKey());
+            }
+        }
+
+        for (Map.Entry<BlockState, Float> e : this.sampleToWeightMap.entrySet()) {
+            this.sumWeightSamples += e.getValue();
+        }
+
+        if (!DepositUtils.nearlyEquals(sumWeightSamples, 1.0F)) {
+            throw new RuntimeException("Sum of weights for cluster samples should equal 1.0");
+        }
     }
 
 
@@ -95,13 +126,14 @@ public class SparseDeposit extends Deposit implements IDeposit {
 
     @Override
     public int generate(StructureWorldAccess world, BlockPos pos, IWorldDepositComponent deposits, IWorldChunkComponent chunksGenerated) {
+        /* Dimension checking is done in PlutonRegistry#pick */
+        /* Check biome allowance */
         if (!this.canPlaceInBiome(world.getBiome(pos))) {
             return 0;
         }
 
         int totlPlaced = 0;
         int totlPnding = 0;
-        ChunkPos thisChunk = new ChunkPos(pos);
         int randY = this.yMin + world.getRandom().nextInt(this.yMax - this.yMin);
         int max = GeoclusterUtils.getTopSolidBlock(world, pos).getY();
         if (randY > max) {
@@ -116,7 +148,12 @@ public class SparseDeposit extends Deposit implements IDeposit {
         double y1 = randY + world.getRandom().nextInt(3) - 2;
         double y2 = randY + world.getRandom().nextInt(3) - 2;
 
-        for (int i = 0; i < this.size; ++i) {
+
+        int x;
+        int y;
+        int z;
+        int i;
+        for (i = 0; i < this.size; ++i) {
             float radScl = (float) i / (float) this.size;
             double xn = x1 + (x2 - x1) * (double) radScl;
             double yn = y1 + (y2 - y1) * (double) radScl;
@@ -130,15 +167,15 @@ public class SparseDeposit extends Deposit implements IDeposit {
             int ymax = MathHelper.floor(yn + radius / 2.0D);
             int zmax = MathHelper.floor(zn + radius / 2.0D);
 
-            for (int x = xmin; x <= xmax; ++x) {
+            for (x = xmin; x <= xmax; ++x) {
                 double layerRadX = ((double) x + 0.5D - xn) / (radius / 2.0D);
 
                 if (layerRadX * layerRadX < 1.0D) {
-                    for (int y = ymin; y <= ymax; ++y) {
+                    for (y = ymin; y <= ymax; ++y) {
                         double layerRadY = ((double) y + 0.5D - yn) / (radius / 2.0D);
 
                         if (layerRadX * layerRadX + layerRadY * layerRadY < 1.0D) {
-                            for (int z = zmin; z <= zmax; ++z) {
+                            for (z = zmin; z <= zmax; ++z) {
                                 double layerRadZ = ((double) z + 0.5D - zn) / (radius / 2.0D);
 
                                 if (layerRadX * layerRadX + layerRadY * layerRadY + layerRadZ * layerRadZ < 1.0D) {

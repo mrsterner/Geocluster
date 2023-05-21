@@ -1,0 +1,43 @@
+{
+  "type": "geocluster:deposit_sparse",
+  "config": {
+    "yMin": -16,
+    "yMax": 32,
+    "size": 32,
+    "spread": 32,
+    "biomeTag": "#c:is_plains",
+    "blocks": {
+      "default": [
+        {
+          "block": "geocluster:lead_ore",
+          "chance": 0.5
+        },
+        {
+          "block": "geocluster:silver_ore",
+          "chance": 0.5
+        }
+      ],
+      "minecraft:deepslate": [
+        {
+          "block": "geocluster:deepslate_lead_ore",
+          "chance": 0.5
+        },
+        {
+          "block": "geocluster:deepslate_silver_ore",
+          "chance": 0.5
+        }
+      ]
+    },
+    "samples": [
+      {
+        "block": "geocluster:lead_ore_sample",
+        "chance": 0.5
+      },
+      {
+        "block": "geocluster:silver_ore_sample",
+        "chance": 0.5
+      }
+    ],
+    "generationWeight": 5
+  }
+}

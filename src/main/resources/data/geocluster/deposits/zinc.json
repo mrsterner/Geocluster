@@ -1,27 +1,28 @@
 {
-  "type": "geocluster:deposit_dike",
+  "type": "geocluster:deposit_sparse",
   "config": {
-    "yMin": -64,
-    "yMax": -48,
-    "baseRadius": 7,
+    "yMin": 37,
+    "yMax": 46,
+    "spread": 48,
+    "size": 28,
     "biomeTag": "#minecraft:is_overworld",
     "blocks": {
       "default": [
         {
-          "block": "geocluster:quartz_ore",
+          "block": "geocluster:zinc_ore",
           "chance": 1.0
         }
       ],
       "minecraft:deepslate": [
         {
-          "block": "geocluster:deepslate_quartz_ore",
+          "block": "geocluster:deepslate_zinc_ore",
           "chance": 1.0
         }
       ]
     },
     "samples": [
       {
-        "block": "geocluster:quartz_ore_sample",
+        "block": "geocluster:zinc_ore_sample",
         "chance": 1.0
       }
     ],

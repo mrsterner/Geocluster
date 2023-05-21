@@ -27,11 +27,15 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 
 public class DenseDeposit extends Deposit implements IDeposit {
 
     public static final String JSON_TYPE = "geocluster:deposit_dense";
-
+    public final HashMap<String, HashMap<BlockState, Float>> oreToWeightMap;
+    public final HashMap<BlockState, Float> sampleToWeightMap;
+    public final HashMap<String, Float> cumulativeOreWeightMap = new HashMap<>();
+    public float sumWeightSamples = 0.0F;
     private final int yMin;
     private final int yMax;
     private final int size;
@@ -40,7 +44,8 @@ public class DenseDeposit extends Deposit implements IDeposit {
     private final TagKey<Biome> biomeTag;
 
     public DenseDeposit(HashMap<String, HashMap<BlockState, Float>> oreBlocks, HashMap<BlockState, Float> sampleBlocks, int yMin, int yMax, int size, int weight, TagKey<Biome> biomeTag, HashSet<BlockState> blockStateMatchers) {
-        super(oreBlocks, sampleBlocks);
+        this.oreToWeightMap = oreBlocks;
+        this.sampleToWeightMap = sampleBlocks;
         this.yMin = yMin;
         this.yMax = yMax;
         this.size = size;
@@ -48,7 +53,33 @@ public class DenseDeposit extends Deposit implements IDeposit {
         this.biomeTag = biomeTag;
         this.blockStateMatchers = blockStateMatchers;
 
-        Deposit.checkDefault(oreToWeightMap, sampleToWeightMap, cumulativeOreWeightMap, sumWeightSamples);
+        // Verify that blocks.default exists.
+        if (!this.oreToWeightMap.containsKey("default")) {
+            throw new RuntimeException("Cluster blocks should always have a default key");
+        }
+
+        for (Map.Entry<String, HashMap<BlockState, Float>> i : this.oreToWeightMap.entrySet()) {
+            if (!this.cumulativeOreWeightMap.containsKey(i.getKey())) {
+                this.cumulativeOreWeightMap.put(i.getKey(), 0.0F);
+            }
+
+            for (Map.Entry<BlockState, Float> j : i.getValue().entrySet()) {
+                float v = this.cumulativeOreWeightMap.get(i.getKey());
+                this.cumulativeOreWeightMap.put(i.getKey(), v + j.getValue());
+            }
+
+            if (!DepositUtils.nearlyEquals(this.cumulativeOreWeightMap.get(i.getKey()), 1.0F)) {
+                throw new RuntimeException("Sum of weights for cluster blocks should equal 1.0" + ", is " + this.cumulativeOreWeightMap.get(i.getKey()));
+            }
+        }
+
+        for (Map.Entry<BlockState, Float> e : this.sampleToWeightMap.entrySet()) {
+            this.sumWeightSamples += e.getValue();
+        }
+
+        if (!DepositUtils.nearlyEquals(sumWeightSamples, 1.0F)) {
+            throw new RuntimeException("Sum of weights for cluster samples should equal 1.0");
+        }
     }
 
     @Nullable
@@ -64,65 +95,68 @@ public class DenseDeposit extends Deposit implements IDeposit {
 
     @Override
     public int generate(StructureWorldAccess world, BlockPos pos, IWorldDepositComponent deposits, IWorldChunkComponent chunksGenerated) {
-        if (!canPlaceInBiome(world.getBiome(pos))) {
+        /* Dimension checking is done in PlutonRegistry#pick */
+        /* Check biome allowance */
+        if (!this.canPlaceInBiome(world.getBiome(pos))) {
             return 0;
         }
 
-        int totalPlaced = 0;
+        int totlPlaced = 0;
+        int randY = this.yMin + world.getRandom().nextInt(this.yMax - this.yMin);
         int max = GeoclusterUtils.getTopSolidBlock(world, pos).getY();
-        int randY = Math.max(yMin, max);
+        if (randY > max) {
+            randY = Math.max(yMin, max);
+        }
 
-        Random random = world.getRandom();
-        float ranFlt = random.nextFloat() * (float) Math.PI;
-        double x1 = (pos.getX() + 8) + MathHelper.sin(ranFlt) * size / 8.0F;
-        double x2 = (pos.getX() + 8) - MathHelper.sin(ranFlt) * size / 8.0F;
-        double z1 = (pos.getZ() + 8) + MathHelper.cos(ranFlt) * size / 8.0F;
-        double z2 = (pos.getZ() + 8) - MathHelper.cos(ranFlt) * size / 8.0F;
-        double y1 = randY + random.nextInt(3) - 2;
-        double y2 = randY + random.nextInt(3) - 2;
+        float ranFlt = world.getRandom().nextFloat() * (float) Math.PI;
+        double x1 = (float) (pos.getX() + 8) + MathHelper.sin(ranFlt) * (float) this.size / 8.0F;
+        double x2 = (float) (pos.getX() + 8) - MathHelper.sin(ranFlt) * (float) this.size / 8.0F;
+        double z1 = (float) (pos.getZ() + 8) + MathHelper.cos(ranFlt) * (float) this.size / 8.0F;
+        double z2 = (float) (pos.getZ() + 8) - MathHelper.cos(ranFlt) * (float) this.size / 8.0F;
+        double y1 = randY + world.getRandom().nextInt(3) - 2;
+        double y2 = randY + world.getRandom().nextInt(3) - 2;
 
-        double radiusDiv2 = size / 16.0D;
-        double radiusDiv8 = size / 8.0D;
-
-        for (int i = 0; i < size; ++i) {
-            float radScl = (float) i / (float) size;
-            double xNoise = x1 + (x2 - x1) * radScl;
-            double yNoise = y1 + (y2 - y1) * radScl;
-            double zNoise = z1 + (z2 - z1) * radScl;
-            double noise = random.nextDouble() * radiusDiv8;
-            double radius = (MathHelper.sin((float) Math.PI * radScl) + 1.0F) * noise + 1.0D;
-            int xmin = MathHelper.floor(xNoise - radius / 2.0D);
-            int ymin = MathHelper.floor(yNoise - radius / 2.0D);
-            int zmin = MathHelper.floor(zNoise - radius / 2.0D);
-            int xmax = MathHelper.floor(xNoise + radius / 2.0D);
-            int ymax = MathHelper.floor(yNoise + radius / 2.0D);
-            int zmax = MathHelper.floor(zNoise + radius / 2.0D);
+        for (int i = 0; i < this.size; ++i) {
+            float radScl = (float) i / (float) this.size;
+            double xn = x1 + (x2 - x1) * (double) radScl;
+            double yn = y1 + (y2 - y1) * (double) radScl;
+            double zn = z1 + (z2 - z1) * (double) radScl;
+            double noise = world.getRandom().nextDouble() * (double) this.size / 16.0D;
+            double radius = (double) (MathHelper.sin((float) Math.PI * radScl) + 1.0F) * noise + 1.0D;
+            int xmin = MathHelper.floor(xn - radius / 2.0D);
+            int ymin = MathHelper.floor(yn - radius / 2.0D);
+            int zmin = MathHelper.floor(zn - radius / 2.0D);
+            int xmax = MathHelper.floor(xn + radius / 2.0D);
+            int ymax = MathHelper.floor(yn + radius / 2.0D);
+            int zmax = MathHelper.floor(zn + radius / 2.0D);
 
             for (int x = xmin; x <= xmax; ++x) {
-                double layerRadX = (x + 0.5D - xNoise) / radiusDiv2;
+                double layerRadX = ((double) x + 0.5D - xn) / (radius / 2.0D);
 
-                if (Math.pow(layerRadX, 2) < 1.0D) {
+                if (layerRadX * layerRadX < 1.0D) {
                     for (int y = ymin; y <= ymax; ++y) {
-                        double layerRadY = (y + 0.5D - yNoise) / radiusDiv2;
+                        double layerRadY = ((double) y + 0.5D - yn) / (radius / 2.0D);
 
-                        if (Math.pow(layerRadX, 2) + Math.pow(layerRadY, 2) < 1.0D) {
+                        if (layerRadX * layerRadX + layerRadY * layerRadY < 1.0D) {
                             for (int z = zmin; z <= zmax; ++z) {
-                                double layerRadZ = (z + 0.5D - zNoise) / radiusDiv2;
+                                double layerRadZ = ((double) z + 0.5D - zn) / (radius / 2.0D);
 
-                                if (Math.pow(layerRadX, 2) + Math.pow(layerRadY, 2) + Math.pow(layerRadZ, 2) < 1.0D) {
+                                if (layerRadX * layerRadX + layerRadY * layerRadY + layerRadZ * layerRadZ < 1.0D) {
                                     BlockPos placePos = new BlockPos(x, y, z);
                                     BlockState current = world.getBlockState(placePos);
-                                    BlockState tmp = getOre(current, random);
+                                    BlockState tmp = this.getOre(current, world.getRandom());
                                     if (tmp == null) {
                                         continue;
                                     }
 
-                                    if (!(getBlockStateMatchers().contains(current) || oreToWeightMap.containsKey(GeoclusterUtils.getRegistryName(current)))) {
+                                    // Skip this block if it can't replace the target block or doesn't have a
+                                    // manually-configured replacer in the blocks object
+                                    if (!(this.getBlockStateMatchers().contains(current) || this.oreToWeightMap.containsKey(GeoclusterUtils.getRegistryName(current)))) {
                                         continue;
                                     }
 
                                     if (FeatureUtils.enqueueBlockPlacement(world, placePos, tmp, deposits, chunksGenerated)) {
-                                        totalPlaced++;
+                                        totlPlaced++;
                                     }
                                 }
                             }
@@ -132,7 +166,7 @@ public class DenseDeposit extends Deposit implements IDeposit {
             }
         }
 
-        return totalPlaced;
+        return totlPlaced;
     }
 
     @Override

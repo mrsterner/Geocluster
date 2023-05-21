@@ -35,7 +35,7 @@ public class DepositFeature extends Feature<DefaultFeatureConfig> {
         WorldDepositComponent depositComponent = GeoclusterComponents.DEPOSIT.get(world.toServerWorld());
         WorldChunkComponent chunkComponent = GeoclusterComponents.CHUNK.get(world.toServerWorld());
 
-        boolean placedPluton = false;
+        boolean placedCluster = false;
         boolean placedPending = placePendingBlocks(world, depositComponent, chunkComponent, pos);
 
         if (world.getRandom().nextDouble() > GeoclusterConfig.CHUNK_SKIP_CHANCE) {
@@ -47,7 +47,7 @@ public class DepositFeature extends Feature<DefaultFeatureConfig> {
 
                 boolean anyGenerated = deposit.generate(world, pos, depositComponent, chunkComponent) > 0;
                 if (anyGenerated) {
-                    placedPluton = true;
+                    placedCluster = true;
                     deposit.generatePost(world, pos, depositComponent, chunkComponent);
                 }
             }
@@ -56,7 +56,7 @@ public class DepositFeature extends Feature<DefaultFeatureConfig> {
         chunkComponent.setChunkGenerated(new ChunkPos(pos));
 
 
-        return placedPluton || placedPending;
+        return placedCluster || placedPending;
     }
 
     private boolean placePendingBlocks(StructureWorldAccess worldAccess, IWorldDepositComponent depCap, IWorldChunkComponent cgCap, BlockPos origin) {

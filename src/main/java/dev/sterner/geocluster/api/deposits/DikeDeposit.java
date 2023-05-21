@@ -27,10 +27,14 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 
 public class DikeDeposit extends Deposit implements IDeposit {
     public static final String JSON_TYPE = "geocluster:deposit_dike";
-
+    public final HashMap<String, HashMap<BlockState, Float>> oreToWeightMap;
+    public final HashMap<BlockState, Float> sampleToWeightMap;
+    public final HashMap<String, Float> cumulativeOreWeightMap = new HashMap<>();
+    public float sumWeightSamples = 0.0F;
     private final int yMin;
     private final int yMax;
     private final int baseRadius;
@@ -39,7 +43,8 @@ public class DikeDeposit extends Deposit implements IDeposit {
     private final TagKey<Biome> biomeTag;
 
     public DikeDeposit(HashMap<String, HashMap<BlockState, Float>> oreBlocks, HashMap<BlockState, Float> sampleBlocks, int yMin, int yMax, int baseRadius, int weight, TagKey<Biome> biomeTag, HashSet<BlockState> blockStateMatchers) {
-        super(oreBlocks, sampleBlocks);
+        this.oreToWeightMap = oreBlocks;
+        this.sampleToWeightMap = sampleBlocks;
         this.yMin = yMin;
         this.yMax = yMax;
         this.baseRadius = baseRadius;
@@ -47,7 +52,33 @@ public class DikeDeposit extends Deposit implements IDeposit {
         this.biomeTag = biomeTag;
         this.blockStateMatchers = blockStateMatchers;
 
-        Deposit.checkDefault(oreToWeightMap, sampleToWeightMap, cumulativeOreWeightMap, sumWeightSamples);
+        // Verify that blocks.default exists.
+        if (!this.oreToWeightMap.containsKey("default")) {
+            throw new RuntimeException("Cluster blocks should always have a default key");
+        }
+
+        for (Map.Entry<String, HashMap<BlockState, Float>> i : this.oreToWeightMap.entrySet()) {
+            if (!this.cumulativeOreWeightMap.containsKey(i.getKey())) {
+                this.cumulativeOreWeightMap.put(i.getKey(), 0.0F);
+            }
+
+            for (Map.Entry<BlockState, Float> j : i.getValue().entrySet()) {
+                float v = this.cumulativeOreWeightMap.get(i.getKey());
+                this.cumulativeOreWeightMap.put(i.getKey(), v + j.getValue());
+            }
+
+            if (!DepositUtils.nearlyEquals(this.cumulativeOreWeightMap.get(i.getKey()), 1.0F)) {
+                throw new RuntimeException("Sum of weights for cluster blocks should equal 1.0" + ", is " + i.getKey());
+            }
+        }
+
+        for (Map.Entry<BlockState, Float> e : this.sampleToWeightMap.entrySet()) {
+            this.sumWeightSamples += e.getValue();
+        }
+
+        if (!DepositUtils.nearlyEquals(sumWeightSamples, 1.0F)) {
+            throw new RuntimeException("Sum of weights for cluster samples should equal 1.0");
+        }
     }
 
 
@@ -94,18 +125,18 @@ public class DikeDeposit extends Deposit implements IDeposit {
 
     @Override
     public int generate(StructureWorldAccess world, BlockPos pos, IWorldDepositComponent deposits, IWorldChunkComponent chunksGenerated) {
-        RegistryEntry<Biome> biome = world.getBiome(pos);
-        if (!canPlaceInBiome(biome)) {
+        /* Dimension checking is done in PlutonRegistry#pick */
+        /* Check biome allowance */
+        if (!this.canPlaceInBiome(world.getBiome(pos))) {
             return 0;
         }
 
         ChunkPos thisChunk = new ChunkPos(pos);
-        int height = Math.abs(yMax - yMin);
-        Random random = world.getRandom();
-        int x = thisChunk.getStartX() + random.nextInt(16);
-        int z = thisChunk.getStartZ() + random.nextInt(16);
-        int yMin = this.yMin + random.nextInt(height / 4);
-        int yMax = this.yMax - random.nextInt(height / 4);
+        int height = Math.abs((this.yMax - this.yMin));
+        int x = thisChunk.getStartX() + world.getRandom().nextInt(16);
+        int z = thisChunk.getStartZ() + world.getRandom().nextInt(16);
+        int yMin = this.yMin + world.getRandom().nextInt(height / 4);
+        int yMax = this.yMax - world.getRandom().nextInt(height / 4);
         int max = GeoclusterUtils.getTopSolidBlock(world, pos).getY();
         if (yMin > max) {
             yMin = Math.max(yMin, max);
@@ -114,47 +145,51 @@ public class DikeDeposit extends Deposit implements IDeposit {
         }
         BlockPos basePos = new BlockPos(x, yMin, z);
 
-        int totalPlaced = 0;
-        int heightRnd = Math.abs(yMax - yMin);
-        int radius = baseRadius / 2;
+        int totlPlaced = 0;
+        int htRnd = Math.abs((yMax - yMin));
+        int rad = this.baseRadius / 2;
         boolean shouldSub = false;
 
-        int halfHeightRnd = yMin + (heightRnd / 2); // Calculate once outside the loop
-
-        for (int deltaY = yMin; deltaY <= yMax; deltaY++) {
-            for (int deltaX = -radius; deltaX <= radius; deltaX++) {
-                for (int deltaZ = -radius; deltaZ <= radius; deltaZ++) {
-                    int distSq = deltaX * deltaX + deltaZ * deltaZ; // Split into two lines
-
-                    if (distSq > radius) {
+        for (int dY = yMin; dY <= yMax; dY++) {
+            for (int dX = -rad; dX <= rad; dX++) {
+                for (int dZ = -rad; dZ <= rad; dZ++) {
+                    float dist = (dX * dX) + (dZ * dZ);
+                    if (dist > rad) {
                         continue;
                     }
 
-                    BlockPos placePos = basePos.add(deltaX, deltaY, deltaZ);
+                    BlockPos placePos = new BlockPos(basePos.getX() + dX, dY, basePos.getZ() + dZ);
                     BlockState current = world.getBlockState(placePos);
-                    BlockState tmp = getOre(current, random);
-                    if (tmp == null || !(getBlockStateMatchers().contains(current) || oreToWeightMap.containsKey(GeoclusterUtils.getRegistryName(current)))) {
+                    BlockState tmp = this.getOre(current, world.getRandom());
+                    if (tmp == null) {
+                        continue;
+                    }
+
+                    // Skip this block if it can't replace the target block or doesn't have a
+                    // manually-configured replacer in the blocks object
+                    if (!(this.getBlockStateMatchers().contains(current) || this.oreToWeightMap.containsKey(GeoclusterUtils.getRegistryName(current)))) {
                         continue;
                     }
 
                     if (FeatureUtils.enqueueBlockPlacement(world, placePos, tmp, deposits, chunksGenerated)) {
-                        totalPlaced++;
+                        totlPlaced++;
                     }
                 }
             }
 
-            if (halfHeightRnd <= deltaY) {
+            // flip at around the halfway point.
+            if (yMin + (htRnd / 2) <= dY) {
                 shouldSub = true;
             }
-            if (random.nextInt(3) == 0) {
-                radius += shouldSub ? -1 : 1;
-                if (radius <= 0) {
-                    return totalPlaced;
+            if (world.getRandom().nextInt(3) == 0) {
+                rad += shouldSub ? -1 : 1;
+                if (rad <= 0) {
+                    return totlPlaced;
                 }
             }
         }
 
-        return totalPlaced;
+        return totlPlaced;
     }
 
 

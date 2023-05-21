@@ -25,8 +25,8 @@ public class ProspectingUtils {
     public static void populateDepositBlocks() {
         depositBlocks = new HashSet<>();
 
-        GeoclusterAPI.depositCache.getOres().forEach((pluton) -> {
-            HashSet<BlockState> ores = pluton.getAllOres();
+        GeoclusterAPI.depositCache.getOres().forEach((cluster) -> {
+            HashSet<BlockState> ores = cluster.getAllOres();
             if (ores != null) {
                 depositBlocks.addAll(ores);
             }

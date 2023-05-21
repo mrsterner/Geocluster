@@ -42,7 +42,7 @@
   "block.geocluster.zinc_ore": "Zinc Ore",
   "block.geocluster.zinc_ore_sample": "Zinc Sample",
   "geocluster.midnightconfig.CHUNK_SKIP_CHANCE": "Chance To Skip A Chunk",
-  "geocluster.midnightconfig.CHUNK_SKIP_CHANCE.tooltip": "The upper limit of RNG for generating any cluster in a given chunk.\nLarger values indicate further distance between plutons.",
+  "geocluster.midnightconfig.CHUNK_SKIP_CHANCE.tooltip": "The upper limit of RNG for generating any cluster in a given chunk.\nLarger values indicate further distance between clusters.",
   "geocluster.midnightconfig.DEBUG_WORLD_GEN": "WorldGen Debug",
   "geocluster.midnightconfig.DEBUG_WORLD_GEN.tooltip": "Output info into the logs when generating Geolosys deposits",
   "geocluster.midnightconfig.DEFAULT_REPLACEMENT_MATERIALS": "Default Replacement Materials",

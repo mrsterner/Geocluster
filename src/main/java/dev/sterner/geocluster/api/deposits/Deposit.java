@@ -18,43 +18,9 @@ import java.util.Map;
 import static dev.sterner.geocluster.common.blocks.SampleBlock.FACING;
 
 public abstract class Deposit {
-    public final HashMap<String, HashMap<BlockState, Float>> oreToWeightMap;
-    public final HashMap<BlockState, Float> sampleToWeightMap;
-    public final HashMap<String, Float> cumulativeOreWeightMap = new HashMap<>();
-    public float sumWeightSamples = 0.0F;
 
-    public Deposit(HashMap<String, HashMap<BlockState, Float>> oreBlocks, HashMap<BlockState, Float> sampleBlocks) {
-        this.oreToWeightMap = oreBlocks;
-        this.sampleToWeightMap = sampleBlocks;
-    }
+    public Deposit() {
 
-    public static void checkDefault(HashMap<String, HashMap<BlockState, Float>> oreToWeightMap, HashMap<BlockState, Float> sampleToWeightMap, HashMap<String, Float> cumulativeOreWeightMap, float sumWeightSamples) {
-        if (!oreToWeightMap.containsKey("default")) {
-            throw new RuntimeException("Cluster blocks should always have a default key");
-        }
-
-        for (Map.Entry<String, HashMap<BlockState, Float>> i : oreToWeightMap.entrySet()) {
-            if (!cumulativeOreWeightMap.containsKey(i.getKey())) {
-                cumulativeOreWeightMap.put(i.getKey(), 0.0F);
-            }
-
-            for (Map.Entry<BlockState, Float> j : i.getValue().entrySet()) {
-                float v = cumulativeOreWeightMap.get(i.getKey());
-                cumulativeOreWeightMap.put(i.getKey(), v + j.getValue());
-            }
-
-            if (!DepositUtils.nearlyEquals(cumulativeOreWeightMap.get(i.getKey()), 1.0F)) {
-                throw new RuntimeException("Sum of weights for cluster blocks should equal 1.0");
-            }
-        }
-
-        for (Map.Entry<BlockState, Float> e : sampleToWeightMap.entrySet()) {
-            sumWeightSamples += e.getValue();
-        }
-
-        if (!DepositUtils.nearlyEquals(sumWeightSamples, 1.0F)) {
-            throw new RuntimeException("Sum of weights for cluster samples should equal 1.0");
-        }
     }
 
     public static void findAndPlaceSample(int maxSampleCnt, BlockState sampleState, StructureWorldAccess world, BlockPos pos, IWorldDepositComponent deposits, IWorldChunkComponent chunksGenerated) {

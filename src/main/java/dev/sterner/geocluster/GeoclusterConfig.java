@@ -15,7 +15,7 @@ public class GeoclusterConfig extends MidnightConfig {
     public static int NUMBER_CLUSTERS_PER_CHUNK = 2;
 
     @Entry
-    public static boolean DEBUG_WORLD_GEN = true;
+    public static boolean DEBUG_WORLD_GEN = false;
 
     @Entry(min = 1, max = 256)
     public static int MAX_SAMPLES_PER_CHUNK = 10;

@@ -99,7 +99,7 @@ public class GeoclusterLanguageProvider extends FabricLanguageProvider {
         builder.add(RAW_ANCIENT_DEBRIS, "Raw Ancient Debris");
 
         builder.add("geocluster.midnightconfig.CHUNK_SKIP_CHANCE", "Chance To Skip A Chunk");
-        builder.add("geocluster.midnightconfig.CHUNK_SKIP_CHANCE.tooltip", "The upper limit of RNG for generating any cluster in a given chunk.\nLarger values indicate further distance between plutons.");
+        builder.add("geocluster.midnightconfig.CHUNK_SKIP_CHANCE.tooltip", "The upper limit of RNG for generating any cluster in a given chunk.\nLarger values indicate further distance between clusters.");
 
         builder.add("geocluster.midnightconfig.NUMBER_CLUSTERS_PER_CHUNK", "Number of Clusters per Chunk");
         builder.add("geocluster.midnightconfig.NUMBER_CLUSTERS_PER_CHUNK.tooltip", "The number of times Geocluster will attempt to place clusters in a given chunk");

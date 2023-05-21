@@ -1,0 +1,39 @@
+{
+  "type": "geocluster:deposit_dense",
+  "config": {
+    "yMin": 44,
+    "yMax": 68,
+    "size": 24,
+    "density": 1.0,
+    "biomeTag": "#geocluster:is_sandy",
+    "blocks": {
+      "default": [
+        {
+          "block": "geocluster:tin_ore",
+          "chance": 0.75
+        },
+        {
+          "block": null,
+          "chance": 0.25
+        }
+      ],
+      "minecraft:deepslate": [
+        {
+          "block": "geocluster:deepslate_tin_ore",
+          "chance": 0.75
+        },
+        {
+          "block": null,
+          "chance": 0.25
+        }
+      ]
+    },
+    "samples": [
+      {
+        "block": "geocluster:tin_ore_sample",
+        "chance": 1.0
+      }
+    ],
+    "generationWeight": 6
+  }
+}

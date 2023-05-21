@@ -1,7 +1,8 @@
-// 1.19.2	2023-05-21T18:38:08.298058676	Tags for minecraft:worldgen/biome
+// 1.19.2	2023-05-21T20:16:01.232395495	Tags for minecraft:worldgen/biome
 d9ed5858de9992609f810870a5b07c039117179e data/c/tags/worldgen/biome/is_swamp.json
 9014e596ae9afe8b3918f5f87515a6541a7b5889 data/c/tags/worldgen/biome/is_mushroom.json
 f45653fdd02f79a7206281b4ffd78834da958b1e data/geocluster/tags/worldgen/biome/is_marshy.json
 31f8ad9ab408ce0bc395b4e1cc887b45ca700a98 data/c/tags/worldgen/biome/is_sandy.json
+dccc1e2fa1cd9dd1fb89d6f56b424807d5455fb8 data/geocluster/tags/worldgen/biome/is_plains.json
 1a26a58a48eec9f9a458603f14c1644af88fc53e data/c/tags/worldgen/biome/is_hot/overworld.json
 33f84e124bd9726ae65bcf27117dc0ccfe9819d5 data/c/tags/worldgen/biome/is_dry/overworld.json

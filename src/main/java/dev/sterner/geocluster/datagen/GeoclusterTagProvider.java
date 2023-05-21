@@ -110,6 +110,8 @@ public class GeoclusterTagProvider {
             getOrCreateTagBuilder(GeoclusterTagRegistry.IS_SWAMP).add(BiomeKeys.SWAMP).add(BiomeKeys.MANGROVE_SWAMP);
             getOrCreateTagBuilder(GeoclusterTagRegistry.IS_MUSHROOM).add(BiomeKeys.MUSHROOM_FIELDS);
             getOrCreateTagBuilder(GeoclusterTagRegistry.IS_MARSHY).addTag(GeoclusterTagRegistry.IS_SWAMP).addTag(GeoclusterTagRegistry.IS_MUSHROOM);
+
+            getOrCreateTagBuilder(GeoclusterTagRegistry.IS_PLAINS).add(BiomeKeys.PLAINS).add(BiomeKeys.SNOWY_PLAINS).add(BiomeKeys.MEADOW).add(BiomeKeys.SUNFLOWER_PLAINS);
         }
     }
 }

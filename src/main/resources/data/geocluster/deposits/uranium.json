@@ -1,38 +1,38 @@
 {
   "type": "geocluster:deposit_dense",
   "config": {
-    "yMin": -64,
-    "yMax": 24,
-    "size": 32,
-    "biomeTag": "#minecraft:is_overworld",
     "blocks": {
       "default": [
         {
-          "block": "gold_ore",
+          "block": "geocluster:uranium_ore",
           "chance": 0.85
         },
         {
-          "block": null,
+          "block": "granite",
           "chance": 0.15
         }
       ],
       "minecraft:deepslate": [
         {
-          "block": "deepslate_gold_ore",
+          "block": "geocluster:deepslate_uranium_ore",
           "chance": 0.85
         },
         {
-          "block": null,
+          "block": "minecraft:deepslate_granite",
           "chance": 0.15
         }
       ]
     },
     "samples": [
       {
-        "block": "geocluster:gold_ore_sample",
+        "block": "geocluster:uranium_ore_sample",
         "chance": 1.0
       }
     ],
+    "yMin": 8,
+    "yMax": 33,
+    "size": 24,
+    "biomeTag": "#minecraft:is_mountain",
     "generationWeight": 4
   }
 }
