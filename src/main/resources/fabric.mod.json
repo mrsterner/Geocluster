@@ -8,10 +8,8 @@
 		"MrSterner"
 	],
 	"contact": {
-		"homepage": "https://fabricmc.net/",
-		"sources": "https://github.com/mrsterner/geocluster"
 	},
-	"license": "CC0-1.0",
+	"license": "ARR",
 	"icon": "assets/geocluster/icon.png",
 	"environment": "*",
 	"entrypoints": {
