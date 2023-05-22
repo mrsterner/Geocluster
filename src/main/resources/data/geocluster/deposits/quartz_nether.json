@@ -4,6 +4,7 @@
     "yMin": 10,
     "yMax": 60,
     "baseRadius": 7,
+    "maxHeight": 16,
     "blockStateMatchers": [
       "minecraft:netherrack",
       "minecraft:basalt",

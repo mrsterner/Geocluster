@@ -8,10 +8,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DepositCache {
+    private static DepositCache cache = new DepositCache();
     private ArrayList<IDeposit> deposits;
 
     public DepositCache() {
         this.deposits = new ArrayList<>();
+    }
+
+    public static DepositCache getCache(){
+        return cache;
     }
 
     public void clear() {

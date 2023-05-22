@@ -4,6 +4,7 @@
     "yMin": 32,
     "yMax": 60,
     "baseRadius": 3,
+    "maxHeight": 16,
     "biomeTag": "#minecraft:is_overworld",
     "blocks": {
       "default": [

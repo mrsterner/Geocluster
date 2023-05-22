@@ -3,6 +3,7 @@
   "config": {
     "yMin": -64,
     "yMax": 10,
+    "maxHeight": 8,
     "baseRadius": 2,
     "biomeTag": "#minecraft:is_overworld",
     "blocks": {
@@ -30,11 +31,11 @@
     "samples": [
       {
         "block": "geocluster:diamond_ore_sample",
-        "chance": 0.5
+        "chance": 0.75
       },
       {
         "block": null,
-        "chance": 0.5
+        "chance": 0.25
       }
     ],
     "generationWeight": 2

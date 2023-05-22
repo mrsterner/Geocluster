@@ -3,6 +3,7 @@
   "config": {
     "yMin": 8,
     "yMax": 22,
+    "maxHeight": 6,
     "baseRadius": 3,
     "biomeTag": "#minecraft:is_nether",
     "blockStateMatchers": [

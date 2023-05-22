@@ -68,15 +68,30 @@ public class SampleUtils {
         return null;
     }
 
+    /**
+     * @param level an WorldGenLevel instance
+     * @param pos   A BlockPos to check in and around
+     * @return true if the block at pos is replaceable
+     */
     public static boolean canReplace(StructureWorldAccess level, BlockPos pos) {
         BlockState state = level.getBlockState(pos);
         return state.getMaterial().isReplaceable() || state.isAir();
     }
 
+    /**
+     * @param level an WorldGenLevel instance
+     * @param pos   A BlockPos to check in and around
+     * @return true if the block is water (since we can waterlog)
+     */
     public static boolean isInWater(StructureWorldAccess level, BlockPos pos) {
         return level.getBlockState(pos).getBlock() == Blocks.WATER;
     }
 
+    /**
+     * @param level an WorldGenLevel instance
+     * @param pos   A BlockPos to check in and around
+     * @return true if the block is in a non-water fluid
+     */
     public static boolean inNonWaterFluid(StructureWorldAccess level, BlockPos pos) {
         return level.getBlockState(pos).getMaterial().isLiquid() && !isInWater(level, pos);
     }

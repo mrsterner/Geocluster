@@ -11,8 +11,19 @@ import net.minecraft.world.biome.Biome;
 import java.util.HashSet;
 
 public interface IDeposit {
+    /**
+     * Handles full-on generation of this type of cluster. Requires 0 arguments as
+     * everything is self-contained in this class
+     *
+     * @return (int) the number of cluster resource blocks placed. If 0 -- this
+     * should be evaluted as a false for use of Mojang's sort-of sketchy
+     * generation code in
+     */
     int generate(StructureWorldAccess level, BlockPos pos, IWorldDepositComponent deposits, IWorldChunkComponent chunksGenerated);
 
+    /**
+     * Handles what to do after the world has generated
+     */
     void generatePost(StructureWorldAccess level, BlockPos pos, IWorldDepositComponent deposits, IWorldChunkComponent chunksGenerated);
 
     HashSet<BlockState> getAllOres();

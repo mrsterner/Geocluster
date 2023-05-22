@@ -4,6 +4,7 @@
     "yMin": -25,
     "yMax": 19,
     "baseRadius": 4,
+    "maxHeight": 7,
     "biomeTag": "#minecraft:is_mountain",
     "blocks": {
       "default": [
@@ -33,6 +34,6 @@
         "chance": 1.0
       }
     ],
-    "generationWeight": 4
+    "generationWeight": 2
   }
 }

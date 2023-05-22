@@ -1,6 +1,5 @@
 package dev.sterner.geocluster;
 
-import dev.sterner.geocluster.api.GeoclusterAPI;
 import dev.sterner.geocluster.client.network.S2CProspectingPacket;
 import dev.sterner.geocluster.client.toast.IOreToastManager;
 import dev.sterner.geocluster.client.toast.OreToastManager;
@@ -15,7 +14,6 @@ import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
 import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.toast.ToastManager;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
@@ -37,7 +35,6 @@ public class Geocluster implements ModInitializer, ClientModInitializer {
     @Override
     public void onInitialize() {
         MidnightConfig.init(MODID, GeoclusterConfig.class);
-        GeoclusterAPI.init();
         GeoclusterObjects.init();
         GeoclusterWorldgenRegistry.init();
         ResourceManagerHelper.get(ResourceType.SERVER_DATA).registerReloadListener(new WorldGenDataReloadListener());

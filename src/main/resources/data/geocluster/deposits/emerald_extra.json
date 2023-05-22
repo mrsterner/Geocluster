@@ -35,6 +35,7 @@
     ],
     "yMin": -52,
     "yMax": -40,
+    "maxHeight": 9,
     "baseRadius": 6,
     "biomeTag": "#c:is_hot/overworld",
     "generationWeight": 2

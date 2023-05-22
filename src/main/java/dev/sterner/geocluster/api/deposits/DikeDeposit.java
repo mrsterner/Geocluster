@@ -17,6 +17,7 @@ import net.minecraft.tag.TagKey;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.util.registry.RegistryEntry;
@@ -37,48 +38,24 @@ public class DikeDeposit extends Deposit implements IDeposit {
     public float sumWeightSamples = 0.0F;
     private final int yMin;
     private final int yMax;
+    private final int maxHeight;
     private final int baseRadius;
     private final int weight;
     private final HashSet<BlockState> blockStateMatchers;
     private final TagKey<Biome> biomeTag;
 
-    public DikeDeposit(HashMap<String, HashMap<BlockState, Float>> oreBlocks, HashMap<BlockState, Float> sampleBlocks, int yMin, int yMax, int baseRadius, int weight, TagKey<Biome> biomeTag, HashSet<BlockState> blockStateMatchers) {
+    public DikeDeposit(HashMap<String, HashMap<BlockState, Float>> oreBlocks, HashMap<BlockState, Float> sampleBlocks, int yMin, int yMax, int baseRadius, int maxHeight, int weight, TagKey<Biome> biomeTag, HashSet<BlockState> blockStateMatchers) {
         this.oreToWeightMap = oreBlocks;
         this.sampleToWeightMap = sampleBlocks;
         this.yMin = yMin;
         this.yMax = yMax;
+        this.maxHeight = maxHeight;
         this.baseRadius = baseRadius;
         this.weight = weight;
         this.biomeTag = biomeTag;
         this.blockStateMatchers = blockStateMatchers;
 
-        // Verify that blocks.default exists.
-        if (!this.oreToWeightMap.containsKey("default")) {
-            throw new RuntimeException("Cluster blocks should always have a default key");
-        }
-
-        for (Map.Entry<String, HashMap<BlockState, Float>> i : this.oreToWeightMap.entrySet()) {
-            if (!this.cumulativeOreWeightMap.containsKey(i.getKey())) {
-                this.cumulativeOreWeightMap.put(i.getKey(), 0.0F);
-            }
-
-            for (Map.Entry<BlockState, Float> j : i.getValue().entrySet()) {
-                float v = this.cumulativeOreWeightMap.get(i.getKey());
-                this.cumulativeOreWeightMap.put(i.getKey(), v + j.getValue());
-            }
-
-            if (!DepositUtils.nearlyEquals(this.cumulativeOreWeightMap.get(i.getKey()), 1.0F)) {
-                throw new RuntimeException("Sum of weights for cluster blocks should equal 1.0" + ", is " + i.getKey());
-            }
-        }
-
-        for (Map.Entry<BlockState, Float> e : this.sampleToWeightMap.entrySet()) {
-            this.sumWeightSamples += e.getValue();
-        }
-
-        if (!DepositUtils.nearlyEquals(sumWeightSamples, 1.0F)) {
-            throw new RuntimeException("Sum of weights for cluster samples should equal 1.0");
-        }
+        validateFormat(oreToWeightMap, cumulativeOreWeightMap, sampleToWeightMap, sumWeightSamples);
     }
 
 
@@ -132,17 +109,18 @@ public class DikeDeposit extends Deposit implements IDeposit {
         }
 
         ChunkPos thisChunk = new ChunkPos(pos);
+
         int height = Math.abs((this.yMax - this.yMin));
         int x = thisChunk.getStartX() + world.getRandom().nextInt(16);
         int z = thisChunk.getStartZ() + world.getRandom().nextInt(16);
         int yMin = this.yMin + world.getRandom().nextInt(height / 4);
         int yMax = this.yMax - world.getRandom().nextInt(height / 4);
-        int max = GeoclusterUtils.getTopSolidBlock(world, pos).getY();
-        if (yMin > max) {
-            yMin = Math.max(yMin, max);
-        } else if (yMin == yMax) {
-            yMax = this.yMax;
-        }
+
+        int cmaxHeight = maxHeight - world.getRandom().nextBetween(0, maxHeight / 4);
+        int maxStart = MathHelper.abs(yMax - cmaxHeight - yMin);
+        yMin = world.getRandom().nextInt(maxStart + 1) + yMin;
+        yMax = yMin + cmaxHeight;
+
         BlockPos basePos = new BlockPos(x, yMin, z);
 
         int totlPlaced = 0;
@@ -219,6 +197,7 @@ public class DikeDeposit extends Deposit implements IDeposit {
             int yMin = json.get("yMin").getAsInt();
             int yMax = json.get("yMax").getAsInt();
             int baseRadius = json.get("baseRadius").getAsInt();
+            int maxHeight = json.get("maxHeight").getAsInt();
             int genWt = json.get("generationWeight").getAsInt();
             TagKey<Biome> biomeTag = TagKey.of(Registry.BIOME_KEY, new Identifier(json.get("biomeTag").getAsString().replace("#", "")));
 
@@ -227,7 +206,7 @@ public class DikeDeposit extends Deposit implements IDeposit {
                 blockStateMatchers = SerializerUtils.toBlockStateList(json.get("blockStateMatchers").getAsJsonArray());
             }
 
-            return new DikeDeposit(oreBlocks, sampleBlocks, yMin, yMax, baseRadius, genWt, biomeTag, blockStateMatchers);
+            return new DikeDeposit(oreBlocks, sampleBlocks, yMin, yMax, baseRadius, maxHeight, genWt, biomeTag, blockStateMatchers);
         } catch (Exception e) {
             Geocluster.LOGGER.error("Failed to parse: {}", e.getMessage());
             return null;
@@ -243,6 +222,7 @@ public class DikeDeposit extends Deposit implements IDeposit {
         config.addProperty("yMin", this.yMin);
         config.addProperty("yMax", this.yMax);
         config.addProperty("baseRadius", this.baseRadius);
+        config.addProperty("maxHeight", this.maxHeight);
         config.addProperty("generationWeight", this.getWeight());
         config.addProperty("biomeTag", this.biomeTag.id().toString());
         json.addProperty("type", JSON_TYPE);

@@ -5,7 +5,7 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import dev.sterner.geocluster.Geocluster;
-import dev.sterner.geocluster.api.GeoclusterAPI;
+import dev.sterner.geocluster.api.DepositCache;
 import dev.sterner.geocluster.api.deposits.*;
 import dev.sterner.geocluster.common.data.serializer.*;
 import dev.sterner.geocluster.common.utils.ProspectingUtils;
@@ -38,7 +38,8 @@ public class WorldGenDataReloadListener extends JsonDataLoader implements Identi
 
     @Override
     protected void apply(Map<Identifier, JsonElement> prepared, ResourceManager manager, Profiler profiler) {
-        GeoclusterAPI.depositCache.clear();
+        DepositCache cache = DepositCache.getCache();
+        cache.clear();
         prepared.forEach((identifier, json) -> {
 
             try {
@@ -51,35 +52,35 @@ public class WorldGenDataReloadListener extends JsonDataLoader implements Identi
                         DenseDeposit denseDeposit = DenseSerializer.deserialize(config);
                         if (denseDeposit != null) {
                             Geocluster.LOGGER.info(denseDeposit.toString());
-                            GeoclusterAPI.depositCache.addDeposit(denseDeposit);
+                            cache.addDeposit(denseDeposit);
                         }
                     }
                     case "geocluster:deposit_layer" -> {
                         LayerDeposit layerDeposit = LayerSerializer.deserialize(config);
                         if (layerDeposit != null) {
                             Geocluster.LOGGER.info(layerDeposit.toString());
-                            GeoclusterAPI.depositCache.addDeposit(layerDeposit);
+                            cache.addDeposit(layerDeposit);
                         }
                     }
                     case "geocluster:deposit_top_layer" -> {
                         TopLayerDeposit topLayerDeposit = TopLayerSerializer.deserialize(config);
                         if (topLayerDeposit != null) {
                             Geocluster.LOGGER.info(topLayerDeposit.toString());
-                            GeoclusterAPI.depositCache.addDeposit(topLayerDeposit);
+                            cache.addDeposit(topLayerDeposit);
                         }
                     }
                     case "geocluster:deposit_dike" -> {
                         DikeDeposit dikeDeposit = DikeSerializer.deserialize(config);
                         if (dikeDeposit != null) {
                             Geocluster.LOGGER.info(dikeDeposit.toString());
-                            GeoclusterAPI.depositCache.addDeposit(dikeDeposit);
+                            cache.addDeposit(dikeDeposit);
                         }
                     }
                     case "geocluster:deposit_sparse" -> {
                         SparseDeposit sparseDeposit = SparseSerializer.deserialize(config);
                         if (sparseDeposit != null) {
                             Geocluster.LOGGER.info(sparseDeposit.toString());
-                            GeoclusterAPI.depositCache.addDeposit(sparseDeposit);
+                            cache.addDeposit(sparseDeposit);
                         }
                     }
                     default -> {

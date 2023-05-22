@@ -3,7 +3,7 @@ package dev.sterner.geocluster.common.world.feature;
 import com.mojang.serialization.Codec;
 import dev.sterner.geocluster.Geocluster;
 import dev.sterner.geocluster.GeoclusterConfig;
-import dev.sterner.geocluster.api.GeoclusterAPI;
+import dev.sterner.geocluster.api.DepositCache;
 import dev.sterner.geocluster.api.IDeposit;
 import dev.sterner.geocluster.common.components.*;
 import dev.sterner.geocluster.common.utils.FeatureUtils;
@@ -40,7 +40,7 @@ public class DepositFeature extends Feature<DefaultFeatureConfig> {
 
         if (world.getRandom().nextDouble() > GeoclusterConfig.CHUNK_SKIP_CHANCE) {
             for (int p = 0; p < GeoclusterConfig.NUMBER_CLUSTERS_PER_CHUNK; p++) {
-                IDeposit deposit = GeoclusterAPI.depositCache.pick(world, pos);
+                IDeposit deposit = DepositCache.getCache().pick(world, pos);
                 if (deposit == null) {
                     continue;
                 }

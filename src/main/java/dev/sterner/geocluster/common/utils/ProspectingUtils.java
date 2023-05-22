@@ -2,7 +2,7 @@ package dev.sterner.geocluster.common.utils;
 
 import dev.sterner.geocluster.Geocluster;
 import dev.sterner.geocluster.GeoclusterConfig;
-import dev.sterner.geocluster.api.GeoclusterAPI;
+import dev.sterner.geocluster.api.DepositCache;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.util.Identifier;
@@ -24,8 +24,8 @@ public class ProspectingUtils {
 
     public static void populateDepositBlocks() {
         depositBlocks = new HashSet<>();
-
-        GeoclusterAPI.depositCache.getOres().forEach((cluster) -> {
+        DepositCache cache = DepositCache.getCache();
+        cache.getOres().forEach((cluster) -> {
             HashSet<BlockState> ores = cluster.getAllOres();
             if (ores != null) {
                 depositBlocks.addAll(ores);

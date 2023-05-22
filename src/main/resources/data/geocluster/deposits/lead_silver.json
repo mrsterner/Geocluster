@@ -3,8 +3,8 @@
   "config": {
     "yMin": -16,
     "yMax": 32,
-    "size": 32,
-    "spread": 32,
+    "size": 24,
+    "spread": 24,
     "biomeTag": "#c:is_plains",
     "blocks": {
       "default": [

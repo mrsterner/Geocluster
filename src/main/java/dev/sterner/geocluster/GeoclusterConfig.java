@@ -9,7 +9,10 @@ import java.util.List;
 public class GeoclusterConfig extends MidnightConfig {
 
     @Entry
-    public static double CHUNK_SKIP_CHANCE = 0.9D;
+    public static final boolean REMOVE_VEINS = true;
+
+    @Entry
+    public static double CHUNK_SKIP_CHANCE = 0.95D;
 
     @Entry(min = 1, max = Integer.MAX_VALUE)
     public static int NUMBER_CLUSTERS_PER_CHUNK = 2;
@@ -18,7 +21,7 @@ public class GeoclusterConfig extends MidnightConfig {
     public static boolean DEBUG_WORLD_GEN = false;
 
     @Entry(min = 1, max = 256)
-    public static int MAX_SAMPLES_PER_CHUNK = 10;
+    public static int MAX_SAMPLES_PER_CHUNK = 8;
 
     @Entry
     public static List<String> DEFAULT_REPLACEMENT_MATERIALS = Lists.newArrayList("minecraft:stone", "minecraft:andesite", "minecraft:diorite", "minecraft:granite", "minecraft:netherrack", "minecraft:sandstone", "minecraft:deepslate", "minecraft:tuff", "minecraft:calcite", "minecraft:dripstone_block");

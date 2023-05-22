@@ -17,6 +17,13 @@ public class DepositUtils {
 
     private static HashSet<BlockState> defaultMatchersCached = null;
 
+    /**
+     * picks a choice out of a mapping between blockstate to weight
+     *
+     * @param map  the map between a blockstate and its chance
+     * @return null if no block should be used or placed, T instanceof BlockState if
+     * actual block should be placed.
+     */
     @Nullable
     public static BlockState pick(HashMap<BlockState, Float> map, Random random) {
         float rng = random.nextFloat();
@@ -56,6 +63,10 @@ public class DepositUtils {
         return false;
     }
 
+    /**
+     * Returns true if a and b are within epsilon of each other, where epsilon is the minimum
+     * representable value by a 32-bit floating point number.
+     */
     public static boolean nearlyEquals(float a, float b) {
         return Math.abs(a - b) <= Float.MIN_VALUE;
     }

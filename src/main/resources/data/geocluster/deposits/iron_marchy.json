@@ -4,6 +4,7 @@
     "yMin": -48,
     "yMax": -32,
     "baseRadius": 6,
+    "maxHeight": 20,
     "biomeTag": "#geocluster:is_marshy",
     "blocks": {
       "default": [

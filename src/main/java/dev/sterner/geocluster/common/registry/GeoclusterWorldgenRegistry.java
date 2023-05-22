@@ -3,6 +3,7 @@ package dev.sterner.geocluster.common.registry;
 import com.google.common.collect.Lists;
 import dev.sterner.geocluster.Geocluster;
 import dev.sterner.geocluster.common.world.feature.DepositFeature;
+import dev.sterner.geocluster.common.world.feature.RemoveVeinsFeature;
 import dev.sterner.geocluster.mixin.BiomeModificationContextImplMixin;
 import net.fabricmc.fabric.api.biome.v1.*;
 import net.minecraft.tag.TagKey;
@@ -27,6 +28,14 @@ public interface GeoclusterWorldgenRegistry {
     RegistryEntry<ConfiguredFeature<DefaultFeatureConfig, ?>> CONFIGURED_DEPOSIT_FEATURE = registerConfigured("deposits_configured", DEPOSIT_FEATURE);
     RegistryEntry<PlacedFeature> PLACED_DEPOSIT_FEATURE = PlacedFeatures.register("geocluster:deposits_placed", CONFIGURED_DEPOSIT_FEATURE, placement);
 
+    /* Replaced with ChunkGeneratorSettingsMixin
+    Feature<DefaultFeatureConfig> REMOVE_VEINS_FEATURE = registerFeature("remove_veins", new RemoveVeinsFeature(DefaultFeatureConfig.CODEC));
+    RegistryEntry<ConfiguredFeature<DefaultFeatureConfig, ?>> CONFIGURED_REMOVE_VEINS_FEATURE = registerConfigured("remove_veins_configured", REMOVE_VEINS_FEATURE);
+    RegistryEntry<PlacedFeature> PLACED_REMOVE_VEINS_FEATURE = PlacedFeatures.register("geocluster:remove_veins_placed", CONFIGURED_REMOVE_VEINS_FEATURE, placement);
+
+
+     */
+
     static void init() {
 
         BiomeModification modifications = BiomeModifications.create(Geocluster.id("worldgen"));
@@ -42,12 +51,12 @@ public interface GeoclusterWorldgenRegistry {
 
         modifications.add(ModificationPhase.ADDITIONS, BiomeSelectors.all(), ctx -> {
             ctx.getGenerationSettings().addFeature(GenerationStep.Feature.UNDERGROUND_ORES, PLACED_DEPOSIT_FEATURE.getKey().get());
+            //ctx.getGenerationSettings().addFeature(GenerationStep.Feature.UNDERGROUND_ORES, PLACED_REMOVE_VEINS_FEATURE.getKey().get());
         });
 
     }
 
     private static Iterable<RegistryEntry<PlacedFeature>> getPlacedFeaturesByTag(BiomeModificationContext ctx, TagKey<PlacedFeature> placedFeatureTagKey) {
-
         DynamicRegistryManager dynamicRegistryManager = ((BiomeModificationContextImplMixin) ctx).getRegistries();
         Registry<PlacedFeature> placedFeatureRegistry = dynamicRegistryManager.get(Registry.PLACED_FEATURE_KEY);
         return placedFeatureRegistry.iterateEntries(placedFeatureTagKey);
