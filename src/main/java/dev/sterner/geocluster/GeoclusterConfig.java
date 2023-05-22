@@ -9,7 +9,7 @@ import java.util.List;
 public class GeoclusterConfig extends MidnightConfig {
 
     @Entry
-    public static final boolean REMOVE_VEINS = true;
+    public static boolean REMOVE_VEINS = true;
 
     @Entry
     public static double CHUNK_SKIP_CHANCE = 0.95D;
