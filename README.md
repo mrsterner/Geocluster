@@ -41,7 +41,7 @@ If you want to add new clusters a practical solution is more appropriate, there 
 * deposit_top_layer
 
 ### <span style="color:pink">deposit_dense</span>
-```json
+```json5
 {                                                      /* Notes / Comments    ↓                                    */
   "type": "geocluster:deposit_dense",                  /* This tells Geocluster how to generate this cluster       */
   "config": {
@@ -70,7 +70,7 @@ If you want to add new clusters a practical solution is more appropriate, there 
 ```
 
 ### <span style="color:pink">deposit_dike</span>
-```json
+```json5
 {                                                      /* Notes / Comments    ↓                                    */
   "type": "geocluster:deposit_dike",                   /* This tells Geocluster how to generate this cluster       */
   "config": {
@@ -102,7 +102,7 @@ If you want to add new clusters a practical solution is more appropriate, there 
 ```
 
 ### <span style="color:pink">deposit_sparse</span>
-```json
+```json5
 {                                                      /* Notes / Comments    ↓                                    */
   "type": "geocluster:deposit_sparse",                 /* This tells Geocluster how to generate this cluster       */
   "config": {
@@ -132,7 +132,7 @@ If you want to add new clusters a practical solution is more appropriate, there 
 ```
 
 ### <span style="color:pink">deposit_layer</span>
-```json
+```json5
 {                                                      /* Notes / Comments    ↓                                    */
   "type": "geocluster:deposit_layer",                  /* This tells Geocluster how to generate this cluster       */
   "config": {
@@ -162,7 +162,7 @@ If you want to add new clusters a practical solution is more appropriate, there 
 ```
 
 ### <span style="color:pink">deposit_top_layer</span>
-```json
+```json5
 {                                                      /* Notes / Comments    ↓                                    */
   "type": "geocluster:top_deposit_layer",              /* This tells Geocluster how to generate this cluster       */
   "config": {                                          /* YMIN/MAX IS NOT PERMITTED BC. USE LAYER IF YOU NEED IT   */
