@@ -18,7 +18,7 @@ versions of [Minecraft][minecraft] Java Edition.
 Add the placed feature of the mods ore you want to disable in the tag:
 ``data/geocluster/tags/worldgen/placed_feature/ores_to_remove.json``
 Remember to check if there is more than one feature for an ore. For example, gold has 4 overworld features and one nether feature:
-```json
+```json5
 ...
 "ore_gold_deltas",
 "ore_gold_extra",
@@ -27,6 +27,7 @@ Remember to check if there is more than one feature for an ore. For example, gol
 "ore_gold",
 ...
 ```
+
 
 ## Add or modify ore clusters
 The mod comes with a few ore clusters, which should be changed to reflect your packs theme. To modify the default clusters, just add a json with the same name in
