@@ -40,7 +40,7 @@ public interface GeoclusterTagRegistry {
     TagKey<Item> LEAD_INGOTS = TagKey.of(Registry.ITEM_KEY, new Identifier("c", "lead_ingots"));
     TagKey<Item> LEAD_NUGGETS = TagKey.of(Registry.ITEM_KEY, new Identifier("c", "lead_nuggets"));
 
-    TagKey<Block> ALUMINIUM_ORES = TagKey.of(Registry.BLOCK_KEY, new Identifier("c", "aluminium_ores"));
+    TagKey<Block> ALUMINIUM_ORES = TagKey.of(Registry.BLOCK_KEY, new Identifier("c", "aluminum_ores"));
     TagKey<Item> ALUMINIUM_INGOTS = TagKey.of(Registry.ITEM_KEY, new Identifier("c", "aluminium_ingots"));
     TagKey<Item> ALUMINIUM_NUGGETS = TagKey.of(Registry.ITEM_KEY, new Identifier("c", "aluminium_nuggets"));
 
