@@ -76,6 +76,7 @@ If you want to add new clusters a practical solution is more appropriate, there 
   "config": {
     "yMin": 8,                                         /* The Minimum Y-level the deposit can gen                  */
     "yMax": 22,                                        /* The Maximum Y-level the deposit can gen                  */
+    "maxHeight": 8,                                    /* The Maximum height of the dike spike                     */
     "baseRadius": 3,                                   /* The Base radius of the deposit when the dike is formed   */
     "biomeTag": "#minecraft:is_nether",                /* The biome tag you wish to generate this deposit in       */
     "blockStateMatchers": [ "minecraft:netherrack" ],  /* The blocks you want this deposit to be able to replace   */
