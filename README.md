@@ -152,11 +152,11 @@ If you want to add new clusters a practical solution is more appropriate, there 
         "chance": 1.0
       }]
     },
-    "samples": [{                                      /* List of samples to use within this cluster. null = skip   */
+    "samples": [{                                      /* List of samples to use within this cluster. null = skip  */
       "block": "geocluster:coal_ore_sample",     
       "chance": 1.0
     }],
-    "generationWeight": 1                              /* The weight for this specific cluster to generate          */
+    "generationWeight": 1                              /* The weight for this specific cluster to generate         */
   }
 }
 ```
@@ -171,7 +171,7 @@ If you want to add new clusters a practical solution is more appropriate, there 
     "chanceForSample": 0.25,                           /* The chance for a sample block to be generated            */
     "biomeTag": "#is_mountain",                        /* The biome tag you wish to generate this deposit in       */
     "blockStateMatchers": [ "minecraft:dirt" ],        /* The blocks you want this deposit to be able to replace   */
-    "blocks": {                                        /* List of blocks to use within this cluster. null = skip    */
+    "blocks": {                                        /* List of blocks to use within this cluster. null = skip   */
       "default": [{                                    /* Blocks now MUST have a "default"                         */
         "block": "red_sand",
         "chance": 1.0
@@ -181,11 +181,11 @@ If you want to add new clusters a practical solution is more appropriate, there 
         "chance": 1.0
       }]
     },
-    "samples": [{                                      /* List of samples to use within this cluster. null = skip   */
+    "samples": [{                                      /* List of samples to use within this cluster. null = skip  */
       "block": "allium",                               
       "chance": 1.0
     }],
-    "generationWeight": 1                              /* The weight for this specific cluster to generate          */
+    "generationWeight": 1                              /* The weight for this specific cluster to generate         */
   }
 }
 ```

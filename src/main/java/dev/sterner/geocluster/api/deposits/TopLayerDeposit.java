@@ -120,7 +120,7 @@ public class TopLayerDeposit extends Deposit implements IDeposit {
 
     @Override
     public int generate(StructureWorldAccess level, BlockPos pos, IWorldDepositComponent deposits, IWorldChunkComponent chunksGenerated) {
-        /* Dimension checking is done in PlutonRegistry#pick */
+        /* Dimension checking is done in DepositCache#pick */
         /* Check biome allowance */
         if (!this.canPlaceInBiome(level.getBiome(pos))) {
             return 0;
