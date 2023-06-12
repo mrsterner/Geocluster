@@ -74,7 +74,7 @@ public class GeoclusterLanguageProvider extends FabricLanguageProvider {
         builder.add(NICKEL_NUGGET, "Nickel Nugget");
 
         builder.add(ZINC_ORE, "Zinc Ore");
-        builder.add(SILVER_ORE, "Nickel Ore");
+        builder.add(SILVER_ORE, "Silver Ore");
         builder.add(LEAD_ORE, "Lead Ore");
         builder.add(ALUMINIUM_ORE, "Aluminium Ore");
         builder.add(URANIUM_ORE, "Uranium Ore");

@@ -32,8 +32,6 @@ public interface GeoclusterWorldgenRegistry {
     Feature<DefaultFeatureConfig> REMOVE_VEINS_FEATURE = registerFeature("remove_veins", new RemoveVeinsFeature(DefaultFeatureConfig.CODEC));
     RegistryEntry<ConfiguredFeature<DefaultFeatureConfig, ?>> CONFIGURED_REMOVE_VEINS_FEATURE = registerConfigured("remove_veins_configured", REMOVE_VEINS_FEATURE);
     RegistryEntry<PlacedFeature> PLACED_REMOVE_VEINS_FEATURE = PlacedFeatures.register("geocluster:remove_veins_placed", CONFIGURED_REMOVE_VEINS_FEATURE, placement);
-
-
      */
 
     static void init() {

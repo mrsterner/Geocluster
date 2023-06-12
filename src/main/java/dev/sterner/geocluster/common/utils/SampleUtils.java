@@ -1,5 +1,6 @@
 package dev.sterner.geocluster.common.utils;
 
+import dev.sterner.geocluster.GeoclusterConfig;
 import dev.sterner.geocluster.common.registry.GeoclusterTagRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -53,18 +54,37 @@ public class SampleUtils {
 
 
         } else {
+
             BlockPos searchPos = new BlockPos(blockPosX, worldAccess.getTopY(Heightmap.Type.OCEAN_FLOOR_WG, blockPosX, blockPosZ), blockPosZ).down();
-            BlockState blockToPlaceOn = world.getBlockState(searchPos);
-            if (Block.isFaceFullSquare(blockToPlaceOn.getOutlineShape(world, searchPos), Direction.UP)) {
-                if (blockToPlaceOn.isIn(GeoclusterTagRegistry.SUPPORTS_SAMPLE)) {
-                    BlockPos actualPlacePos = searchPos.up();
-                    if (canReplace(world, actualPlacePos)) {
-                        return actualPlacePos;
+
+            if (GeoclusterConfig.FORCE_DEEPSLATE_SAMPLE_CAVEGEN && pos.getY() < 10) {
+                int forcedPosY = pos.getY();
+                while (forcedPosY < searchPos.getY()) {
+                    forcedPosY++;
+                    BlockPos forcedPos = new BlockPos(pos.getX(), forcedPosY, pos.getZ());
+
+                    BlockPos result = tryFind(world, forcedPos);
+                    if (result != null) {
+                        return result;
                     }
                 }
             }
+            return tryFind(world, searchPos);
         }
 
+        return null;
+    }
+
+    private static BlockPos tryFind(ChunkRegion world, BlockPos pos) {
+        BlockState blockToPlaceOn = world.getBlockState(pos);
+        if (Block.isFaceFullSquare(blockToPlaceOn.getOutlineShape(world, pos), Direction.UP)) {
+            if (blockToPlaceOn.isIn(GeoclusterTagRegistry.SUPPORTS_SAMPLE)) {
+                BlockPos actualPlacePos = pos.up();
+                if (canReplace(world, actualPlacePos)) {
+                    return actualPlacePos;
+                }
+            }
+        }
         return null;
     }
 

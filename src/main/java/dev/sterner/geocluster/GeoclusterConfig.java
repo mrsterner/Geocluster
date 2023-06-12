@@ -9,6 +9,10 @@ import java.util.List;
 public class GeoclusterConfig extends MidnightConfig {
 
     @Entry
+    public static boolean FORCE_DEEPSLATE_SAMPLE_CAVEGEN = false;
+    @Entry
+    public static boolean DISABLE_IN_AREA_MESSAGE = false;
+    @Entry
     public static boolean REMOVE_VEINS = true;
 
     @Entry

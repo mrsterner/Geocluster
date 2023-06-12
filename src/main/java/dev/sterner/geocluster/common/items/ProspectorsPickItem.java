@@ -94,7 +94,9 @@ public class ProspectorsPickItem extends Item {
             optional.ifPresent(blockPos -> world.playSound(null, blockPos, SoundEvents.BLOCK_ANVIL_PLACE, SoundCategory.PLAYERS, 0.15F, 2F));
             return;
         }
-        prospectChunk(world, pos, player);
+        if (!GeoclusterConfig.DISABLE_IN_AREA_MESSAGE) {
+            prospectChunk(world, pos, player);
+        }
     }
 
     private void prospectChunk(World world, BlockPos pos, PlayerEntity player) {
