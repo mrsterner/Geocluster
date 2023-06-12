@@ -1,13 +1,15 @@
 package dev.sterner.geocluster.datagen;
 
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
+import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricLanguageProvider;
 
 import static dev.sterner.geocluster.common.registry.GeoclusterObjects.*;
 
 public class GeoclusterLanguageProvider extends FabricLanguageProvider {
-    public GeoclusterLanguageProvider(FabricDataGenerator dataGenerator) {
-        super(dataGenerator);
+
+    public GeoclusterLanguageProvider(FabricDataOutput dataOutput) {
+        super(dataOutput);
     }
 
     @Override

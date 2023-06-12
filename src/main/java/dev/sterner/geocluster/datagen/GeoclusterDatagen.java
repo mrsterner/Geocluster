@@ -6,14 +6,13 @@ import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
 public class GeoclusterDatagen implements DataGeneratorEntrypoint {
     @Override
     public void onInitializeDataGenerator(FabricDataGenerator dataGenerator) {
-        GeoclusterTagProvider.GeoclusterBlockTags blockTagsProvider = new GeoclusterTagProvider.GeoclusterBlockTags(dataGenerator);
-        dataGenerator.addProvider(blockTagsProvider);
-        dataGenerator.addProvider(GeoclusterTagProvider.GeoclusterBiomeTags::new);
-        dataGenerator.addProvider((p) -> new GeoclusterTagProvider.GeoclusterItemTags(p, blockTagsProvider));
-
-        dataGenerator.addProvider(GeoclusterLanguageProvider::new);
-        dataGenerator.addProvider(GeoclusterLootTableProvider::new);
-        dataGenerator.addProvider(GeoclusterModelProvider::new);
-        dataGenerator.addProvider(GeoclusterRecipeProvider::new);
+        var pack = dataGenerator.createPack();
+        pack.addProvider(GeoclusterLanguageProvider::new);
+        pack.addProvider(GeoclusterLootTableProvider::new);
+        pack.addProvider(GeoclusterModelProvider::new);
+        pack.addProvider(GeoclusterRecipeProvider::new);
+        pack.addProvider(GeoclusterTagProvider.GeoclusterBlockTags::new);
+        pack.addProvider(GeoclusterTagProvider.GeoclusterItemTags::new);
+        pack.addProvider(GeoclusterTagProvider.GeoclusterBiomeTags::new);
     }
 }

@@ -5,8 +5,8 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
+import net.minecraft.registry.Registries;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.registry.Registry;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -21,7 +21,7 @@ public class SerializerUtils {
             return Blocks.AIR.getDefaultState();
         }
         Identifier r = new Identifier(string);
-        return Objects.requireNonNull(Registry.BLOCK.get(r)).getDefaultState();
+        return Objects.requireNonNull(Registries.BLOCK.get(r)).getDefaultState();
     }
 
     public static String[] toStringArray(JsonArray arr) {

@@ -3,8 +3,8 @@ package dev.sterner.geocluster.api;
 import dev.sterner.geocluster.common.components.IWorldChunkComponent;
 import dev.sterner.geocluster.common.components.IWorldDepositComponent;
 import net.minecraft.block.BlockState;
+import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.registry.RegistryEntry;
 import net.minecraft.world.StructureWorldAccess;
 import net.minecraft.world.biome.Biome;
 

@@ -32,7 +32,7 @@ public class SampleBlock extends HorizontalFacingBlock implements Waterloggable 
 
     public static final BooleanProperty WATERLOGGED = Properties.WATERLOGGED;
     public static final DirectionProperty FACING = HorizontalFacingBlock.FACING;
-    private static final Settings BASE_PROPS = FabricBlockSettings.of(Material.SOIL, MapColor.GRAY).strength(0.125F, 2F).sounds(BlockSoundGroup.GRAVEL).dynamicBounds().offsetType(OffsetType.XZ);
+    private static final Settings BASE_PROPS = FabricBlockSettings.create().strength(0.125F, 2F).sounds(BlockSoundGroup.GRAVEL).dynamicBounds().offset(OffsetType.XZ);
 
     public SampleBlock() {
         super(BASE_PROPS);
@@ -104,7 +104,7 @@ public class SampleBlock extends HorizontalFacingBlock implements Waterloggable 
             world.breakBlock(pos, true);
         }
         if (state.get(WATERLOGGED)) {
-            world.createAndScheduleFluidTick(pos, Fluids.WATER, Fluids.WATER.getTickRate(world));
+            world.scheduleFluidTick(pos, Fluids.WATER, Fluids.WATER.getTickRate(world));
         }
     }
 }

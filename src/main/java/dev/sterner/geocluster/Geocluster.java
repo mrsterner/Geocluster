@@ -9,15 +9,20 @@ import dev.sterner.geocluster.common.registry.GeoclusterWorldgenRegistry;
 import eu.midnightdust.lib.config.MidnightConfig;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.ModInitializer;
-import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
+import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
+import net.minecraft.registry.DynamicRegistryManager;
+import net.minecraft.registry.RegistryKey;
+import net.minecraft.registry.RegistryKeys;
 import net.minecraft.resource.ResourceType;
+import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,7 +31,12 @@ import org.slf4j.LoggerFactory;
 public class Geocluster implements ModInitializer, ClientModInitializer {
     public static final String MODID = "geocluster";
     public static final Logger LOGGER = LoggerFactory.getLogger(MODID);
-    public static final ItemGroup GROUP = FabricItemGroupBuilder.build(new Identifier(MODID, MODID), () -> new ItemStack(GeoclusterObjects.ZINC_INGOT));
+
+    public static final RegistryKey<ItemGroup> GEOCLUSTER_ITEM_GROUP = RegistryKey.of(RegistryKeys.ITEM_GROUP, id(MODID));
+    public static ItemGroup GROUP = FabricItemGroup.builder()
+            .icon(() -> new ItemStack(GeoclusterObjects.ZINC_INGOT))
+            .displayName(Text.translatable("geocluster"))
+            .build();
 
     public static Identifier id(String id) {
         return new Identifier(MODID, id);
@@ -46,10 +56,10 @@ public class Geocluster implements ModInitializer, ClientModInitializer {
         HudRenderCallback.EVENT.register(this::renderFoundOres);
     }
 
-    private void renderFoundOres(MatrixStack matrixStack, float v) {
+    private void renderFoundOres(DrawContext ctx, float v) {
         if (!MinecraftClient.getInstance().skipGameRender) {
             OreToastManager manager = ((IOreToastManager) MinecraftClient.getInstance()).getManager();
-            manager.draw(matrixStack);
+            manager.draw(ctx);
         }
     }
 }

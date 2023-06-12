@@ -95,7 +95,7 @@ public class SampleUtils {
      */
     public static boolean canReplace(StructureWorldAccess level, BlockPos pos) {
         BlockState state = level.getBlockState(pos);
-        return state.getMaterial().isReplaceable() || state.isAir();
+        return state.isReplaceable() || state.isAir();
     }
 
     /**
@@ -113,6 +113,6 @@ public class SampleUtils {
      * @return true if the block is in a non-water fluid
      */
     public static boolean inNonWaterFluid(StructureWorldAccess level, BlockPos pos) {
-        return level.getBlockState(pos).getMaterial().isLiquid() && !isInWater(level, pos);
+        return level.getBlockState(pos).isLiquid() && !isInWater(level, pos);
     }
 }

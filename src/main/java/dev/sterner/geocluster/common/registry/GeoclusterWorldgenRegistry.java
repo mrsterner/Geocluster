@@ -3,15 +3,12 @@ package dev.sterner.geocluster.common.registry;
 import com.google.common.collect.Lists;
 import dev.sterner.geocluster.Geocluster;
 import dev.sterner.geocluster.common.world.feature.DepositFeature;
-import dev.sterner.geocluster.common.world.feature.RemoveVeinsFeature;
 import dev.sterner.geocluster.mixin.BiomeModificationContextImplMixin;
 import net.fabricmc.fabric.api.biome.v1.*;
-import net.minecraft.tag.TagKey;
+import net.minecraft.registry.*;
+import net.minecraft.registry.entry.RegistryEntry;
+import net.minecraft.registry.tag.TagKey;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.registry.DynamicRegistryManager;
-import net.minecraft.util.registry.Registry;
-import net.minecraft.util.registry.RegistryEntry;
-import net.minecraft.util.registry.RegistryKey;
 import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.world.gen.YOffset;
 import net.minecraft.world.gen.feature.*;
@@ -56,12 +53,12 @@ public interface GeoclusterWorldgenRegistry {
 
     private static Iterable<RegistryEntry<PlacedFeature>> getPlacedFeaturesByTag(BiomeModificationContext ctx, TagKey<PlacedFeature> placedFeatureTagKey) {
         DynamicRegistryManager dynamicRegistryManager = ((BiomeModificationContextImplMixin) ctx).getRegistries();
-        Registry<PlacedFeature> placedFeatureRegistry = dynamicRegistryManager.get(Registry.PLACED_FEATURE_KEY);
+        Registry<PlacedFeature> placedFeatureRegistry = dynamicRegistryManager.get(RegistryKeys.PLACED_FEATURE);
         return placedFeatureRegistry.iterateEntries(placedFeatureTagKey);
     }
 
     static <C extends FeatureConfig, F extends Feature<C>> F registerFeature(String id, F feature) {
-        return Registry.register(Registry.FEATURE, id, feature);
+        return Registry.register(Registries.FEATURE, id, feature);
     }
 
     static RegistryEntry<ConfiguredFeature<DefaultFeatureConfig, ?>> registerConfigured(String id, Feature<DefaultFeatureConfig> feature) {
@@ -69,7 +66,7 @@ public interface GeoclusterWorldgenRegistry {
     }
 
     static RegistryKey<PlacedFeature> placedFeature(Identifier id) {
-        return RegistryKey.of(Registry.PLACED_FEATURE_KEY, id);
+        return RegistryKey.of(RegistryKeys.PLACED_FEATURE, id);
     }
 
 }

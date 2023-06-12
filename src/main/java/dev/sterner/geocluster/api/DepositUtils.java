@@ -4,9 +4,9 @@ import dev.sterner.geocluster.Geocluster;
 import dev.sterner.geocluster.GeoclusterConfig;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.registry.Registries;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.random.Random;
-import net.minecraft.util.registry.Registry;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.HashMap;
@@ -44,7 +44,7 @@ public class DepositUtils {
         if (defaultMatchersCached == null) {
             defaultMatchersCached = new HashSet<>();
             GeoclusterConfig.DEFAULT_REPLACEMENT_MATERIALS.forEach(s -> {
-                Block block = Registry.BLOCK.get(new Identifier(s));
+                Block block = Registries.BLOCK.get(new Identifier(s));
                 if (!addDefaultMatcher(block)) {
                     Geocluster.LOGGER.warn(String.format(s + "&s is not a valid block. Please verify.", s));
                 }

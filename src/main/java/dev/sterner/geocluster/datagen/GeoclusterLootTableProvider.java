@@ -1,6 +1,7 @@
 package dev.sterner.geocluster.datagen;
 
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
+import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricBlockLootTableProvider;
 import net.minecraft.item.Items;
 
@@ -8,12 +9,14 @@ import static dev.sterner.geocluster.common.registry.GeoclusterObjects.*;
 import static net.minecraft.item.Items.QUARTZ;
 
 public class GeoclusterLootTableProvider extends FabricBlockLootTableProvider {
-    public GeoclusterLootTableProvider(FabricDataGenerator dataGenerator) {
-        super(dataGenerator);
+
+
+    public GeoclusterLootTableProvider(FabricDataOutput dataOutput) {
+        super(dataOutput);
     }
 
     @Override
-    protected void generateBlockLootTables() {
+    public void generate() {
         this.addDrop(ZINC_ORE, b -> oreDrops(b, RAW_ZINC));
         this.addDrop(DEEPSLATE_ZINC_ORE, b -> oreDrops(b, RAW_ZINC));
 

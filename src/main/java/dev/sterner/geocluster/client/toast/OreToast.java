@@ -5,6 +5,8 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.datafixers.util.Pair;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.font.TextRenderer;
+import net.minecraft.client.gui.DrawContext;
+import net.minecraft.client.toast.Toast;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.item.ItemStack;
 import net.minecraft.text.MutableText;
@@ -31,7 +33,7 @@ public class OreToast implements IOreToast {
     }
 
     @Override
-    public Visibility draw(MatrixStack matrices, OreToastManager oreToastManager, long startTime) {
+    public Visibility draw(DrawContext ctx, OreToastManager oreToastManager, long startTime) {
         if (this.justUpdated) {
             this.justUpdated = false;
         }
@@ -49,16 +51,14 @@ public class OreToast implements IOreToast {
                 msg = Text.translatable("geocluster.pro_pick.tooltip.found", pair.getSecond());
             }
 
-            matrices.push();
-            matrices.scale(0.85f, 0.85f, 1);
-            textRenderer.drawWithShadow(matrices, blockState.getBlock().getName(), 30.0F, 10.0F, 16777215);
-            textRenderer.drawWithShadow(matrices, msg, 30.0F, 22.0F, 16777215);
-            matrices.pop();
+            ctx.drawTextWithShadow(textRenderer, blockState.getBlock().getName(), 30, 10, 16777215);
+            ctx.drawTextWithShadow(textRenderer, blockState.getBlock().getName(), 30, 10, 16777215);
+            ctx.drawTextWithShadow(textRenderer, msg, 30, 22, 16777215);
 
 
             ItemStack itemStack = blockState.getBlock().asItem().getDefaultStack();
             RenderSystem.applyModelViewMatrix();
-            oreToastManager.getClient().getItemRenderer().renderInGui(itemStack, 8, 8);
+            ctx.drawItemInSlot(textRenderer, itemStack, 8, 8);
             return startTime >= 5000L ? IOreToast.Visibility.HIDE : IOreToast.Visibility.SHOW;
         }
     }

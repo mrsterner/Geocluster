@@ -2,26 +2,32 @@ package dev.sterner.geocluster.datagen;
 
 import dev.sterner.geocluster.common.registry.GeoclusterTagRegistry;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
+import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
-import net.minecraft.tag.BlockTags;
-import net.minecraft.util.registry.Registry;
+import net.minecraft.registry.Registry;
+import net.minecraft.registry.RegistryKey;
+import net.minecraft.registry.RegistryKeys;
+import net.minecraft.registry.RegistryWrapper;
+import net.minecraft.registry.tag.BlockTags;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.BiomeKeys;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.concurrent.CompletableFuture;
 
 import static dev.sterner.geocluster.common.registry.GeoclusterObjects.*;
 
 public class GeoclusterTagProvider {
     public static class GeoclusterBlockTags extends FabricTagProvider.BlockTagProvider {
 
-        public GeoclusterBlockTags(FabricDataGenerator dataGenerator) {
-            super(dataGenerator);
+        public GeoclusterBlockTags(FabricDataOutput output, CompletableFuture<RegistryWrapper.WrapperLookup> registriesFuture) {
+            super(output, registriesFuture);
         }
 
         @Override
-        protected void generateTags() {
+        protected void configure(RegistryWrapper.WrapperLookup arg) {
             for (Block block : BLOCKS.keySet()) {
                 getOrCreateTagBuilder(BlockTags.PICKAXE_MINEABLE).add(block);
                 getOrCreateTagBuilder(GeoclusterTagRegistry.ORES).add(block);
@@ -66,12 +72,13 @@ public class GeoclusterTagProvider {
 
     public static class GeoclusterItemTags extends FabricTagProvider.ItemTagProvider {
 
-        public GeoclusterItemTags(FabricDataGenerator dataGenerator, @Nullable BlockTagProvider blockTagProvider) {
-            super(dataGenerator, blockTagProvider);
+
+        public GeoclusterItemTags(FabricDataOutput output, CompletableFuture<RegistryWrapper.WrapperLookup> completableFuture) {
+            super(output, completableFuture);
         }
 
         @Override
-        protected void generateTags() {
+        protected void configure(RegistryWrapper.WrapperLookup arg) {
             getOrCreateTagBuilder(GeoclusterTagRegistry.ZINC_INGOTS).add(ZINC_INGOT);
             getOrCreateTagBuilder(GeoclusterTagRegistry.ZINC_NUGGETS).add(ZINC_NUGGET);
             getOrCreateTagBuilder(GeoclusterTagRegistry.SILVER_INGOTS).add(SILVER_INGOT);
@@ -94,14 +101,15 @@ public class GeoclusterTagProvider {
         }
     }
 
-    public static class GeoclusterBiomeTags extends FabricTagProvider.DynamicRegistryTagProvider<Biome> {
+    public static class GeoclusterBiomeTags extends FabricTagProvider<Biome> {
 
-        protected GeoclusterBiomeTags(FabricDataGenerator dataGenerator) {
-            super(dataGenerator, Registry.BIOME_KEY);
+
+        public GeoclusterBiomeTags(FabricDataOutput output, CompletableFuture<RegistryWrapper.WrapperLookup> registriesFuture) {
+            super(output, RegistryKeys.BIOME, registriesFuture);
         }
 
         @Override
-        protected void generateTags() {
+        protected void configure(RegistryWrapper.WrapperLookup arg) {
             getOrCreateTagBuilder(GeoclusterTagRegistry.IS_DRY).add(BiomeKeys.DESERT).add(BiomeKeys.ERODED_BADLANDS).add(BiomeKeys.WINDSWEPT_SAVANNA).add(BiomeKeys.BADLANDS).add(BiomeKeys.WOODED_BADLANDS);
             getOrCreateTagBuilder(GeoclusterTagRegistry.IS_HOT).addTag(GeoclusterTagRegistry.IS_DRY).add(BiomeKeys.JUNGLE).add(BiomeKeys.SPARSE_JUNGLE).add(BiomeKeys.SAVANNA).add(BiomeKeys.SAVANNA_PLATEAU).add(BiomeKeys.STONY_PEAKS)
                     .add(BiomeKeys.WARM_OCEAN).add(BiomeKeys.BAMBOO_JUNGLE).add(BiomeKeys.MANGROVE_SWAMP);

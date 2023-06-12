@@ -5,8 +5,8 @@ import dev.sterner.geocluster.GeoclusterConfig;
 import dev.sterner.geocluster.api.DepositCache;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.registry.Registries;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.registry.Registry;
 
 import java.util.HashSet;
 
@@ -45,7 +45,7 @@ public class ProspectingUtils {
         detectionBlacklist = new HashSet<>();
 
         GeoclusterConfig.PROSPECTORS_PICK_DETECTION_BLACKLIST.forEach(s -> {
-            Block block = Registry.BLOCK.get(new Identifier(s));
+            Block block = Registries.BLOCK.get(new Identifier(s));
             if (block != null) {
                 detectionBlacklist.add(block.getDefaultState());
             } else {

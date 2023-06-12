@@ -1,10 +1,14 @@
 package dev.sterner.geocluster.common.utils;
 
 import dev.sterner.geocluster.Geocluster;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtHelper;
 import net.minecraft.nbt.NbtList;
+import net.minecraft.registry.Registries;
+import net.minecraft.registry.RegistryEntryLookup;
+import net.minecraft.registry.RegistryKeys;
 
 import java.util.HashSet;
 
@@ -24,7 +28,7 @@ public class PacketUtils {
         NbtList list = comp.getList("Blocks", 10);
         list.forEach((c) -> {
             if (c instanceof NbtCompound) {
-                ret.add(NbtHelper.toBlockState((NbtCompound) c));
+                ret.add(NbtHelper.toBlockState(Registries.BLOCK.getReadOnlyWrapper(), (NbtCompound) c));
             } else {
                 Geocluster.LOGGER.error("The following compound appears to be broken: {}", c);
             }

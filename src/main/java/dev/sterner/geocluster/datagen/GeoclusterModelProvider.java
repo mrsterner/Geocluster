@@ -1,6 +1,7 @@
 package dev.sterner.geocluster.datagen;
 
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
+import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider;
 import net.minecraft.data.client.BlockStateModelGenerator;
 import net.minecraft.data.client.ItemModelGenerator;
@@ -9,8 +10,9 @@ import net.minecraft.data.client.Models;
 import static dev.sterner.geocluster.common.registry.GeoclusterObjects.*;
 
 public class GeoclusterModelProvider extends FabricModelProvider {
-    public GeoclusterModelProvider(FabricDataGenerator dataGenerator) {
-        super(dataGenerator);
+
+    public GeoclusterModelProvider(FabricDataOutput output) {
+        super(output);
     }
 
     @Override

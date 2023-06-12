@@ -1,6 +1,5 @@
 package dev.sterner.geocluster.common.items;
 
-import dev.sterner.geocluster.Geocluster;
 import dev.sterner.geocluster.GeoclusterConfig;
 import dev.sterner.geocluster.client.network.S2CProspectingPacket;
 import dev.sterner.geocluster.common.utils.GeoclusterUtils;
@@ -22,7 +21,7 @@ import net.minecraft.world.World;
 import java.util.HashSet;
 
 public class ProspectorsPickItem extends Item {
-    public static Item.Settings props = new Item.Settings().maxCount(1).group(Geocluster.GROUP).maxDamage(1024);
+    public static Item.Settings props = new Item.Settings().maxCount(1).maxDamage(1024);
 
     public ProspectorsPickItem() {
         super(props);

@@ -6,9 +6,9 @@ import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtElement;
 import net.minecraft.nbt.NbtHelper;
 import net.minecraft.nbt.NbtList;
+import net.minecraft.registry.Registries;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
-import net.minecraft.util.registry.Registry;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
@@ -92,7 +92,7 @@ public class WorldDepositComponent implements AutoSyncedComponent, IWorldDeposit
         public static PendingBlock readNbt(NbtElement element) {
             if (element instanceof NbtCompound tag) {
                 BlockPos pos = NbtHelper.toBlockPos(tag.getCompound("pos"));
-                BlockState state = NbtHelper.toBlockState(tag.getCompound("state"));
+                BlockState state = NbtHelper.toBlockState(Registries.BLOCK.getReadOnlyWrapper(), tag.getCompound("state"));
                 return new PendingBlock(pos, state);
             }
             return null;
@@ -100,7 +100,7 @@ public class WorldDepositComponent implements AutoSyncedComponent, IWorldDeposit
 
         @Override
         public String toString() {
-            return "[" + this.pos.getX() + " " + this.pos.getY() + " " + this.pos.getZ() + "]: " + Registry.BLOCK.getId(this.state.getBlock());
+            return "[" + this.pos.getX() + " " + this.pos.getY() + " " + this.pos.getZ() + "]: " + Registries.BLOCK.getId(this.state.getBlock());
         }
     }
 }

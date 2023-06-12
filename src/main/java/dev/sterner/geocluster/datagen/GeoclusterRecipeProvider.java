@@ -2,11 +2,13 @@ package dev.sterner.geocluster.datagen;
 
 import com.google.common.collect.ImmutableList;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
+import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
 import net.minecraft.data.server.recipe.RecipeJsonProvider;
 import net.minecraft.data.server.recipe.ShapedRecipeJsonBuilder;
 import net.minecraft.item.ItemConvertible;
 import net.minecraft.item.Items;
+import net.minecraft.recipe.book.RecipeCategory;
 
 import java.util.List;
 import java.util.function.Consumer;
@@ -26,52 +28,51 @@ public class GeoclusterRecipeProvider extends FabricRecipeProvider {
     private static final ImmutableList<ItemConvertible> NICKEL_ORES = ImmutableList.of(NICKEL_ORE, DEEPSLATE_NICKEL_ORE, RAW_NICKEL);
     private static final ImmutableList<ItemConvertible> QUARTZ_ORES = ImmutableList.of(QUARTZ_ORE, DEEPSLATE_QUARTZ_ORE);
 
-    public GeoclusterRecipeProvider(FabricDataGenerator dataGenerator) {
-        super(dataGenerator);
+    public GeoclusterRecipeProvider(FabricDataOutput output) {
+        super(output);
     }
 
     @Override
-    protected void generateRecipes(Consumer<RecipeJsonProvider> exporter) {
-        offerReversibleCompactingRecipesWithCompactingRecipeGroup(exporter, COPPER_NUGGET, Items.COPPER_INGOT, "copper_ingot_from_nuggets", "copper_ingot");
-        offerReversibleCompactingRecipesWithCompactingRecipeGroup(exporter, ZINC_NUGGET, ZINC_INGOT, "zinc_ingot_from_nuggets", "zinc_ingot");
-        offerReversibleCompactingRecipesWithCompactingRecipeGroup(exporter, SILVER_NUGGET, SILVER_INGOT, "silver_ingot_from_nuggets", "silver_ingot");
-        offerReversibleCompactingRecipesWithCompactingRecipeGroup(exporter, LEAD_NUGGET, LEAD_INGOT, "lead_ingot_from_nuggets", "lead_ingot");
-        offerReversibleCompactingRecipesWithCompactingRecipeGroup(exporter, ALUMINIUM_NUGGET, ALUMINIUM_INGOT, "aluminium_ingot_from_nuggets", "aluminium_ingot");
-        offerReversibleCompactingRecipesWithCompactingRecipeGroup(exporter, URANIUM_NUGGET, URANIUM_INGOT, "uranium_ingot_from_nuggets", "uranium_ingot");
-        offerReversibleCompactingRecipesWithCompactingRecipeGroup(exporter, TIN_NUGGET, TIN_INGOT, "tin_ingot_from_nuggets", "tin_ingot");
-        offerReversibleCompactingRecipesWithCompactingRecipeGroup(exporter, PLATINUM_NUGGET, PLATINUM_INGOT, "platinum_ingot_from_nuggets", "platinum_ingot");
-        offerReversibleCompactingRecipesWithCompactingRecipeGroup(exporter, TITANIUM_NUGGET, TITANIUM_INGOT, "titanium_ingot_from_nuggets", "titanium_ingot");
-        offerReversibleCompactingRecipesWithCompactingRecipeGroup(exporter, NICKEL_NUGGET, NICKEL_INGOT, "nickel_ingot_from_nuggets", "nickel_ingot");
+    public void generate(Consumer<RecipeJsonProvider> exporter) {
+        offerReversibleCompactingRecipesWithCompactingRecipeGroup(exporter, RecipeCategory.MISC, COPPER_NUGGET, RecipeCategory.MISC, Items.COPPER_INGOT, "copper_ingot_from_nuggets", "copper_ingot");
+        offerReversibleCompactingRecipesWithCompactingRecipeGroup(exporter, RecipeCategory.MISC, ZINC_NUGGET, RecipeCategory.MISC, ZINC_INGOT, "zinc_ingot_from_nuggets", "zinc_ingot");
+        offerReversibleCompactingRecipesWithCompactingRecipeGroup(exporter, RecipeCategory.MISC, SILVER_NUGGET, RecipeCategory.MISC, SILVER_INGOT, "silver_ingot_from_nuggets", "silver_ingot");
+        offerReversibleCompactingRecipesWithCompactingRecipeGroup(exporter, RecipeCategory.MISC, LEAD_NUGGET, RecipeCategory.MISC, LEAD_INGOT, "lead_ingot_from_nuggets", "lead_ingot");
+        offerReversibleCompactingRecipesWithCompactingRecipeGroup(exporter, RecipeCategory.MISC, ALUMINIUM_NUGGET, RecipeCategory.MISC, ALUMINIUM_INGOT, "aluminium_ingot_from_nuggets", "aluminium_ingot");
+        offerReversibleCompactingRecipesWithCompactingRecipeGroup(exporter, RecipeCategory.MISC, URANIUM_NUGGET, RecipeCategory.MISC, URANIUM_INGOT, "uranium_ingot_from_nuggets", "uranium_ingot");
+        offerReversibleCompactingRecipesWithCompactingRecipeGroup(exporter, RecipeCategory.MISC, TIN_NUGGET, RecipeCategory.MISC, TIN_INGOT, "tin_ingot_from_nuggets", "tin_ingot");
+        offerReversibleCompactingRecipesWithCompactingRecipeGroup(exporter, RecipeCategory.MISC, PLATINUM_NUGGET, RecipeCategory.MISC, PLATINUM_INGOT, "platinum_ingot_from_nuggets", "platinum_ingot");
+        offerReversibleCompactingRecipesWithCompactingRecipeGroup(exporter, RecipeCategory.MISC, TITANIUM_NUGGET, RecipeCategory.MISC, TITANIUM_INGOT, "titanium_ingot_from_nuggets", "titanium_ingot");
+        offerReversibleCompactingRecipesWithCompactingRecipeGroup(exporter, RecipeCategory.MISC, NICKEL_NUGGET, RecipeCategory.MISC, NICKEL_INGOT, "nickel_ingot_from_nuggets", "nickel_ingot");
 
-        offerSmelting(exporter, ZINC_ORES, ZINC_INGOT, 1.0F, 200, "zinc_ingot");
-        offerSmelting(exporter, SILVER_ORES, SILVER_INGOT, 1.0F, 200, "silver_ingot");
-        offerSmelting(exporter, LEAD_ORES, LEAD_INGOT, 1.0F, 200, "lead_ingot");
-        offerSmelting(exporter, ALUMINIUM_ORES, ALUMINIUM_INGOT, 1.0F, 200, "aluminium_ingot");
-        offerSmelting(exporter, URANIUM_ORES, URANIUM_INGOT, 1.0F, 200, "uranium_ingot");
-        offerSmelting(exporter, TIN_ORES, TIN_INGOT, 1.0F, 200, "tin_ingot");
-        offerSmelting(exporter, PLATINUM_ORES, PLATINUM_INGOT, 1.0F, 200, "platinum_ingot");
-        offerSmelting(exporter, TITANIUM_ORES, TITANIUM_INGOT, 1.0F, 200, "titanium_ingot");
-        offerSmelting(exporter, NICKEL_ORES, NICKEL_INGOT, 1.0F, 200, "nickel_ingot");
-        offerSmelting(exporter, List.of(RAW_ANCIENT_DEBRIS), Items.NETHERITE_SCRAP, 1.0F, 200, "netherite_scrap");
-        offerSmelting(exporter, QUARTZ_ORES, Items.QUARTZ, 1.0F, 200, "quartz");
+        offerSmelting(exporter, ZINC_ORES, RecipeCategory.MISC, ZINC_INGOT, 1.0F, 200, "zinc_ingot");
+        offerSmelting(exporter, SILVER_ORES, RecipeCategory.MISC, SILVER_INGOT, 1.0F, 200, "silver_ingot");
+        offerSmelting(exporter, LEAD_ORES, RecipeCategory.MISC, LEAD_INGOT, 1.0F, 200, "lead_ingot");
+        offerSmelting(exporter, ALUMINIUM_ORES, RecipeCategory.MISC, ALUMINIUM_INGOT, 1.0F, 200, "aluminium_ingot");
+        offerSmelting(exporter, URANIUM_ORES, RecipeCategory.MISC, URANIUM_INGOT, 1.0F, 200, "uranium_ingot");
+        offerSmelting(exporter, TIN_ORES, RecipeCategory.MISC, TIN_INGOT, 1.0F, 200, "tin_ingot");
+        offerSmelting(exporter, PLATINUM_ORES, RecipeCategory.MISC, PLATINUM_INGOT, 1.0F, 200, "platinum_ingot");
+        offerSmelting(exporter, TITANIUM_ORES, RecipeCategory.MISC, TITANIUM_INGOT, 1.0F, 200, "titanium_ingot");
+        offerSmelting(exporter, NICKEL_ORES, RecipeCategory.MISC, NICKEL_INGOT, 1.0F, 200, "nickel_ingot");
+        offerSmelting(exporter, List.of(RAW_ANCIENT_DEBRIS), RecipeCategory.MISC,  Items.NETHERITE_SCRAP, 1.0F, 200, "netherite_scrap");
+        offerSmelting(exporter, QUARTZ_ORES, RecipeCategory.MISC,  Items.QUARTZ, 1.0F, 200, "quartz");
 
-        offerBlasting(exporter, ZINC_ORES, ZINC_INGOT, 1.0F, 100, "zinc_ingot");
-        offerBlasting(exporter, SILVER_ORES, SILVER_INGOT, 1.0F, 100, "silver_ingot");
-        offerBlasting(exporter, LEAD_ORES, LEAD_INGOT, 1.0F, 100, "lead_ingot");
-        offerBlasting(exporter, ALUMINIUM_ORES, ALUMINIUM_INGOT, 1.0F, 100, "aluminium_ingot");
-        offerBlasting(exporter, URANIUM_ORES, URANIUM_INGOT, 1.0F, 100, "uranium_ingot");
-        offerBlasting(exporter, TIN_ORES, TIN_INGOT, 1.0F, 100, "tin_ingot");
-        offerBlasting(exporter, PLATINUM_ORES, PLATINUM_INGOT, 1.0F, 100, "platinum_ingot");
-        offerBlasting(exporter, TITANIUM_ORES, TITANIUM_INGOT, 1.0F, 100, "titanium_ingot");
-        offerBlasting(exporter, NICKEL_ORES, NICKEL_INGOT, 1.0F, 100, "nickel_ingot");
-        offerBlasting(exporter, List.of(RAW_ANCIENT_DEBRIS), Items.NETHERITE_SCRAP, 1.0F, 100, "netherite_scrap");
-        offerBlasting(exporter, QUARTZ_ORES, Items.QUARTZ, 1.0F, 100, "quartz");
+        offerBlasting(exporter, ZINC_ORES, RecipeCategory.MISC, ZINC_INGOT, 1.0F, 100, "zinc_ingot");
+        offerBlasting(exporter, SILVER_ORES, RecipeCategory.MISC, SILVER_INGOT, 1.0F, 100, "silver_ingot");
+        offerBlasting(exporter, LEAD_ORES, RecipeCategory.MISC, LEAD_INGOT, 1.0F, 100, "lead_ingot");
+        offerBlasting(exporter, ALUMINIUM_ORES, RecipeCategory.MISC, ALUMINIUM_INGOT, 1.0F, 100, "aluminium_ingot");
+        offerBlasting(exporter, URANIUM_ORES, RecipeCategory.MISC, URANIUM_INGOT, 1.0F, 100, "uranium_ingot");
+        offerBlasting(exporter, TIN_ORES, RecipeCategory.MISC, TIN_INGOT, 1.0F, 100, "tin_ingot");
+        offerBlasting(exporter, PLATINUM_ORES, RecipeCategory.MISC, PLATINUM_INGOT, 1.0F, 100, "platinum_ingot");
+        offerBlasting(exporter, TITANIUM_ORES, RecipeCategory.MISC, TITANIUM_INGOT, 1.0F, 100, "titanium_ingot");
+        offerBlasting(exporter, NICKEL_ORES, RecipeCategory.MISC, NICKEL_INGOT, 1.0F, 100, "nickel_ingot");
+        offerBlasting(exporter, List.of(RAW_ANCIENT_DEBRIS), RecipeCategory.MISC,  Items.NETHERITE_SCRAP, 1.0F, 100, "netherite_scrap");
+        offerBlasting(exporter, QUARTZ_ORES, RecipeCategory.MISC, Items.QUARTZ, 1.0F, 100, "quartz");
 
-        ShapedRecipeJsonBuilder.create(PROSPECTORS_PICK).input('I', Items.IRON_INGOT).input('N', Items.IRON_NUGGET).input('S', Items.STICK)
+        ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, PROSPECTORS_PICK).input('I', Items.IRON_INGOT).input('N', Items.IRON_NUGGET).input('S', Items.STICK)
                 .pattern("NI")
                 .pattern(" S")
                 .criterion("has_raw_iron", conditionsFromItem(Items.RAW_IRON))
                 .offerTo(exporter);
-
     }
 }

@@ -3,12 +3,18 @@ package dev.sterner.geocluster.common.registry;
 import dev.sterner.geocluster.Geocluster;
 import dev.sterner.geocluster.common.blocks.SampleBlock;
 import dev.sterner.geocluster.common.items.ProspectorsPickItem;
+import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
+import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.minecraft.block.*;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemGroup;
+import net.minecraft.item.ItemStack;
+import net.minecraft.registry.Registries;
+import net.minecraft.registry.Registry;
 import net.minecraft.sound.BlockSoundGroup;
+import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.registry.Registry;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -51,38 +57,38 @@ public interface GeoclusterObjects {
     Item TITANIUM_NUGGET = register("titanium_nugget", new Item(settings()));
     Item NICKEL_NUGGET = register("nickel_nugget", new Item(settings()));
 
-    Block ZINC_ORE = register("zinc_ore", new OreBlock(AbstractBlock.Settings.of(Material.STONE).requiresTool().strength(3.0F, 3.0F)), settings());
-    Block DEEPSLATE_ZINC_ORE = register("deepslate_zinc_ore", new OreBlock(AbstractBlock.Settings.copy(ZINC_ORE).mapColor(MapColor.DEEPSLATE_GRAY).strength(4.5F, 3.0F).sounds(BlockSoundGroup.DEEPSLATE)), settings());
+    Block ZINC_ORE = register("zinc_ore", new ExperienceDroppingBlock(AbstractBlock.Settings.copy(Blocks.STONE).requiresTool().strength(3.0F, 3.0F)), settings());
+    Block DEEPSLATE_ZINC_ORE = register("deepslate_zinc_ore", new ExperienceDroppingBlock(AbstractBlock.Settings.copy(ZINC_ORE).mapColor(MapColor.DEEPSLATE_GRAY).strength(4.5F, 3.0F).sounds(BlockSoundGroup.DEEPSLATE)), settings());
 
-    Block SILVER_ORE = register("silver_ore", new OreBlock(AbstractBlock.Settings.of(Material.STONE).requiresTool().strength(3.0F, 3.0F)), settings());
-    Block DEEPSLATE_SILVER_ORE = register("deepslate_silver_ore", new OreBlock(AbstractBlock.Settings.copy(SILVER_ORE).mapColor(MapColor.DEEPSLATE_GRAY).strength(4.5F, 3.0F).sounds(BlockSoundGroup.DEEPSLATE)), settings());
+    Block SILVER_ORE = register("silver_ore", new ExperienceDroppingBlock(AbstractBlock.Settings.copy(Blocks.STONE).requiresTool().strength(3.0F, 3.0F)), settings());
+    Block DEEPSLATE_SILVER_ORE = register("deepslate_silver_ore", new ExperienceDroppingBlock(AbstractBlock.Settings.copy(SILVER_ORE).mapColor(MapColor.DEEPSLATE_GRAY).strength(4.5F, 3.0F).sounds(BlockSoundGroup.DEEPSLATE)), settings());
 
-    Block LEAD_ORE = register("lead_ore", new OreBlock(AbstractBlock.Settings.of(Material.STONE).requiresTool().strength(3.0F, 3.0F)), settings());
-    Block DEEPSLATE_LEAD_ORE = register("deepslate_lead_ore", new OreBlock(AbstractBlock.Settings.copy(LEAD_ORE).mapColor(MapColor.DEEPSLATE_GRAY).strength(4.5F, 3.0F).sounds(BlockSoundGroup.DEEPSLATE)), settings());
+    Block LEAD_ORE = register("lead_ore", new ExperienceDroppingBlock(AbstractBlock.Settings.copy(Blocks.STONE).requiresTool().strength(3.0F, 3.0F)), settings());
+    Block DEEPSLATE_LEAD_ORE = register("deepslate_lead_ore", new ExperienceDroppingBlock(AbstractBlock.Settings.copy(LEAD_ORE).mapColor(MapColor.DEEPSLATE_GRAY).strength(4.5F, 3.0F).sounds(BlockSoundGroup.DEEPSLATE)), settings());
 
-    Block ALUMINIUM_ORE = register("aluminium_ore", new OreBlock(AbstractBlock.Settings.of(Material.STONE).requiresTool().strength(3.0F, 3.0F)), settings());
-    Block DEEPSLATE_ALUMINIUM_ORE = register("deepslate_aluminium_ore", new OreBlock(AbstractBlock.Settings.copy(ALUMINIUM_ORE).mapColor(MapColor.DEEPSLATE_GRAY).strength(4.5F, 3.0F).sounds(BlockSoundGroup.DEEPSLATE)), settings());
+    Block ALUMINIUM_ORE = register("aluminium_ore", new ExperienceDroppingBlock(AbstractBlock.Settings.copy(Blocks.STONE).requiresTool().strength(3.0F, 3.0F)), settings());
+    Block DEEPSLATE_ALUMINIUM_ORE = register("deepslate_aluminium_ore", new ExperienceDroppingBlock(AbstractBlock.Settings.copy(ALUMINIUM_ORE).mapColor(MapColor.DEEPSLATE_GRAY).strength(4.5F, 3.0F).sounds(BlockSoundGroup.DEEPSLATE)), settings());
 
-    Block URANIUM_ORE = register("uranium_ore", new OreBlock(AbstractBlock.Settings.of(Material.STONE).requiresTool().strength(3.0F, 3.0F)), settings());
-    Block DEEPSLATE_URANIUM_ORE = register("deepslate_uranium_ore", new OreBlock(AbstractBlock.Settings.copy(URANIUM_ORE).mapColor(MapColor.DEEPSLATE_GRAY).strength(4.5F, 3.0F).sounds(BlockSoundGroup.DEEPSLATE)), settings());
+    Block URANIUM_ORE = register("uranium_ore", new ExperienceDroppingBlock(AbstractBlock.Settings.copy(Blocks.STONE).requiresTool().strength(3.0F, 3.0F)), settings());
+    Block DEEPSLATE_URANIUM_ORE = register("deepslate_uranium_ore", new ExperienceDroppingBlock(AbstractBlock.Settings.copy(URANIUM_ORE).mapColor(MapColor.DEEPSLATE_GRAY).strength(4.5F, 3.0F).sounds(BlockSoundGroup.DEEPSLATE)), settings());
 
-    Block TIN_ORE = register("tin_ore", new OreBlock(AbstractBlock.Settings.of(Material.STONE).requiresTool().strength(3.0F, 3.0F)), settings());
-    Block DEEPSLATE_TIN_ORE = register("deepslate_tin_ore", new OreBlock(AbstractBlock.Settings.copy(TIN_ORE).mapColor(MapColor.DEEPSLATE_GRAY).strength(4.5F, 3.0F).sounds(BlockSoundGroup.DEEPSLATE)), settings());
+    Block TIN_ORE = register("tin_ore", new ExperienceDroppingBlock(AbstractBlock.Settings.copy(Blocks.STONE).requiresTool().strength(3.0F, 3.0F)), settings());
+    Block DEEPSLATE_TIN_ORE = register("deepslate_tin_ore", new ExperienceDroppingBlock(AbstractBlock.Settings.copy(TIN_ORE).mapColor(MapColor.DEEPSLATE_GRAY).strength(4.5F, 3.0F).sounds(BlockSoundGroup.DEEPSLATE)), settings());
 
-    Block PLATINUM_ORE = register("platinum_ore", new OreBlock(AbstractBlock.Settings.of(Material.STONE).requiresTool().strength(3.0F, 3.0F)), settings());
-    Block DEEPSLATE_PLATINUM_ORE = register("deepslate_platinum_ore", new OreBlock(AbstractBlock.Settings.copy(PLATINUM_ORE).mapColor(MapColor.DEEPSLATE_GRAY).strength(4.5F, 3.0F).sounds(BlockSoundGroup.DEEPSLATE)), settings());
+    Block PLATINUM_ORE = register("platinum_ore", new ExperienceDroppingBlock(AbstractBlock.Settings.copy(Blocks.STONE).requiresTool().strength(3.0F, 3.0F)), settings());
+    Block DEEPSLATE_PLATINUM_ORE = register("deepslate_platinum_ore", new ExperienceDroppingBlock(AbstractBlock.Settings.copy(PLATINUM_ORE).mapColor(MapColor.DEEPSLATE_GRAY).strength(4.5F, 3.0F).sounds(BlockSoundGroup.DEEPSLATE)), settings());
 
-    Block TITANIUM_ORE = register("titanium_ore", new OreBlock(AbstractBlock.Settings.of(Material.STONE).requiresTool().strength(3.0F, 3.0F)), settings());
-    Block DEEPSLATE_TITANIUM_ORE = register("deepslate_titanium_ore", new OreBlock(AbstractBlock.Settings.copy(TITANIUM_ORE).mapColor(MapColor.DEEPSLATE_GRAY).strength(4.5F, 3.0F).sounds(BlockSoundGroup.DEEPSLATE)), settings());
+    Block TITANIUM_ORE = register("titanium_ore", new ExperienceDroppingBlock(AbstractBlock.Settings.copy(Blocks.STONE).requiresTool().strength(3.0F, 3.0F)), settings());
+    Block DEEPSLATE_TITANIUM_ORE = register("deepslate_titanium_ore", new ExperienceDroppingBlock(AbstractBlock.Settings.copy(TITANIUM_ORE).mapColor(MapColor.DEEPSLATE_GRAY).strength(4.5F, 3.0F).sounds(BlockSoundGroup.DEEPSLATE)), settings());
 
-    Block NICKEL_ORE = register("nickel_ore", new OreBlock(AbstractBlock.Settings.of(Material.STONE).requiresTool().strength(3.0F, 3.0F)), settings());
-    Block DEEPSLATE_NICKEL_ORE = register("deepslate_nickel_ore", new OreBlock(AbstractBlock.Settings.copy(NICKEL_ORE).mapColor(MapColor.DEEPSLATE_GRAY).strength(4.5F, 3.0F).sounds(BlockSoundGroup.DEEPSLATE)), settings());
+    Block NICKEL_ORE = register("nickel_ore", new ExperienceDroppingBlock(AbstractBlock.Settings.copy(Blocks.STONE).requiresTool().strength(3.0F, 3.0F)), settings());
+    Block DEEPSLATE_NICKEL_ORE = register("deepslate_nickel_ore", new ExperienceDroppingBlock(AbstractBlock.Settings.copy(NICKEL_ORE).mapColor(MapColor.DEEPSLATE_GRAY).strength(4.5F, 3.0F).sounds(BlockSoundGroup.DEEPSLATE)), settings());
 
-    Block QUARTZ_ORE = register("quartz_ore", new OreBlock(AbstractBlock.Settings.of(Material.STONE).requiresTool().strength(3.0F, 3.0F)), settings());
-    Block DEEPSLATE_QUARTZ_ORE = register("deepslate_quartz_ore", new OreBlock(AbstractBlock.Settings.copy(NICKEL_ORE).mapColor(MapColor.DEEPSLATE_GRAY).strength(4.5F, 3.0F).sounds(BlockSoundGroup.DEEPSLATE)), settings());
+    Block QUARTZ_ORE = register("quartz_ore", new ExperienceDroppingBlock(AbstractBlock.Settings.copy(Blocks.STONE).requiresTool().strength(3.0F, 3.0F)), settings());
+    Block DEEPSLATE_QUARTZ_ORE = register("deepslate_quartz_ore", new ExperienceDroppingBlock(AbstractBlock.Settings.copy(NICKEL_ORE).mapColor(MapColor.DEEPSLATE_GRAY).strength(4.5F, 3.0F).sounds(BlockSoundGroup.DEEPSLATE)), settings());
 
 
-    Block ANCIENT_DEBRIS_ORE = register("ancient_debris_ore", new OreBlock(AbstractBlock.Settings.of(Material.STONE).requiresTool().strength(3.0F, 3.0F)), settings());
+    Block ANCIENT_DEBRIS_ORE = register("ancient_debris_ore", new ExperienceDroppingBlock(AbstractBlock.Settings.copy(Blocks.STONE).requiresTool().strength(3.0F, 3.0F)), settings());
 
     Block COPPER_SAMPLE = register("copper_ore_sample", new SampleBlock(), settings());
     Block IRON_SAMPLE = register("iron_ore_sample", new SampleBlock(), settings());
@@ -109,7 +115,7 @@ public interface GeoclusterObjects {
 
 
     static Item.Settings settings() {
-        return new Item.Settings().group(Geocluster.GROUP);
+        return new Item.Settings();
     }
 
     static <T extends Item> T register(String name, T item) {
@@ -124,7 +130,8 @@ public interface GeoclusterObjects {
     }
 
     static void init() {
-        BLOCKS.keySet().forEach(block -> Registry.register(Registry.BLOCK, BLOCKS.get(block), block));
-        ITEMS.keySet().forEach(item -> Registry.register(Registry.ITEM, ITEMS.get(item), item));
+        BLOCKS.keySet().forEach(block -> Registry.register(Registries.BLOCK, BLOCKS.get(block), block));
+        ITEMS.keySet().forEach(item -> Registry.register(Registries.ITEM, ITEMS.get(item), item));
+        ItemGroupEvents.modifyEntriesEvent(Geocluster.GEOCLUSTER_ITEM_GROUP).register(entries -> ITEMS.keySet().forEach(entries::add));
     }
 }
