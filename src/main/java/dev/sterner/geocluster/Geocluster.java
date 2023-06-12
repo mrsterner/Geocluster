@@ -11,14 +11,13 @@ import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
+import net.fabricmc.fabric.api.event.registry.DynamicRegistrySetupCallback;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
-import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
-import net.minecraft.registry.DynamicRegistryManager;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.resource.ResourceType;
@@ -48,6 +47,11 @@ public class Geocluster implements ModInitializer, ClientModInitializer {
         GeoclusterObjects.init();
         GeoclusterWorldgenRegistry.init();
         ResourceManagerHelper.get(ResourceType.SERVER_DATA).registerReloadListener(new WorldGenDataReloadListener());
+        DynamicRegistrySetupCallback.EVENT.register(registryView -> {
+            registryView.getOptional(RegistryKeys.CONFIGURED_FEATURE).ifPresent(configuredFeatures -> {
+                GeoclusterWorldgenRegistry.init(registryView, configuredFeatures);
+            });
+        });
     }
 
     @Override

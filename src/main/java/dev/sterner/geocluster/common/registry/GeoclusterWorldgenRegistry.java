@@ -5,35 +5,45 @@ import dev.sterner.geocluster.Geocluster;
 import dev.sterner.geocluster.common.world.feature.DepositFeature;
 import dev.sterner.geocluster.mixin.BiomeModificationContextImplMixin;
 import net.fabricmc.fabric.api.biome.v1.*;
+import net.fabricmc.fabric.api.event.registry.DynamicRegistryView;
 import net.minecraft.registry.*;
 import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.registry.tag.TagKey;
-import net.minecraft.util.Identifier;
 import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.world.gen.YOffset;
 import net.minecraft.world.gen.feature.*;
 import net.minecraft.world.gen.placementmodifier.HeightRangePlacementModifier;
-import net.minecraft.world.gen.placementmodifier.PlacementModifier;
-
-import java.util.List;
 
 
-public interface GeoclusterWorldgenRegistry {
-    List<PlacementModifier> placement = Lists.newArrayList(HeightRangePlacementModifier.uniform(YOffset.fixed(-64), YOffset.fixed(320)));
+public class GeoclusterWorldgenRegistry {
 
-    Feature<DefaultFeatureConfig> DEPOSIT_FEATURE = registerFeature("deposits", new DepositFeature(DefaultFeatureConfig.CODEC));
-    RegistryEntry<ConfiguredFeature<DefaultFeatureConfig, ?>> CONFIGURED_DEPOSIT_FEATURE = registerConfigured("deposits_configured", DEPOSIT_FEATURE);
-    RegistryEntry<PlacedFeature> PLACED_DEPOSIT_FEATURE = PlacedFeatures.register("geocluster:deposits_placed", CONFIGURED_DEPOSIT_FEATURE, placement);
+    public static Feature<DefaultFeatureConfig> DEPOSIT_FEATURE = Registry.register(Registries.FEATURE, "deposits", new DepositFeature(DefaultFeatureConfig.CODEC));
+    public static ConfiguredFeature<DefaultFeatureConfig, Feature<DefaultFeatureConfig>> CONFIGURED_DEPOSIT_FEATURE;
+    public static RegistryKey<ConfiguredFeature<?,?>> CONFIGURED_DEPOSIT_FEATURE_KEY;
 
-    /* Replaced with ChunkGeneratorSettingsMixin
-    Feature<DefaultFeatureConfig> REMOVE_VEINS_FEATURE = registerFeature("remove_veins", new RemoveVeinsFeature(DefaultFeatureConfig.CODEC));
-    RegistryEntry<ConfiguredFeature<DefaultFeatureConfig, ?>> CONFIGURED_REMOVE_VEINS_FEATURE = registerConfigured("remove_veins_configured", REMOVE_VEINS_FEATURE);
-    RegistryEntry<PlacedFeature> PLACED_REMOVE_VEINS_FEATURE = PlacedFeatures.register("geocluster:remove_veins_placed", CONFIGURED_REMOVE_VEINS_FEATURE, placement);
-     */
+    public static PlacedFeature PLACED_DEPOSIT_FEATURE;
+    public static RegistryKey<PlacedFeature> PLACED_DEPOSIT_FEATURE_KEY;
 
-    static void init() {
+    public static void init(){
+
+    }
+
+    public static void init(DynamicRegistryView registryView, Registry<ConfiguredFeature<?, ?>> configuredFeatures) {
+
+        CONFIGURED_DEPOSIT_FEATURE = Registry.register(configuredFeatures, "deposits_configured", new ConfiguredFeature<>(DEPOSIT_FEATURE, DefaultFeatureConfig.INSTANCE));
+        CONFIGURED_DEPOSIT_FEATURE_KEY = ConfiguredFeatures.of("deposits_configured");
+
+        registryView.getOptional(RegistryKeys.PLACED_FEATURE).ifPresent(registry -> {
+            RegistryEntryLookup<ConfiguredFeature<?, ?>> entry = registryView.asDynamicRegistryManager().createRegistryLookup().getOrThrow(RegistryKeys.CONFIGURED_FEATURE);
+            PLACED_DEPOSIT_FEATURE = new PlacedFeature(entry.getOrThrow(CONFIGURED_DEPOSIT_FEATURE_KEY), Lists.newArrayList(HeightRangePlacementModifier.uniform(YOffset.fixed(-64), YOffset.fixed(320))));
+            Registry.register(registry, "deposits_placed", PLACED_DEPOSIT_FEATURE);
+        });
+        PLACED_DEPOSIT_FEATURE_KEY = PlacedFeatures.of("deposits_placed");
 
         BiomeModification modifications = BiomeModifications.create(Geocluster.id("worldgen"));
+        modifications.add(ModificationPhase.ADDITIONS, BiomeSelectors.all(), ctx -> {
+            ctx.getGenerationSettings().addFeature(GenerationStep.Feature.UNDERGROUND_ORES, PLACED_DEPOSIT_FEATURE_KEY);
+        });
 
         modifications.add(ModificationPhase.REMOVALS, BiomeSelectors.all(), ctx -> {
             Iterable<RegistryEntry<PlacedFeature>> registryEntries = getPlacedFeaturesByTag(ctx, GeoclusterTagRegistry.ORES_TO_REMOVE);
@@ -43,12 +53,6 @@ public interface GeoclusterWorldgenRegistry {
                 }
             }
         });
-
-        modifications.add(ModificationPhase.ADDITIONS, BiomeSelectors.all(), ctx -> {
-            ctx.getGenerationSettings().addFeature(GenerationStep.Feature.UNDERGROUND_ORES, PLACED_DEPOSIT_FEATURE.getKey().get());
-            //ctx.getGenerationSettings().addFeature(GenerationStep.Feature.UNDERGROUND_ORES, PLACED_REMOVE_VEINS_FEATURE.getKey().get());
-        });
-
     }
 
     private static Iterable<RegistryEntry<PlacedFeature>> getPlacedFeaturesByTag(BiomeModificationContext ctx, TagKey<PlacedFeature> placedFeatureTagKey) {
@@ -56,17 +60,4 @@ public interface GeoclusterWorldgenRegistry {
         Registry<PlacedFeature> placedFeatureRegistry = dynamicRegistryManager.get(RegistryKeys.PLACED_FEATURE);
         return placedFeatureRegistry.iterateEntries(placedFeatureTagKey);
     }
-
-    static <C extends FeatureConfig, F extends Feature<C>> F registerFeature(String id, F feature) {
-        return Registry.register(Registries.FEATURE, id, feature);
-    }
-
-    static RegistryEntry<ConfiguredFeature<DefaultFeatureConfig, ?>> registerConfigured(String id, Feature<DefaultFeatureConfig> feature) {
-        return ConfiguredFeatures.register(Geocluster.id(id).toString(), feature);
-    }
-
-    static RegistryKey<PlacedFeature> placedFeature(Identifier id) {
-        return RegistryKey.of(RegistryKeys.PLACED_FEATURE, id);
-    }
-
 }
