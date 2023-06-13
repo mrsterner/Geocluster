@@ -41,12 +41,16 @@
   "block.geocluster.uranium_ore_sample": "Uranium Sample",
   "block.geocluster.zinc_ore": "Zinc Ore",
   "block.geocluster.zinc_ore_sample": "Zinc Sample",
+  "geocluster.group.main": "Geocluster",
   "geocluster.midnightconfig.CHUNK_SKIP_CHANCE": "Chance To Skip A Chunk",
   "geocluster.midnightconfig.CHUNK_SKIP_CHANCE.tooltip": "The upper limit of RNG for generating any cluster in a given chunk.\nLarger values indicate further distance between clusters.",
   "geocluster.midnightconfig.DEBUG_WORLD_GEN": "WorldGen Debug",
   "geocluster.midnightconfig.DEBUG_WORLD_GEN.tooltip": "Output info into the logs when generating Geolosys deposits",
   "geocluster.midnightconfig.DEFAULT_REPLACEMENT_MATERIALS": "Default Replacement Materials",
   "geocluster.midnightconfig.DEFAULT_REPLACEMENT_MATERIALS.tooltip": "The fallback materials which a Deposit can replace if they're not specified by the deposit itself\\n\" + \"Format: Comma-delimited set of <modid:block> (see default for example)\"",
+  "geocluster.midnightconfig.DISABLE_IN_AREA_MESSAGE": "Disable In Area Message",
+  "geocluster.midnightconfig.FORCE_DEEPSLATE_SAMPLE_CAVEGEN": "Deepslate Ores Samples",
+  "geocluster.midnightconfig.FORCE_DEEPSLATE_SAMPLE_CAVEGEN.tooltip": "Will try to spawn deepslate ores samples at first avalible pos above deposit",
   "geocluster.midnightconfig.MAX_SAMPLES_PER_CHUNK": "Max samples per chunk",
   "geocluster.midnightconfig.MAX_SAMPLES_PER_CHUNK.tooltip": "Maximum samples that can generate with each cluster within a chunk",
   "geocluster.midnightconfig.NUMBER_CLUSTERS_PER_CHUNK": "Number of Clusters per Chunk",
@@ -59,6 +63,7 @@
   "geocluster.midnightconfig.PROSPECTORS_PICK_RANGE.tooltip": "The range (depth) of the prospector's pick prospecting cycle",
   "geocluster.midnightconfig.PROSPECTORS_POPUP_RIGHT": "Prospectors Info Popup Right-side",
   "geocluster.midnightconfig.PROSPECTORS_POPUP_RIGHT.tooltip": "If the prospectors pick should popup info on the right side of the screen",
+  "geocluster.midnightconfig.REMOVE_VEINS": "Remove Vanilla Veins of Gold/Iron",
   "geocluster.pro_pick.tooltip.found": "Found %s from you",
   "geocluster.pro_pick.tooltip.found_surface": "Found in this area",
   "geocluster.pro_pick.tooltip.nonefound_surface": "Nothing found in this area",
@@ -91,6 +96,5 @@
   "item.geocluster.uranium_ingot": "Uranium Ingot",
   "item.geocluster.uranium_nugget": "Uranium Nugget",
   "item.geocluster.zinc_ingot": "Zinc Ingot",
-  "item.geocluster.zinc_nugget": "Zinc Nugget",
-  "itemGroup.geocluster.geocluster": "Geocluster"
+  "item.geocluster.zinc_nugget": "Zinc Nugget"
 }

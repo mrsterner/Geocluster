@@ -6,11 +6,17 @@ import com.mojang.datafixers.util.Pair;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.font.TextRenderer;
 import net.minecraft.client.gui.DrawContext;
+import net.minecraft.client.gui.hud.InGameHud;
+import net.minecraft.client.render.block.entity.SignBlockEntityRenderer;
+import net.minecraft.client.toast.AdvancementToast;
 import net.minecraft.client.toast.Toast;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.item.ItemStack;
 import net.minecraft.text.MutableText;
+import net.minecraft.text.Style;
 import net.minecraft.text.Text;
+import net.minecraft.util.Formatting;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.math.Direction;
 
 import java.util.ArrayList;
@@ -41,9 +47,12 @@ public class OreToast implements IOreToast {
         if (this.blockStates.isEmpty()) {
             return Visibility.HIDE;
         } else {
+
+            ctx.drawTexture(new Identifier("textures/gui/toasts.png"), 0, 0, 0, 0, this.getWidth(), this.getHeight());
             Pair<BlockState, Direction> pair = this.blockStates.get((int) (startTime / Math.max(1L, 5000L / (long) this.blockStates.size()) % (long) this.blockStates.size()));
             BlockState blockState = pair.getFirst();
             TextRenderer textRenderer = oreToastManager.client.textRenderer;
+
             MutableText msg;
             if (pair.getSecond() == null) {
                 msg = Text.translatable("geocluster.pro_pick.tooltip.found_surface");
@@ -51,14 +60,15 @@ public class OreToast implements IOreToast {
                 msg = Text.translatable("geocluster.pro_pick.tooltip.found", pair.getSecond());
             }
 
-            ctx.drawTextWithShadow(textRenderer, blockState.getBlock().getName(), 30, 10, 16777215);
+            ctx.getMatrices().push();
+            ctx.getMatrices().scale(0.85f, 0.85f, 1);
             ctx.drawTextWithShadow(textRenderer, blockState.getBlock().getName(), 30, 10, 16777215);
             ctx.drawTextWithShadow(textRenderer, msg, 30, 22, 16777215);
-
+            ctx.getMatrices().pop();
 
             ItemStack itemStack = blockState.getBlock().asItem().getDefaultStack();
             RenderSystem.applyModelViewMatrix();
-            ctx.drawItemInSlot(textRenderer, itemStack, 8, 8);
+            ctx.drawItemWithoutEntity(itemStack, 8, 8);
             return startTime >= 5000L ? IOreToast.Visibility.HIDE : IOreToast.Visibility.SHOW;
         }
     }

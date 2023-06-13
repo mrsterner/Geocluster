@@ -18,6 +18,8 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
+import net.minecraft.registry.Registries;
+import net.minecraft.registry.Registry;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.resource.ResourceType;
@@ -32,10 +34,6 @@ public class Geocluster implements ModInitializer, ClientModInitializer {
     public static final Logger LOGGER = LoggerFactory.getLogger(MODID);
 
     public static final RegistryKey<ItemGroup> GEOCLUSTER_ITEM_GROUP = RegistryKey.of(RegistryKeys.ITEM_GROUP, id(MODID));
-    public static ItemGroup GROUP = FabricItemGroup.builder()
-            .icon(() -> new ItemStack(GeoclusterObjects.ZINC_INGOT))
-            .displayName(Text.translatable("geocluster"))
-            .build();
 
     public static Identifier id(String id) {
         return new Identifier(MODID, id);
@@ -45,8 +43,16 @@ public class Geocluster implements ModInitializer, ClientModInitializer {
     public void onInitialize() {
         MidnightConfig.init(MODID, GeoclusterConfig.class);
         GeoclusterObjects.init();
+
+        Registry.register(Registries.ITEM_GROUP, GEOCLUSTER_ITEM_GROUP, FabricItemGroup.builder()
+                .icon(() -> new ItemStack(GeoclusterObjects.ZINC_INGOT))
+                .displayName(Text.translatable(MODID + ".group.main"))
+                .build());
+
         GeoclusterWorldgenRegistry.init();
+
         ResourceManagerHelper.get(ResourceType.SERVER_DATA).registerReloadListener(new WorldGenDataReloadListener());
+
         DynamicRegistrySetupCallback.EVENT.register(registryView -> {
             registryView.getOptional(RegistryKeys.CONFIGURED_FEATURE).ifPresent(configuredFeatures -> {
                 GeoclusterWorldgenRegistry.init(registryView, configuredFeatures);

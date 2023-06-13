@@ -1,0 +1,18 @@
+// 1.20	2023-06-13T15:36:26.418102897	Geocluster/Tags for minecraft:block
+8a23702b05296c8af5014d6aa6e9265ded85c7d9 data/minecraft/tags/blocks/dirt.json
+3e110dd9538ad4063fc9f7720070bc3bdb0fc2a2 data/c/tags/blocks/lead_ores.json
+21f641ed6fb0bb4d49afbde694f5bb979822878d data/c/tags/blocks/titanium_ores.json
+abc5824dbdcc9625e64825ecfc45dfbf5b71031d data/c/tags/blocks/tin_ores.json
+b9f100093c9c96a9175f23e5b27a2e0f7013eec8 data/minecraft/tags/blocks/needs_diamond_tool.json
+0d3b0f9f2a32e8afb5773dddbb486fb3b452edf2 data/c/tags/blocks/uranium_ores.json
+54279f750bf2eab31649c6ed1a942ba58152ff65 data/c/tags/blocks/platinum_ores.json
+0bb423d5873072244e8c656f3ca0c6442b547258 data/c/tags/blocks/nickel_ores.json
+6a77430a5800939c612568a774a47e6ec1deec16 data/minecraft/tags/blocks/needs_iron_tool.json
+611d34853fa6af54891bfbf38006d538b09de295 data/c/tags/blocks/ores.json
+f22dc71e90ec4aef44c3ad4d7d16344414245fe1 data/c/tags/blocks/aluminum_ores.json
+611d34853fa6af54891bfbf38006d538b09de295 data/minecraft/tags/blocks/mineable/pickaxe.json
+8a23702b05296c8af5014d6aa6e9265ded85c7d9 data/minecraft/tags/blocks/sand.json
+7b7382cbe0104fe6af63d9dbc0cf91a76dcafb42 data/c/tags/blocks/stone.json
+32668ad3763b04a200e905999136811adca97b51 data/c/tags/blocks/silver_ores.json
+4db057c9efc26d60b07be94fa96a78ca98cfae1a data/geocluster/tags/blocks/supports_sample.json
+07ad75e14fc8e70982b27fe97c02e1a7474fdee1 data/c/tags/blocks/zinc_ores.json

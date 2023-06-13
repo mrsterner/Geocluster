@@ -30,5 +30,6 @@
     "recipes": [
       "minecraft:netherite_scrap_from_smelting_raw_ancient_debris"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

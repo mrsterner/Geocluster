@@ -8,24 +8,23 @@ import net.minecraft.util.math.MathHelper;
 
 public interface IOreToast {
     Object TYPE = new Object();
-    int BASE_HEIGHT = 24;
 
     default Object getType() {
         return TYPE;
     }
 
     default int getWidth() {
-        return 140;
+        return 160;
     }
 
     default int getHeight() {
-        return BASE_HEIGHT;
+        return 32;
     }
 
     IOreToast.Visibility draw(DrawContext ctx, OreToastManager oreToastManager, long l);
 
     default int getRequiredSpaceCount() {
-        return MathHelper.ceilDiv(this.getHeight(), BASE_HEIGHT);
+        return MathHelper.ceilDiv(this.getHeight(), 32);
     }
 
     @Environment(EnvType.CLIENT)

@@ -162,15 +162,16 @@ public class OreToastManager {
                 this.showTime = l;
             }
 
-            MatrixStack matrixStack = RenderSystem.getModelViewStack();
+            MatrixStack matrixStack = ctx.getMatrices();
             matrixStack.push();
             if (GeoclusterConfig.PROSPECTORS_POPUP_RIGHT) {
-                matrixStack.translate((float) x - (float) this.instance.getWidth() * this.getDisappearProgress(l), client.getWindow().getScaledHeight() - 32 - this.topIndex * 24, 800.0);
+                matrixStack.translate((float) x - (float) this.instance.getWidth() * this.getDisappearProgress(l) + 16, client.getWindow().getScaledHeight() - 32 - this.topIndex * 24, 800.0);
             } else {
                 matrixStack.translate((float) (client.getWindow().getScaledWidth() - x) + (float) this.instance.getWidth() * this.getDisappearProgress(l) - (float) this.instance.getWidth(), client.getWindow().getScaledHeight() - 32 - this.topIndex * 24, 800.0);
             }
 
             RenderSystem.applyModelViewMatrix();
+            matrixStack.scale(0.85f, 0.85f, 1);
             IOreToast.Visibility visibility = this.instance.draw(ctx, OreToastManager.this, l - this.showTime);
             matrixStack.pop();
             RenderSystem.applyModelViewMatrix();

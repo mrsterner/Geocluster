@@ -14,7 +14,7 @@ public class GeoclusterLanguageProvider extends FabricLanguageProvider {
 
     @Override
     public void generateTranslations(TranslationBuilder builder) {
-        builder.add("itemGroup.geocluster.geocluster", "Geocluster");
+        builder.add("geocluster.group.main", "Geocluster");
         builder.add("geocluster.pro_pick.tooltip.nonefound_surface", "Nothing found in this area");
         builder.add("geocluster.pro_pick.tooltip.found_surface", "Found in this area");
         builder.add("geocluster.pro_pick.tooltip.found", "Found %s from you");
@@ -126,5 +126,12 @@ public class GeoclusterLanguageProvider extends FabricLanguageProvider {
 
         builder.add("geocluster.midnightconfig.PROSPECTORS_POPUP_RIGHT", "Prospectors Info Popup Right-side");
         builder.add("geocluster.midnightconfig.PROSPECTORS_POPUP_RIGHT.tooltip", "If the prospectors pick should popup info on the right side of the screen");
+
+        builder.add("geocluster.midnightconfig.FORCE_DEEPSLATE_SAMPLE_CAVEGEN", "Deepslate Ores Samples");
+        builder.add("geocluster.midnightconfig.FORCE_DEEPSLATE_SAMPLE_CAVEGEN.tooltip", "Will try to spawn deepslate ores samples at first avalible pos above deposit");
+
+        builder.add("geocluster.midnightconfig.DISABLE_IN_AREA_MESSAGE", "Disable In Area Message");
+
+        builder.add("geocluster.midnightconfig.REMOVE_VEINS", "Remove Vanilla Veins of Gold/Iron");
     }
 }

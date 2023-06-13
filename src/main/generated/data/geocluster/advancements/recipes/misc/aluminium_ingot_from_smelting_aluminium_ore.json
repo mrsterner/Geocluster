@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_aluminium_ore": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "geocluster:aluminium_ore"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "minecraft:aluminium_ingot_from_smelting_aluminium_ore"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_aluminium_ore",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "minecraft:aluminium_ingot_from_smelting_aluminium_ore"
+    ]
+  },
+  "sends_telemetry_event": false
+}
