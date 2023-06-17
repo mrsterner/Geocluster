@@ -90,6 +90,8 @@ public interface GeoclusterObjects {
 
     Block ANCIENT_DEBRIS_ORE = register("ancient_debris_ore", new ExperienceDroppingBlock(AbstractBlock.Settings.copy(Blocks.STONE).requiresTool().strength(3.0F, 3.0F)), settings());
 
+    Block STONE_SAMPLE = register("stone_sample", new SampleBlock(), settings());
+
     Block COPPER_SAMPLE = register("copper_ore_sample", new SampleBlock(), settings());
     Block IRON_SAMPLE = register("iron_ore_sample", new SampleBlock(), settings());
     Block GOLD_SAMPLE = register("gold_ore_sample", new SampleBlock(), settings());

@@ -9,6 +9,8 @@ import java.util.List;
 public class GeoclusterConfig extends MidnightConfig {
 
     @Entry
+    public static boolean ONLY_VANILLA_ORES = true;
+    @Entry
     public static boolean FORCE_DEEPSLATE_SAMPLE_CAVEGEN = false;
     @Entry
     public static boolean DISABLE_IN_AREA_MESSAGE = false;
@@ -25,7 +27,7 @@ public class GeoclusterConfig extends MidnightConfig {
     public static boolean DEBUG_WORLD_GEN = false;
 
     @Entry(min = 1, max = 256)
-    public static int MAX_SAMPLES_PER_CHUNK = 8;
+    public static int MAX_SAMPLES_PER_CHUNK = 6;
 
     @Entry
     public static List<String> DEFAULT_REPLACEMENT_MATERIALS = Lists.newArrayList("minecraft:stone", "minecraft:andesite", "minecraft:diorite", "minecraft:granite", "minecraft:netherrack", "minecraft:sandstone", "minecraft:deepslate", "minecraft:tuff", "minecraft:calcite", "minecraft:dripstone_block");

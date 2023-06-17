@@ -134,6 +134,11 @@ public class GeoclusterLanguageProvider extends FabricLanguageProvider {
 
         builder.add("geocluster.midnightconfig.REMOVE_VEINS", "Remove Vanilla Veins of Gold/Iron");
 
+        builder.add("geocluster.midnightconfig.ONLY_VANILLA_ORES", "Only Spawn Vanilla Ores");
+        builder.add("geocluster.midnightconfig.ONLY_VANILLA_ORES.tooltip", "If enabled, dont spawn any modded ores added by this mod");
+
+
+        builder.add(STONE_SAMPLE, "Stone Sample");
         builder.add(AMBER_SAMPLE, "Amber Sample");
         builder.add(ENDER_SAMPLE, "Ender Sample");
         builder.add(CINCINNASITE_SAMPLE, "Cincinnasite Sample");
