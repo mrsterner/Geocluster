@@ -1,6 +1,6 @@
 package dev.sterner.geocluster.datagen;
 
-import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
+import com.terraformersmc.modmenu.util.mod.Mod;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider;
 import net.minecraft.data.client.BlockStateModelGenerator;
@@ -83,6 +83,9 @@ public class GeoclusterModelProvider extends FabricModelProvider {
         generator.register(PLATINUM_NUGGET, Models.GENERATED);
         generator.register(TITANIUM_NUGGET, Models.GENERATED);
         generator.register(NICKEL_NUGGET, Models.GENERATED);
-        generator.register(PROSPECTORS_PICK, Models.GENERATED);
+        generator.register(IRON_PROSPECTORS_PICK, Models.GENERATED);
+        generator.register(COPPER_PROSPECTORS_PICK, Models.GENERATED);
+        generator.register(STONE_PROSPECTORS_PICK, Models.GENERATED);
+        generator.register(STONE_CHUNK, Models.GENERATED);
     }
 }

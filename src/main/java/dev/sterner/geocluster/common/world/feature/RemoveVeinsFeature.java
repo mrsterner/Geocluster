@@ -22,6 +22,7 @@ import net.minecraft.world.gen.feature.util.FeatureContext;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+@Deprecated
 public class RemoveVeinsFeature extends Feature<DefaultFeatureConfig> {
     private final ArrayList<Block> UNACCEPTABLE = Lists.newArrayList(
             Blocks.RAW_IRON_BLOCK,

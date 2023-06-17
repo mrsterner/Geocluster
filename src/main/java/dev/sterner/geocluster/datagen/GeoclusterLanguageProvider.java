@@ -19,7 +19,9 @@ public class GeoclusterLanguageProvider extends FabricLanguageProvider {
         builder.add("geocluster.pro_pick.tooltip.found_surface", "Found in this area");
         builder.add("geocluster.pro_pick.tooltip.found", "Found %s from you");
 
-        builder.add(PROSPECTORS_PICK, "Prospectors Pick");
+        builder.add(COPPER_PROSPECTORS_PICK, "Copper Prospectors Pick");
+        builder.add(STONE_PROSPECTORS_PICK, "Stone Prospectors Pick");
+        builder.add(IRON_PROSPECTORS_PICK, "Iron Prospectors Pick");
         builder.add(COPPER_SAMPLE, "Copper Sample");
         builder.add(IRON_SAMPLE, "Iron Sample");
         builder.add(GOLD_SAMPLE, "Gold Sample");
@@ -54,6 +56,7 @@ public class GeoclusterLanguageProvider extends FabricLanguageProvider {
         builder.add(TITANIUM_INGOT, "Titanium Ingot");
         builder.add(NICKEL_INGOT, "Nickel Ingot");
 
+        builder.add(STONE_CHUNK, "Stone Chunk");
         builder.add(RAW_ZINC, "Raw Zinc");
         builder.add(RAW_SILVER, "Raw Silver");
         builder.add(RAW_LEAD, "Raw Lead");

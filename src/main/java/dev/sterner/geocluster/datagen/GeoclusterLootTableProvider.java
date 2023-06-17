@@ -47,6 +47,7 @@ public class GeoclusterLootTableProvider extends FabricBlockLootTableProvider {
         this.addDrop(QUARTZ_ORE, b -> oreDrops(b, QUARTZ));
         this.addDrop(DEEPSLATE_QUARTZ_ORE, b -> oreDrops(b, QUARTZ));
 
+        this.addDrop(STONE_SAMPLE, STONE_CHUNK);
         this.addDrop(COPPER_SAMPLE, Items.RAW_COPPER);
         this.addDrop(IRON_SAMPLE, Items.RAW_IRON);
         this.addDrop(GOLD_SAMPLE, Items.RAW_GOLD);

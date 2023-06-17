@@ -6,9 +6,11 @@ import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
 import net.minecraft.data.server.recipe.RecipeJsonProvider;
 import net.minecraft.data.server.recipe.ShapedRecipeJsonBuilder;
+import net.minecraft.data.server.recipe.ShapelessRecipeJsonBuilder;
 import net.minecraft.item.ItemConvertible;
 import net.minecraft.item.Items;
 import net.minecraft.recipe.book.RecipeCategory;
+import net.minecraft.registry.tag.ItemTags;
 
 import java.util.List;
 import java.util.function.Consumer;
@@ -69,10 +71,28 @@ public class GeoclusterRecipeProvider extends FabricRecipeProvider {
         offerBlasting(exporter, List.of(RAW_ANCIENT_DEBRIS), RecipeCategory.MISC,  Items.NETHERITE_SCRAP, 1.0F, 100, "netherite_scrap");
         offerBlasting(exporter, QUARTZ_ORES, RecipeCategory.MISC, Items.QUARTZ, 1.0F, 100, "quartz");
 
-        ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, PROSPECTORS_PICK).input('I', Items.IRON_INGOT).input('N', Items.IRON_NUGGET).input('S', Items.STICK)
+        ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, IRON_PROSPECTORS_PICK).input('I', Items.IRON_INGOT).input('N', Items.IRON_NUGGET).input('S', Items.STICK)
                 .pattern("NI")
                 .pattern(" S")
                 .criterion("has_raw_iron", conditionsFromItem(Items.RAW_IRON))
+                .offerTo(exporter);
+
+        ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, STONE_PROSPECTORS_PICK).input('I', Items.COBBLESTONE).input('N', STONE_CHUNK).input('S', Items.STICK)
+                .pattern("NI")
+                .pattern(" S")
+                .criterion("has_wood", conditionsFromTag(ItemTags.LOGS))
+                .offerTo(exporter);
+
+        ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, COPPER_PROSPECTORS_PICK).input('I', Items.COPPER_INGOT).input('N', COPPER_NUGGET).input('S', Items.STICK)
+                .pattern("NI")
+                .pattern(" S")
+                .criterion("has_copper", conditionsFromItem(Items.RAW_COPPER))
+                .offerTo(exporter);
+
+        ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, Items.COBBLESTONE).input('S', STONE_CHUNK)
+                .pattern("SS")
+                .pattern("SS")
+                .criterion("has_chunk", conditionsFromItem(STONE_CHUNK))
                 .offerTo(exporter);
     }
 }

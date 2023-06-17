@@ -22,9 +22,11 @@ import java.util.HashSet;
 
 public class ProspectorsPickItem extends Item {
     public static Item.Settings props = new Item.Settings().maxCount(1).maxDamage(1024);
+    private final Type TYPE;
 
-    public ProspectorsPickItem() {
+    public ProspectorsPickItem(Type type) {
         super(props);
+        TYPE = type;
     }
 
     @Override
@@ -53,8 +55,16 @@ public class ProspectorsPickItem extends Item {
                 stack.damage(1, player, (x) -> x.sendToolBreakStatus(hand));
             }
 
-            int range = GeoclusterConfig.PROSPECTORS_PICK_RANGE;
-            int diam = GeoclusterConfig.PROSPECTORS_PICK_DIAMETER;
+            int range = TYPE == Type.IRON ? GeoclusterConfig.PROSPECTORS_PICK_RANGE : TYPE == Type.COPPER ? GeoclusterConfig.PROSPECTORS_PICK_RANGE - 1 : GeoclusterConfig.PROSPECTORS_PICK_RANGE - 2 ;
+            int diam = TYPE == Type.IRON ? GeoclusterConfig.PROSPECTORS_PICK_DIAMETER : TYPE == Type.COPPER ? GeoclusterConfig.PROSPECTORS_PICK_DIAMETER - 1 : GeoclusterConfig.PROSPECTORS_PICK_DIAMETER - 2;
+
+            if (range <= 0) {
+                range = 1;
+            }
+
+            if (diam <= 0) {
+                diam = 1;
+            }
 
             int zStart = facing == Direction.NORTH ? 0 : facing == Direction.SOUTH ? -range : -(diam / 2);
             int zEnd = facing == Direction.NORTH ? range : facing == Direction.SOUTH ? 0 : diam / 2;
@@ -120,5 +130,11 @@ public class ProspectorsPickItem extends Item {
         }
 
         player.sendMessage(GeoclusterUtils.tryTranslate("geocluster.pro_pick.tooltip.nonefound_surface"), true);
+    }
+
+    public enum Type {
+        STONE,
+        COPPER,
+        IRON
     }
 }

@@ -23,7 +23,9 @@ public interface GeoclusterObjects {
     Map<Block, Identifier> BLOCKS = new LinkedHashMap<>();
     Map<Item, Identifier> ITEMS = new LinkedHashMap<>();
 
-    Item PROSPECTORS_PICK = register("prospectors_pick", new ProspectorsPickItem());
+    Item STONE_PROSPECTORS_PICK = register("stone_prospectors_pick", new ProspectorsPickItem(ProspectorsPickItem.Type.STONE));
+    Item COPPER_PROSPECTORS_PICK = register("copper_prospectors_pick", new ProspectorsPickItem(ProspectorsPickItem.Type.COPPER));
+    Item IRON_PROSPECTORS_PICK = register("iron_prospectors_pick", new ProspectorsPickItem(ProspectorsPickItem.Type.IRON));
 
     Item ZINC_INGOT = register("zinc_ingot", new Item(settings()));
     Item SILVER_INGOT = register("silver_ingot", new Item(settings()));
@@ -35,6 +37,7 @@ public interface GeoclusterObjects {
     Item TITANIUM_INGOT = register("titanium_ingot", new Item(settings()));
     Item NICKEL_INGOT = register("nickel_ingot", new Item(settings()));
 
+    Item STONE_CHUNK = register("stone_chunk", new Item(settings()));
     Item RAW_ZINC = register("raw_zinc", new Item(settings()));
     Item RAW_SILVER = register("raw_silver", new Item(settings()));
     Item RAW_LEAD = register("raw_lead", new Item(settings()));
