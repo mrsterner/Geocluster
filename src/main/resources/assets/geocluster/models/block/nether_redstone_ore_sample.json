@@ -1,0 +1,7 @@
+{
+  "parent": "geocluster:block/ore_sample",
+  "textures": {
+    "particle": "minecraft:block/netherrack",
+    "ore": "geocluster:block/compat/betternether/nether_redstone_ore"
+  }
+}

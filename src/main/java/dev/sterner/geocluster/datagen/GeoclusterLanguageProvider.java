@@ -133,5 +133,18 @@ public class GeoclusterLanguageProvider extends FabricLanguageProvider {
         builder.add("geocluster.midnightconfig.DISABLE_IN_AREA_MESSAGE", "Disable In Area Message");
 
         builder.add("geocluster.midnightconfig.REMOVE_VEINS", "Remove Vanilla Veins of Gold/Iron");
+
+        builder.add(AMBER_SAMPLE, "Amber Sample");
+        builder.add(ENDER_SAMPLE, "Ender Sample");
+        builder.add(CINCINNASITE_SAMPLE, "Cincinnasite Sample");
+        builder.add(NEBULITE_SAMPLE, "Nebulite Sample");
+        builder.add(NETHER_LAPIS_SAMPLE, "Lapis Sample");
+        builder.add(NETHER_REDSTONE_SAMPLE, "Redstone Sample");
+        builder.add(NETHER_RUBY_SAMPLE, "Ruby Sample");
+        builder.add(POTASSIUM_SAMPLE, "Potassium Sample");
+        builder.add(PURPEILLE_SAMPLE, "Purpur Remnants Sample");
+        builder.add(SALT_SAMPLE, "Salt Sample");
+        builder.add(SHADOW_QUARTZ_SAMPLE, "Shadow Quartz Sample");
+        builder.add(SULFUR_SAMPLE, "Sulfur Sample");
     }
 }

@@ -42,6 +42,18 @@
     "geocluster:diamond_ore_sample",
     "geocluster:ancient_debris_ore_sample",
     "geocluster:quartz_ore_sample",
-    "geocluster:nether_quartz_ore_sample"
+    "geocluster:nether_quartz_ore_sample",
+    "geocluster:amber_ore_sample",
+    "geocluster:ender_ore_sample",
+    "geocluster:cincinnasite_ore_sample",
+    "geocluster:nether_lapis_ore_sample",
+    "geocluster:nether_redstone_ore_sample",
+    "geocluster:nether_ruby_ore_sample",
+    "geocluster:salt_ore_sample",
+    "geocluster:sulfur_ore_sample",
+    "geocluster:potassium_ore_sample",
+    "geocluster:purpur_remnants_ore_sample",
+    "geocluster:nebulite_ore_sample",
+    "geocluster:shadow_quartz_ore_sample"
   ]
 }

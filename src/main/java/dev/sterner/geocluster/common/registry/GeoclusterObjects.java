@@ -113,6 +113,21 @@ public interface GeoclusterObjects {
     Block QUARTZ_SAMPLE = register("quartz_ore_sample", new SampleBlock(), settings());
     Block NETHER_QUARTZ_SAMPLE = register("nether_quartz_ore_sample", new SampleBlock(), settings());
 
+    //COMPAT
+    Block AMBER_SAMPLE = register("amber_ore_sample", new SampleBlock(), settings());
+    Block ENDER_SAMPLE = register("ender_ore_sample", new SampleBlock(), settings());
+    Block CINCINNASITE_SAMPLE = register("cincinnasite_ore_sample", new SampleBlock(), settings());
+    Block NETHER_LAPIS_SAMPLE = register("nether_lapis_ore_sample", new SampleBlock(), settings());
+    Block NETHER_REDSTONE_SAMPLE = register("nether_redstone_ore_sample", new SampleBlock(), settings());
+    Block NETHER_RUBY_SAMPLE = register("nether_ruby_ore_sample", new SampleBlock(), settings());
+    Block SALT_SAMPLE = register("salt_ore_sample", new SampleBlock(), settings());
+
+    Block SULFUR_SAMPLE = register("sulfur_ore_sample", new SampleBlock(), settings());
+    Block POTASSIUM_SAMPLE = register("potassium_ore_sample", new SampleBlock(), settings());
+    Block PURPEILLE_SAMPLE = register("purpur_remnants_ore_sample", new SampleBlock(), settings());
+
+    Block NEBULITE_SAMPLE = register("nebulite_ore_sample", new SampleBlock(), settings());
+    Block SHADOW_QUARTZ_SAMPLE = register("shadow_quartz_ore_sample", new SampleBlock(), settings());
 
     static Item.Settings settings() {
         return new Item.Settings();

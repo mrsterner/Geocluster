@@ -1,0 +1,7 @@
+{
+  "parent": "geocluster:block/ore_sample",
+  "textures": {
+    "particle": "minecraft:block/end_stone",
+    "ore": "geocluster:block/compat/purpeille/purpur_remnants"
+  }
+}
