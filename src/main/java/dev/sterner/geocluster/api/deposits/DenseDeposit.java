@@ -26,6 +26,7 @@ import net.minecraft.world.StructureWorldAccess;
 import net.minecraft.world.biome.Biome;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 
@@ -171,6 +172,11 @@ public class DenseDeposit extends Deposit implements IDeposit {
     @Override
     public boolean canPlaceInBiome(RegistryEntry<Biome> biome) {
         return biome.isIn(this.biomeTag);
+    }
+
+    @Override
+    public String toString() {
+        return "Dense deposit with Blocks=" + this.getAllOres() + ", Samples=" + Arrays.toString(this.sampleToWeightMap.keySet().toArray()) + ", Y Range=[" + this.yMin + "," + this.yMax + "], Size=" + this.size;
     }
 
     @Override
