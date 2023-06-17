@@ -55,7 +55,7 @@ public class ProspectorsPickItem extends Item {
                 stack.damage(1, player, (x) -> x.sendToolBreakStatus(hand));
             }
 
-            int range = TYPE == Type.IRON ? GeoclusterConfig.PROSPECTORS_PICK_RANGE : TYPE == Type.COPPER ? GeoclusterConfig.PROSPECTORS_PICK_RANGE - 1 : GeoclusterConfig.PROSPECTORS_PICK_RANGE - 2 ;
+            int range = TYPE == Type.IRON ? GeoclusterConfig.PROSPECTORS_PICK_RANGE : TYPE == Type.COPPER ? GeoclusterConfig.PROSPECTORS_PICK_RANGE - 1 : GeoclusterConfig.PROSPECTORS_PICK_RANGE - 2;
             int diam = TYPE == Type.IRON ? GeoclusterConfig.PROSPECTORS_PICK_DIAMETER : TYPE == Type.COPPER ? GeoclusterConfig.PROSPECTORS_PICK_DIAMETER - 1 : GeoclusterConfig.PROSPECTORS_PICK_DIAMETER - 2;
 
             if (range <= 0) {

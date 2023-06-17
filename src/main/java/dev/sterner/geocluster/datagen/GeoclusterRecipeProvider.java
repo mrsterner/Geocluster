@@ -1,12 +1,10 @@
 package dev.sterner.geocluster.datagen;
 
 import com.google.common.collect.ImmutableList;
-import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
 import net.minecraft.data.server.recipe.RecipeJsonProvider;
 import net.minecraft.data.server.recipe.ShapedRecipeJsonBuilder;
-import net.minecraft.data.server.recipe.ShapelessRecipeJsonBuilder;
 import net.minecraft.item.ItemConvertible;
 import net.minecraft.item.Items;
 import net.minecraft.recipe.book.RecipeCategory;
@@ -56,8 +54,8 @@ public class GeoclusterRecipeProvider extends FabricRecipeProvider {
         offerSmelting(exporter, PLATINUM_ORES, RecipeCategory.MISC, PLATINUM_INGOT, 1.0F, 200, "platinum_ingot");
         offerSmelting(exporter, TITANIUM_ORES, RecipeCategory.MISC, TITANIUM_INGOT, 1.0F, 200, "titanium_ingot");
         offerSmelting(exporter, NICKEL_ORES, RecipeCategory.MISC, NICKEL_INGOT, 1.0F, 200, "nickel_ingot");
-        offerSmelting(exporter, List.of(RAW_ANCIENT_DEBRIS), RecipeCategory.MISC,  Items.NETHERITE_SCRAP, 1.0F, 200, "netherite_scrap");
-        offerSmelting(exporter, QUARTZ_ORES, RecipeCategory.MISC,  Items.QUARTZ, 1.0F, 200, "quartz");
+        offerSmelting(exporter, List.of(RAW_ANCIENT_DEBRIS), RecipeCategory.MISC, Items.NETHERITE_SCRAP, 1.0F, 200, "netherite_scrap");
+        offerSmelting(exporter, QUARTZ_ORES, RecipeCategory.MISC, Items.QUARTZ, 1.0F, 200, "quartz");
 
         offerBlasting(exporter, ZINC_ORES, RecipeCategory.MISC, ZINC_INGOT, 1.0F, 100, "zinc_ingot");
         offerBlasting(exporter, SILVER_ORES, RecipeCategory.MISC, SILVER_INGOT, 1.0F, 100, "silver_ingot");
@@ -68,7 +66,7 @@ public class GeoclusterRecipeProvider extends FabricRecipeProvider {
         offerBlasting(exporter, PLATINUM_ORES, RecipeCategory.MISC, PLATINUM_INGOT, 1.0F, 100, "platinum_ingot");
         offerBlasting(exporter, TITANIUM_ORES, RecipeCategory.MISC, TITANIUM_INGOT, 1.0F, 100, "titanium_ingot");
         offerBlasting(exporter, NICKEL_ORES, RecipeCategory.MISC, NICKEL_INGOT, 1.0F, 100, "nickel_ingot");
-        offerBlasting(exporter, List.of(RAW_ANCIENT_DEBRIS), RecipeCategory.MISC,  Items.NETHERITE_SCRAP, 1.0F, 100, "netherite_scrap");
+        offerBlasting(exporter, List.of(RAW_ANCIENT_DEBRIS), RecipeCategory.MISC, Items.NETHERITE_SCRAP, 1.0F, 100, "netherite_scrap");
         offerBlasting(exporter, QUARTZ_ORES, RecipeCategory.MISC, Items.QUARTZ, 1.0F, 100, "quartz");
 
         ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, IRON_PROSPECTORS_PICK).input('I', Items.IRON_INGOT).input('N', Items.IRON_NUGGET).input('S', Items.STICK)

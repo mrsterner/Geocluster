@@ -3,14 +3,12 @@ package dev.sterner.geocluster.common.world.feature;
 import com.google.common.collect.Lists;
 import com.mojang.serialization.Codec;
 import dev.sterner.geocluster.common.components.GeoclusterComponents;
-import dev.sterner.geocluster.common.components.IWorldDepositComponent;
 import dev.sterner.geocluster.common.components.WorldChunkComponent;
 import dev.sterner.geocluster.common.components.WorldDepositComponent;
 import dev.sterner.geocluster.common.utils.FeatureUtils;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
-import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
 import net.minecraft.world.StructureWorldAccess;
@@ -41,7 +39,7 @@ public class RemoveVeinsFeature extends Feature<DefaultFeatureConfig> {
     private HashMap<Block, Block> initOreReplacementMap() {
         return new HashMap<>() {{
             put(Blocks.COPPER_ORE, Blocks.STONE);
-            put(Blocks.RAW_COPPER_BLOCK,  Blocks.STONE);
+            put(Blocks.RAW_COPPER_BLOCK, Blocks.STONE);
             put(Blocks.DEEPSLATE_IRON_ORE, Blocks.DEEPSLATE);
             put(Blocks.RAW_IRON_BLOCK, Blocks.DEEPSLATE);
         }};

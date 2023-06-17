@@ -13,7 +13,6 @@ import dev.sterner.geocluster.common.utils.GeoclusterUtils;
 import dev.sterner.geocluster.common.utils.SerializerUtils;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
-import net.minecraft.registry.Registries;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.registry.tag.TagKey;

@@ -23,7 +23,7 @@ public abstract class Deposit {
 
     }
 
-    public static void validateFormat(HashMap<String, HashMap<BlockState, Float>> oreToWeightMap, HashMap<String, Float> cumulativeOreWeightMap, HashMap<BlockState, Float> sampleToWeightMap, float sumWeightSamples){
+    public static void validateFormat(HashMap<String, HashMap<BlockState, Float>> oreToWeightMap, HashMap<String, Float> cumulativeOreWeightMap, HashMap<BlockState, Float> sampleToWeightMap, float sumWeightSamples) {
         if (!oreToWeightMap.containsKey("default")) {
             throw new RuntimeException("Cluster blocks should always have a default key");
         }

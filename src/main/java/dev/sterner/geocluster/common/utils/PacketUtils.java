@@ -1,14 +1,11 @@
 package dev.sterner.geocluster.common.utils;
 
 import dev.sterner.geocluster.Geocluster;
-import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtHelper;
 import net.minecraft.nbt.NbtList;
 import net.minecraft.registry.Registries;
-import net.minecraft.registry.RegistryEntryLookup;
-import net.minecraft.registry.RegistryKeys;
 
 import java.util.HashSet;
 

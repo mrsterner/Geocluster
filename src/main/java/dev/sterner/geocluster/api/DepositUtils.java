@@ -20,7 +20,7 @@ public class DepositUtils {
     /**
      * picks a choice out of a mapping between blockstate to weight
      *
-     * @param map  the map between a blockstate and its chance
+     * @param map the map between a blockstate and its chance
      * @return null if no block should be used or placed, T instanceof BlockState if
      * actual block should be placed.
      */

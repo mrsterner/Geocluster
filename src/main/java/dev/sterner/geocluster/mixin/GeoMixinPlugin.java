@@ -2,7 +2,6 @@ package dev.sterner.geocluster.mixin;
 
 import com.llamalad7.mixinextras.MixinExtrasBootstrap;
 import org.objectweb.asm.tree.ClassNode;
-import org.spongepowered.asm.launch.MixinLaunchPlugin;
 import org.spongepowered.asm.mixin.extensibility.IMixinConfigPlugin;
 import org.spongepowered.asm.mixin.extensibility.IMixinInfo;
 

@@ -19,12 +19,12 @@ public class GeoclusterWorldgenRegistry {
 
     public static Feature<DefaultFeatureConfig> DEPOSIT_FEATURE = Registry.register(Registries.FEATURE, "deposits", new DepositFeature(DefaultFeatureConfig.CODEC));
     public static ConfiguredFeature<DefaultFeatureConfig, Feature<DefaultFeatureConfig>> CONFIGURED_DEPOSIT_FEATURE;
-    public static RegistryKey<ConfiguredFeature<?,?>> CONFIGURED_DEPOSIT_FEATURE_KEY;
+    public static RegistryKey<ConfiguredFeature<?, ?>> CONFIGURED_DEPOSIT_FEATURE_KEY;
 
     public static PlacedFeature PLACED_DEPOSIT_FEATURE;
     public static RegistryKey<PlacedFeature> PLACED_DEPOSIT_FEATURE_KEY;
 
-    public static void init(){
+    public static void init() {
 
     }
 

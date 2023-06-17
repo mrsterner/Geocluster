@@ -12,7 +12,7 @@ public class ChunkGeneratorSettingsMixin {
 
 
     @Inject(method = "oreVeins", at = @At(value = "RETURN"), cancellable = true)
-    private void geocluster$removeVeins(CallbackInfoReturnable<Boolean> cir){
+    private void geocluster$removeVeins(CallbackInfoReturnable<Boolean> cir) {
         cir.setReturnValue(!GeoclusterConfig.REMOVE_VEINS);
     }
 }

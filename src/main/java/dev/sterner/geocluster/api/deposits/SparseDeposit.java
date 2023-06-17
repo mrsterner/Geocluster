@@ -28,7 +28,6 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Map;
 
 public class SparseDeposit extends Deposit implements IDeposit {
     public static final String JSON_TYPE = "geocluster:deposit_sparse";
