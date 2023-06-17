@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "geocluster:block/stone_sample",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "geocluster:block/stone_sample"
+    },
+    "facing=south": {
+      "model": "geocluster:block/stone_sample",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "geocluster:block/stone_sample",
+      "y": 270
+    }
+  }
+}

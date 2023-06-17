@@ -5,6 +5,7 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import dev.sterner.geocluster.Geocluster;
+import dev.sterner.geocluster.GeoclusterConfig;
 import dev.sterner.geocluster.api.DepositCache;
 import dev.sterner.geocluster.api.deposits.*;
 import dev.sterner.geocluster.common.data.serializer.*;
@@ -14,10 +15,15 @@ import net.minecraft.resource.JsonDataLoader;
 import net.minecraft.resource.ResourceManager;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.profiler.Profiler;
+import org.apache.commons.compress.utils.Lists;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 public class WorldGenDataReloadListener extends JsonDataLoader implements IdentifiableResourceReloadListener {
+
+    private final List<String> MODDED = Lists.newArrayList();
 
     private static final Gson GSON = (new GsonBuilder()).create();
 
@@ -29,6 +35,14 @@ public class WorldGenDataReloadListener extends JsonDataLoader implements Identi
 
     public WorldGenDataReloadListener() {
         super(GSON, "deposits");
+        MODDED.add("aluminium");
+        MODDED.add("lead_silver");
+        MODDED.add("platinum");
+        MODDED.add("tin");
+        MODDED.add("titanium");
+        MODDED.add("uranium");
+        MODDED.add("zinc");
+        MODDED.add("iron_nickel");
     }
 
     @Override
@@ -40,7 +54,14 @@ public class WorldGenDataReloadListener extends JsonDataLoader implements Identi
     protected void apply(Map<Identifier, JsonElement> prepared, ResourceManager manager, Profiler profiler) {
         DepositCache cache = DepositCache.getCache();
         cache.clear();
+
+
         prepared.forEach((identifier, json) -> {
+            if (GeoclusterConfig.ONLY_VANILLA_ORES) {
+                if (MODDED.contains(identifier.getPath())) {
+                    return;
+                }
+            }
 
             try {
                 JsonObject jsonobject = json.getAsJsonObject();

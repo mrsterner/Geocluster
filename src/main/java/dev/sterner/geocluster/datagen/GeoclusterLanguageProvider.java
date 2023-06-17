@@ -124,5 +124,23 @@ public class GeoclusterLanguageProvider extends FabricLanguageProvider {
 
         builder.add("geocluster.midnightconfig.PROSPECTORS_POPUP_RIGHT", "Prospectors Info Popup Right-side");
         builder.add("geocluster.midnightconfig.PROSPECTORS_POPUP_RIGHT.tooltip", "If the prospectors pick should popup info on the right side of the screen");
+
+        builder.add("geocluster.midnightconfig.ONLY_VANILLA_ORES", "Only Spawn Vanilla Ores");
+        builder.add("geocluster.midnightconfig.ONLY_VANILLA_ORES.tooltip", "If enabled, dont spawn any modded ores added by this mod");
+
+
+        builder.add(STONE_SAMPLE, "Stone Sample");
+        builder.add(AMBER_SAMPLE, "Amber Sample");
+        builder.add(ENDER_SAMPLE, "Ender Sample");
+        builder.add(CINCINNASITE_SAMPLE, "Cincinnasite Sample");
+        builder.add(NEBULITE_SAMPLE, "Nebulite Sample");
+        builder.add(NETHER_LAPIS_SAMPLE, "Lapis Sample");
+        builder.add(NETHER_REDSTONE_SAMPLE, "Redstone Sample");
+        builder.add(NETHER_RUBY_SAMPLE, "Ruby Sample");
+        builder.add(POTASSIUM_SAMPLE, "Potassium Sample");
+        builder.add(PURPEILLE_SAMPLE, "Purpur Remnants Sample");
+        builder.add(SALT_SAMPLE, "Salt Sample");
+        builder.add(SHADOW_QUARTZ_SAMPLE, "Shadow Quartz Sample");
+        builder.add(SULFUR_SAMPLE, "Sulfur Sample");
     }
 }
