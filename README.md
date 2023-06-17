@@ -30,6 +30,8 @@ Remember to check if there is more than one feature for an ore. For example, gol
 
 
 ## Add or modify ore clusters
+A new config entry was added in 1.2.0 to enable or disable extra common modded ores which can individually be disable by the method below. Theres also Samples ores from Better End, Better Nether, Enderscape, Bewitchment and Purpeille to use in datapacks so theres no need to add them via KubeJS, which is always an option for adding even more Samples.
+
 The mod comes with a few ore clusters, which should be changed to reflect your packs theme. To modify the default clusters, just add a json with the same name in
 the ``data/geocluster/deposits/`` as the cluster you want to change. If you want to remove the cluster entirely, just leave a blank ``{}`` in the json.
 
