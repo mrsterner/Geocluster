@@ -17,7 +17,7 @@ import net.minecraft.world.gen.placementmodifier.HeightRangePlacementModifier;
 
 public class GeoclusterWorldgenRegistry {
 
-    public static Feature<DefaultFeatureConfig> DEPOSIT_FEATURE = Registry.register(Registries.FEATURE, "deposits", new DepositFeature(DefaultFeatureConfig.CODEC));
+    public static Feature<DefaultFeatureConfig> DEPOSIT_FEATURE = Registry.register(Registries.FEATURE, Geocluster.id("deposits"), new DepositFeature(DefaultFeatureConfig.CODEC));
     public static ConfiguredFeature<DefaultFeatureConfig, Feature<DefaultFeatureConfig>> CONFIGURED_DEPOSIT_FEATURE;
     public static RegistryKey<ConfiguredFeature<?, ?>> CONFIGURED_DEPOSIT_FEATURE_KEY;
 
@@ -25,20 +25,7 @@ public class GeoclusterWorldgenRegistry {
     public static RegistryKey<PlacedFeature> PLACED_DEPOSIT_FEATURE_KEY;
 
     public static void init() {
-
-    }
-
-    public static void init(DynamicRegistryView registryView, Registry<ConfiguredFeature<?, ?>> configuredFeatures) {
-
-        CONFIGURED_DEPOSIT_FEATURE = Registry.register(configuredFeatures, "deposits_configured", new ConfiguredFeature<>(DEPOSIT_FEATURE, DefaultFeatureConfig.INSTANCE));
-        CONFIGURED_DEPOSIT_FEATURE_KEY = ConfiguredFeatures.of("deposits_configured");
-
-        registryView.getOptional(RegistryKeys.PLACED_FEATURE).ifPresent(registry -> {
-            RegistryEntryLookup<ConfiguredFeature<?, ?>> entry = registryView.asDynamicRegistryManager().createRegistryLookup().getOrThrow(RegistryKeys.CONFIGURED_FEATURE);
-            PLACED_DEPOSIT_FEATURE = new PlacedFeature(entry.getOrThrow(CONFIGURED_DEPOSIT_FEATURE_KEY), Lists.newArrayList(HeightRangePlacementModifier.uniform(YOffset.fixed(-64), YOffset.fixed(320))));
-            Registry.register(registry, "deposits_placed", PLACED_DEPOSIT_FEATURE);
-        });
-        PLACED_DEPOSIT_FEATURE_KEY = PlacedFeatures.of("deposits_placed");
+        PLACED_DEPOSIT_FEATURE_KEY = PlacedFeatures.of(Geocluster.id("deposits_placed").toString());
 
         BiomeModification modifications = BiomeModifications.create(Geocluster.id("worldgen"));
         modifications.add(ModificationPhase.ADDITIONS, BiomeSelectors.all(), ctx -> {
@@ -52,6 +39,17 @@ public class GeoclusterWorldgenRegistry {
                     ctx.getGenerationSettings().removeFeature(placedFeatureHolder.getKey().get());
                 }
             }
+        });
+    }
+
+    public static void init(DynamicRegistryView registryView, Registry<ConfiguredFeature<?, ?>> configuredFeatures) {
+        CONFIGURED_DEPOSIT_FEATURE = Registry.register(configuredFeatures, Geocluster.id("deposits_configured"), new ConfiguredFeature<>(DEPOSIT_FEATURE, DefaultFeatureConfig.INSTANCE));
+        CONFIGURED_DEPOSIT_FEATURE_KEY = ConfiguredFeatures.of(Geocluster.id("deposits_configured").toString());
+
+        registryView.getOptional(RegistryKeys.PLACED_FEATURE).ifPresent(registry -> {
+            RegistryEntryLookup<ConfiguredFeature<?, ?>> entry = registryView.asDynamicRegistryManager().createRegistryLookup().getOrThrow(RegistryKeys.CONFIGURED_FEATURE);
+            PLACED_DEPOSIT_FEATURE = new PlacedFeature(entry.getOrThrow(CONFIGURED_DEPOSIT_FEATURE_KEY), Lists.newArrayList(HeightRangePlacementModifier.uniform(YOffset.fixed(-64), YOffset.fixed(320))));
+            Registry.register(registry, Geocluster.id("deposits_placed"), PLACED_DEPOSIT_FEATURE);
         });
     }
 
