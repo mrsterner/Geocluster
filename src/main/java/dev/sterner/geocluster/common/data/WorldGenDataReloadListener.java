@@ -15,7 +15,6 @@ import net.minecraft.resource.JsonDataLoader;
 import net.minecraft.resource.ResourceManager;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.profiler.Profiler;
-import org.apache.commons.compress.utils.Lists;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,7 +22,7 @@ import java.util.Map;
 
 public class WorldGenDataReloadListener extends JsonDataLoader implements IdentifiableResourceReloadListener {
 
-    private final List<String> MODDED = Lists.newArrayList();
+    private final List<String> MODDED = new ArrayList<>();
 
     private static final Gson GSON = (new GsonBuilder()).create();
 
