@@ -33,7 +33,7 @@ repositories {
 	}
 	maven {
 		name = 'Ladysnake Mods'
-		url = 'https://ladysnake.jfrog.io/artifactory/mods'
+		url = 'https://maven.ladysnake.org/releases'
 	}
 	maven {
 		url = "https://jitpack.io"
@@ -57,9 +57,6 @@ dependencies {
 	//Modmenu
 	modImplementation "maven.modrinth:modmenu:${project.mod_menu_version}"
 
-	//MixinExtras
-	implementation("com.github.LlamaLad7:MixinExtras:0.1.1")
-	annotationProcessor("com.github.LlamaLad7:MixinExtras:0.1.1")
 }
 
 processResources {
