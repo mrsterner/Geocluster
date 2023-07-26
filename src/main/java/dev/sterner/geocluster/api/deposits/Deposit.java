@@ -69,7 +69,11 @@ public abstract class Deposit {
                 tmp = tmp.with(Properties.WATERLOGGED, Boolean.TRUE);
             }
 
-            FeatureUtils.enqueueBlockPlacement(world, samplePos, tmp.with(FACING, Direction.fromHorizontal(world.getRandom().nextBetween(0, 3))), deposits, chunksGenerated);
+            if (tmp.contains(FACING)) {
+                tmp = tmp.with(FACING, Direction.fromHorizontal(world.getRandom().nextBetween(0, 3)));
+            }
+
+            FeatureUtils.enqueueBlockPlacement(world, samplePos, tmp, deposits, chunksGenerated);
             FeatureUtils.fixSnowyBlock(world, samplePos);
         }
     }
