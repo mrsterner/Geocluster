@@ -38,7 +38,6 @@
 		"java": ">=17",
 		"fabric-api": "*"
 	},
-	"access_widener": "geocluster.accesswidener",
 	"suggests": {
 		"another-mod": "*"
 	},

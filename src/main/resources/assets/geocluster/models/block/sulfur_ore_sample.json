@@ -2,6 +2,6 @@
   "parent": "geocluster:block/ore_sample",
   "textures": {
     "particle": "minecraft:block/stone",
-    "ore": "geocluster:block/compat/???/sulfur_ore"
+    "ore": "geocluster:block/extras/sulfur_ore"
   }
 }
