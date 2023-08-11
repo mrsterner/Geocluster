@@ -1,4 +1,4 @@
-// 1.19.2	2023-07-26T16:33:52.181557843	Models
+// 1.19.2	2023-08-11T17:20:15.27740715	Models
 23d6768d1f916565af2a6edf1b1c79bc7f42e5cd assets/geocluster/blockstates/deepslate_platinum_ore.json
 1671be165d2de1d528486320c2affcf75c9f7f33 assets/geocluster/models/item/nickel_nugget.json
 6deda6b3d8978a97d67aeae835f67b46b47a0a0e assets/geocluster/models/item/uranium_ore.json
@@ -30,8 +30,8 @@ b13bd92eb32101333b2448a03f9ff55794c3f89f assets/geocluster/models/item/raw_plati
 2b976fa7c11503c94501be8d91cbe27916f383dc assets/geocluster/models/item/platinum_ingot.json
 87bed0c4f98ef584ce2b0549c6f7cb0de532b99d assets/geocluster/models/item/deepslate_platinum_ore.json
 0d0bab54a9352fc4c488e565a767148ceac71133 assets/geocluster/models/item/lead_ingot.json
-2c388fb5965575f855c92adb1516a156ca0b1e5d assets/geocluster/blockstates/quartz_ore.json
 b33b42b2921284d787884b5bdcc569902dc5d4a4 assets/geocluster/blockstates/deepslate_aluminium_ore.json
+2c388fb5965575f855c92adb1516a156ca0b1e5d assets/geocluster/blockstates/quartz_ore.json
 488e4b6f7517b03e1d0c2ae726d0d4b3471e50ec assets/geocluster/models/item/copper_nugget.json
 4d6781dad06a34dbb8c6fc4d2c4a5ef1a629345a assets/geocluster/models/block/quartz_ore.json
 7a871d17f94935ee25f6faa780d4952dd8a5298e assets/geocluster/models/item/silver_ingot.json
