@@ -1,4 +1,4 @@
-// 1.20.1	2023-07-29T20:35:37.785764681	Geocluster/Block Loot Tables
+// 1.20.1	2023-08-11T17:22:54.884799622	Geocluster/Block Loot Tables
 461c076315ca0b7f4c3602f5ca35c74d2e13de2d data/geocluster/loot_tables/blocks/nether_gold_ore_sample.json
 a9a9adee651c85d5512d58a11face54aee191c3f data/geocluster/loot_tables/blocks/platinum_ore_sample.json
 56d4bb03e54e43479f56dfaafebea8296fae5fa6 data/geocluster/loot_tables/blocks/stone_sample.json
@@ -19,6 +19,7 @@ ff345d7ff7d7dcd31d5314fcc693e86c7653f1d9 data/geocluster/loot_tables/blocks/deep
 afef182f3702656bf653be7b6111367c7ed950d6 data/geocluster/loot_tables/blocks/nickel_ore.json
 d60e744062f5aad35ef5632e84026b9557990d13 data/geocluster/loot_tables/blocks/emerald_ore_sample.json
 87b075bdb735337fb8187fb656a60c78142dbd9d data/geocluster/loot_tables/blocks/deepslate_nickel_ore.json
+7a5ca35716f279f49be2bda3f683678c44af0877 data/geocluster/loot_tables/blocks/ancient_debris_ore.json
 2d48d15e1409f62925ffec9942520dc0f0d9acf4 data/geocluster/loot_tables/blocks/deepslate_zinc_ore.json
 e3b74a362495b08e4ca881e5bcd8c19c8bc9b889 data/geocluster/loot_tables/blocks/deepslate_uranium_ore.json
 888d809627a1eb8c08b6fe950c30043051eb1108 data/geocluster/loot_tables/blocks/tin_ore.json
@@ -27,8 +28,8 @@ aaf371031875417ccbb5185119c9831445967c6e data/geocluster/loot_tables/blocks/deep
 7cbec1f7ecbae511509e5db1e538cbd67ae98b56 data/geocluster/loot_tables/blocks/iron_ore_sample.json
 d5f363f32a18f1a1a2d130f9e75402f9f743554c data/geocluster/loot_tables/blocks/deepslate_lead_ore.json
 77272ce04bf501acff3eb206477b2e0b868c48ea data/geocluster/loot_tables/blocks/uranium_ore.json
-d5e580e33cb3676aa1894ed5e8d61f648e8b3707 data/geocluster/loot_tables/blocks/diamond_ore_sample.json
 864a7da225a257fa7e2e22aae7ea65a6466a9ca8 data/geocluster/loot_tables/blocks/nether_quartz_ore_sample.json
+d5e580e33cb3676aa1894ed5e8d61f648e8b3707 data/geocluster/loot_tables/blocks/diamond_ore_sample.json
 e4650c23dba250fdaa134a7d221cebfe496dc3fd data/geocluster/loot_tables/blocks/tin_ore_sample.json
 850635597111485571ac57488642599b02199e53 data/geocluster/loot_tables/blocks/redstone_ore_sample.json
 245dd24c5405f614c796362a77137aa248fb0af6 data/geocluster/loot_tables/blocks/deepslate_tin_ore.json
