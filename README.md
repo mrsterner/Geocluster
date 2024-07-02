@@ -165,7 +165,7 @@ If you want to add new clusters a practical solution is more appropriate, there 
 ### <span style="color:pink">deposit_top_layer</span>
 ```json5
 {                                                      /* Notes / Comments    ↓                                    */
-  "type": "geocluster:top_deposit_layer",              /* This tells Geocluster how to generate this cluster       */
+  "type": "geocluster:deposit_top_layer",              /* This tells Geocluster how to generate this cluster       */
   "config": {                                          /* YMIN/MAX IS NOT PERMITTED BC. USE LAYER IF YOU NEED IT   */
     "radius": 4,                                       /* The radius of the layer (noise is added)                 */
     "depth": 4,                                        /* The height of the layer deposit                          */
