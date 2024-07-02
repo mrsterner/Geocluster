@@ -45,6 +45,11 @@ public class SampleBlock extends HorizontalFacingBlock implements Waterloggable 
         return CODEC;
     }
 
+    @Override
+    protected boolean isShapeFullCube(BlockState state, BlockView world, BlockPos pos) {
+        return false;
+    }
+
     @Nullable
     @Override
     public BlockState getPlacementState(ItemPlacementContext ctx) {
