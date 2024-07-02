@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "geocluster:zinc_ingot"
+    }
+  ],
+  "result": {
+    "count": 9,
+    "id": "geocluster:zinc_nugget"
+  }
+}

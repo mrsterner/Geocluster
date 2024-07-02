@@ -1,6 +1,6 @@
 package dev.sterner.geocluster;
 
-import dev.sterner.geocluster.client.network.S2CProspectingPacket;
+import dev.sterner.geocluster.client.network.S2CProspectingPayload;
 import dev.sterner.geocluster.client.toast.IOreToastManager;
 import dev.sterner.geocluster.client.toast.OreToastManager;
 import dev.sterner.geocluster.common.data.WorldGenDataReloadListener;
@@ -13,9 +13,11 @@ import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
 import net.fabricmc.fabric.api.event.registry.DynamicRegistrySetupCallback;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
+import net.fabricmc.fabric.api.networking.v1.PayloadTypeRegistry;
 import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
+import net.minecraft.client.render.RenderTickCounter;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.registry.Registries;
@@ -36,7 +38,7 @@ public class Geocluster implements ModInitializer, ClientModInitializer {
     public static final RegistryKey<ItemGroup> GEOCLUSTER_ITEM_GROUP = RegistryKey.of(RegistryKeys.ITEM_GROUP, id(MODID));
 
     public static Identifier id(String id) {
-        return new Identifier(MODID, id);
+        return Identifier.of(MODID, id);
     }
 
     @Override
@@ -58,15 +60,22 @@ public class Geocluster implements ModInitializer, ClientModInitializer {
                 GeoclusterWorldgenRegistry.init(registryView, configuredFeatures);
             });
         });
+
+        PayloadTypeRegistry.playS2C().register(S2CProspectingPayload.ID, S2CProspectingPayload.CODEC);
     }
 
     @Override
     public void onInitializeClient() {
-        ClientPlayNetworking.registerGlobalReceiver(S2CProspectingPacket.ID, S2CProspectingPacket::handle);
+
+        ClientPlayNetworking.registerGlobalReceiver(S2CProspectingPayload.ID, (payload, context) -> {
+            context.client().execute(() -> {
+                S2CProspectingPayload.handle(context.client(), payload.nbt(), payload.string());
+            });
+        });
         HudRenderCallback.EVENT.register(this::renderFoundOres);
     }
 
-    private void renderFoundOres(DrawContext ctx, float v) {
+    private void renderFoundOres(DrawContext ctx, RenderTickCounter renderTickCounter) {
         if (!MinecraftClient.getInstance().skipGameRender) {
             OreToastManager manager = ((IOreToastManager) MinecraftClient.getInstance()).getManager();
             manager.draw(ctx);

@@ -3,6 +3,9 @@ package dev.sterner.geocluster.datagen;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricBlockLootTableProvider;
 import net.minecraft.item.Items;
+import net.minecraft.registry.RegistryWrapper;
+
+import java.util.concurrent.CompletableFuture;
 
 import static dev.sterner.geocluster.common.registry.GeoclusterObjects.*;
 import static net.minecraft.item.Items.QUARTZ;
@@ -10,8 +13,8 @@ import static net.minecraft.item.Items.QUARTZ;
 public class GeoclusterLootTableProvider extends FabricBlockLootTableProvider {
 
 
-    public GeoclusterLootTableProvider(FabricDataOutput dataOutput) {
-        super(dataOutput);
+    protected GeoclusterLootTableProvider(FabricDataOutput dataOutput, CompletableFuture<RegistryWrapper.WrapperLookup> registryLookup) {
+        super(dataOutput, registryLookup);
     }
 
     @Override

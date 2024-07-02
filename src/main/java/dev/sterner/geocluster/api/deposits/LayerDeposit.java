@@ -178,7 +178,7 @@ public class LayerDeposit extends Deposit implements IDeposit {
             int radius = json.get("radius").getAsInt();
             int depth = json.get("depth").getAsInt();
             int genWt = json.get("generationWeight").getAsInt();
-            TagKey<Biome> biomeTag = TagKey.of(RegistryKeys.BIOME, new Identifier(json.get("biomeTag").getAsString().replace("#", "")));
+            TagKey<Biome> biomeTag = TagKey.of(RegistryKeys.BIOME, Identifier.of(json.get("biomeTag").getAsString().replace("#", "")));
             HashSet<BlockState> blockStateMatchers = DepositUtils.getDefaultMatchers();
             if (json.has("blockStateMatchers")) {
                 blockStateMatchers = SerializerUtils.toBlockStateList(json.get("blockStateMatchers").getAsJsonArray());

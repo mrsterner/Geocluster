@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:smelting",
+  "category": "misc",
+  "cookingtime": 200,
+  "experience": 1.0,
+  "group": "uranium_ingot",
+  "ingredient": {
+    "item": "geocluster:raw_uranium"
+  },
+  "result": {
+    "id": "geocluster:uranium_ingot"
+  }
+}

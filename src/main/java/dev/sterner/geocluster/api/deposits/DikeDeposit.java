@@ -198,7 +198,7 @@ public class DikeDeposit extends Deposit implements IDeposit {
             int baseRadius = json.get("baseRadius").getAsInt();
             int maxHeight = json.get("maxHeight").getAsInt();
             int genWt = json.get("generationWeight").getAsInt();
-            TagKey<Biome> biomeTag = TagKey.of(RegistryKeys.BIOME, new Identifier(json.get("biomeTag").getAsString().replace("#", "")));
+            TagKey<Biome> biomeTag = TagKey.of(RegistryKeys.BIOME, Identifier.of(json.get("biomeTag").getAsString().replace("#", "")));
 
             HashSet<BlockState> blockStateMatchers = DepositUtils.getDefaultMatchers();
             if (json.has("blockStateMatchers")) {

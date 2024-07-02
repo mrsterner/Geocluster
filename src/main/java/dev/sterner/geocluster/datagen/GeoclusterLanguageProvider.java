@@ -2,16 +2,25 @@ package dev.sterner.geocluster.datagen;
 
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricLanguageProvider;
+import net.minecraft.registry.RegistryWrapper;
+
+import java.util.concurrent.CompletableFuture;
 
 import static dev.sterner.geocluster.common.registry.GeoclusterObjects.*;
 
 public class GeoclusterLanguageProvider extends FabricLanguageProvider {
 
-    public GeoclusterLanguageProvider(FabricDataOutput dataOutput) {
-        super(dataOutput);
+
+    protected GeoclusterLanguageProvider(FabricDataOutput dataOutput, CompletableFuture<RegistryWrapper.WrapperLookup> registryLookup) {
+        super(dataOutput, registryLookup);
     }
 
     @Override
+    public void generateTranslations(RegistryWrapper.WrapperLookup registryLookup, TranslationBuilder translationBuilder) {
+        generateTranslations(translationBuilder);
+    }
+
+
     public void generateTranslations(TranslationBuilder builder) {
         builder.add("geocluster.group.main", "Geocluster");
         builder.add("geocluster.pro_pick.tooltip.nonefound_surface", "Nothing found in this area");
@@ -154,4 +163,6 @@ public class GeoclusterLanguageProvider extends FabricLanguageProvider {
         builder.add(SHADOW_QUARTZ_SAMPLE, "Shadow Quartz Sample");
         builder.add(SULFUR_SAMPLE, "Sulfur Sample");
     }
+
+
 }

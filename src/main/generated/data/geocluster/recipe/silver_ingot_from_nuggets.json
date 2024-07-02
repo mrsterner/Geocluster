@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "silver_ingot",
+  "key": {
+    "#": {
+      "item": "geocluster:silver_nugget"
+    }
+  },
+  "pattern": [
+    "###",
+    "###",
+    "###"
+  ],
+  "result": {
+    "count": 1,
+    "id": "geocluster:silver_ingot"
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "values": [
+    "#minecraft:dirt",
+    "#minecraft:sand",
+    "minecraft:gravel",
+    "#c:stone",
+    "minecraft:soul_soil",
+    "minecraft:soul_sand",
+    "minecraft:basalt",
+    "minecraft:crimson_nylium",
+    "minecraft:warped_nylium"
+  ]
+}

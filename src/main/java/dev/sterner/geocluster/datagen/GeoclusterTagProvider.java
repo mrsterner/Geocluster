@@ -106,6 +106,7 @@ public class GeoclusterTagProvider {
 
         @Override
         protected void configure(RegistryWrapper.WrapperLookup arg) {
+            /*
             getOrCreateTagBuilder(GeoclusterTagRegistry.IS_DRY).add(BiomeKeys.DESERT).add(BiomeKeys.ERODED_BADLANDS).add(BiomeKeys.WINDSWEPT_SAVANNA).add(BiomeKeys.BADLANDS).add(BiomeKeys.WOODED_BADLANDS);
             getOrCreateTagBuilder(GeoclusterTagRegistry.IS_HOT).addTag(GeoclusterTagRegistry.IS_DRY).add(BiomeKeys.JUNGLE).add(BiomeKeys.SPARSE_JUNGLE).add(BiomeKeys.SAVANNA).add(BiomeKeys.SAVANNA_PLATEAU).add(BiomeKeys.STONY_PEAKS)
                     .add(BiomeKeys.WARM_OCEAN).add(BiomeKeys.BAMBOO_JUNGLE).add(BiomeKeys.MANGROVE_SWAMP);
@@ -116,6 +117,8 @@ public class GeoclusterTagProvider {
             getOrCreateTagBuilder(GeoclusterTagRegistry.IS_MARSHY).addTag(GeoclusterTagRegistry.IS_SWAMP).addTag(GeoclusterTagRegistry.IS_MUSHROOM);
 
             getOrCreateTagBuilder(GeoclusterTagRegistry.IS_PLAINS).add(BiomeKeys.PLAINS).add(BiomeKeys.SNOWY_PLAINS).add(BiomeKeys.MEADOW).add(BiomeKeys.SUNFLOWER_PLAINS);
+
+             */
         }
     }
 }

@@ -3,14 +3,16 @@ package dev.sterner.geocluster.datagen;
 import com.google.common.collect.ImmutableList;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
-import net.minecraft.data.server.recipe.RecipeJsonProvider;
+import net.minecraft.data.server.recipe.RecipeExporter;
 import net.minecraft.data.server.recipe.ShapedRecipeJsonBuilder;
 import net.minecraft.item.ItemConvertible;
 import net.minecraft.item.Items;
 import net.minecraft.recipe.book.RecipeCategory;
+import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.registry.tag.ItemTags;
 
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 import java.util.function.Consumer;
 
 import static dev.sterner.geocluster.common.registry.GeoclusterObjects.*;
@@ -28,12 +30,12 @@ public class GeoclusterRecipeProvider extends FabricRecipeProvider {
     private static final ImmutableList<ItemConvertible> NICKEL_ORES = ImmutableList.of(NICKEL_ORE, DEEPSLATE_NICKEL_ORE, RAW_NICKEL);
     private static final ImmutableList<ItemConvertible> QUARTZ_ORES = ImmutableList.of(QUARTZ_ORE, DEEPSLATE_QUARTZ_ORE);
 
-    public GeoclusterRecipeProvider(FabricDataOutput output) {
-        super(output);
+    public GeoclusterRecipeProvider(FabricDataOutput output, CompletableFuture<RegistryWrapper.WrapperLookup> registriesFuture) {
+        super(output, registriesFuture);
     }
 
     @Override
-    public void generate(Consumer<RecipeJsonProvider> exporter) {
+    public void generate(RecipeExporter exporter) {
         offerReversibleCompactingRecipesWithCompactingRecipeGroup(exporter, RecipeCategory.MISC, COPPER_NUGGET, RecipeCategory.MISC, Items.COPPER_INGOT, "copper_ingot_from_nuggets", "copper_ingot");
         offerReversibleCompactingRecipesWithCompactingRecipeGroup(exporter, RecipeCategory.MISC, ZINC_NUGGET, RecipeCategory.MISC, ZINC_INGOT, "zinc_ingot_from_nuggets", "zinc_ingot");
         offerReversibleCompactingRecipesWithCompactingRecipeGroup(exporter, RecipeCategory.MISC, SILVER_NUGGET, RecipeCategory.MISC, SILVER_INGOT, "silver_ingot_from_nuggets", "silver_ingot");
@@ -93,4 +95,6 @@ public class GeoclusterRecipeProvider extends FabricRecipeProvider {
                 .criterion("has_chunk", conditionsFromItem(STONE_CHUNK))
                 .offerTo(exporter);
     }
+
+
 }

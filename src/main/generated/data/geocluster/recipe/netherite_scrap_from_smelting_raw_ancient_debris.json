@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:smelting",
+  "category": "misc",
+  "cookingtime": 200,
+  "experience": 1.0,
+  "group": "netherite_scrap",
+  "ingredient": {
+    "item": "geocluster:raw_ancient_debris"
+  },
+  "result": {
+    "id": "minecraft:netherite_scrap"
+  }
+}

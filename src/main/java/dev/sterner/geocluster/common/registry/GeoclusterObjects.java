@@ -11,6 +11,8 @@ import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.math.intprovider.ConstantIntProvider;
+import net.minecraft.util.math.intprovider.UniformIntProvider;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -56,38 +58,38 @@ public interface GeoclusterObjects {
     Item TITANIUM_NUGGET = register("titanium_nugget", new Item(settings()));
     Item NICKEL_NUGGET = register("nickel_nugget", new Item(settings()));
 
-    Block ZINC_ORE = register("zinc_ore", new ExperienceDroppingBlock(AbstractBlock.Settings.copy(Blocks.STONE).requiresTool().strength(3.0F, 3.0F)), settings());
-    Block DEEPSLATE_ZINC_ORE = register("deepslate_zinc_ore", new ExperienceDroppingBlock(AbstractBlock.Settings.copy(ZINC_ORE).mapColor(MapColor.DEEPSLATE_GRAY).strength(4.5F, 3.0F).sounds(BlockSoundGroup.DEEPSLATE)), settings());
+    Block ZINC_ORE = register("zinc_ore", new ExperienceDroppingBlock(ConstantIntProvider.create(0), AbstractBlock.Settings.copy(Blocks.STONE).requiresTool().strength(3.0F, 3.0F)), settings());
+    Block DEEPSLATE_ZINC_ORE = register("deepslate_zinc_ore", new ExperienceDroppingBlock(ConstantIntProvider.create(0), AbstractBlock.Settings.copy(ZINC_ORE).mapColor(MapColor.DEEPSLATE_GRAY).strength(4.5F, 3.0F).sounds(BlockSoundGroup.DEEPSLATE)), settings());
 
-    Block SILVER_ORE = register("silver_ore", new ExperienceDroppingBlock(AbstractBlock.Settings.copy(Blocks.STONE).requiresTool().strength(3.0F, 3.0F)), settings());
-    Block DEEPSLATE_SILVER_ORE = register("deepslate_silver_ore", new ExperienceDroppingBlock(AbstractBlock.Settings.copy(SILVER_ORE).mapColor(MapColor.DEEPSLATE_GRAY).strength(4.5F, 3.0F).sounds(BlockSoundGroup.DEEPSLATE)), settings());
+    Block SILVER_ORE = register("silver_ore", new ExperienceDroppingBlock(ConstantIntProvider.create(0), AbstractBlock.Settings.copy(Blocks.STONE).requiresTool().strength(3.0F, 3.0F)), settings());
+    Block DEEPSLATE_SILVER_ORE = register("deepslate_silver_ore", new ExperienceDroppingBlock(ConstantIntProvider.create(0), AbstractBlock.Settings.copy(SILVER_ORE).mapColor(MapColor.DEEPSLATE_GRAY).strength(4.5F, 3.0F).sounds(BlockSoundGroup.DEEPSLATE)), settings());
 
-    Block LEAD_ORE = register("lead_ore", new ExperienceDroppingBlock(AbstractBlock.Settings.copy(Blocks.STONE).requiresTool().strength(3.0F, 3.0F)), settings());
-    Block DEEPSLATE_LEAD_ORE = register("deepslate_lead_ore", new ExperienceDroppingBlock(AbstractBlock.Settings.copy(LEAD_ORE).mapColor(MapColor.DEEPSLATE_GRAY).strength(4.5F, 3.0F).sounds(BlockSoundGroup.DEEPSLATE)), settings());
+    Block LEAD_ORE = register("lead_ore", new ExperienceDroppingBlock(ConstantIntProvider.create(0), AbstractBlock.Settings.copy(Blocks.STONE).requiresTool().strength(3.0F, 3.0F)), settings());
+    Block DEEPSLATE_LEAD_ORE = register("deepslate_lead_ore", new ExperienceDroppingBlock(ConstantIntProvider.create(0), AbstractBlock.Settings.copy(LEAD_ORE).mapColor(MapColor.DEEPSLATE_GRAY).strength(4.5F, 3.0F).sounds(BlockSoundGroup.DEEPSLATE)), settings());
 
-    Block ALUMINIUM_ORE = register("aluminium_ore", new ExperienceDroppingBlock(AbstractBlock.Settings.copy(Blocks.STONE).requiresTool().strength(3.0F, 3.0F)), settings());
-    Block DEEPSLATE_ALUMINIUM_ORE = register("deepslate_aluminium_ore", new ExperienceDroppingBlock(AbstractBlock.Settings.copy(ALUMINIUM_ORE).mapColor(MapColor.DEEPSLATE_GRAY).strength(4.5F, 3.0F).sounds(BlockSoundGroup.DEEPSLATE)), settings());
+    Block ALUMINIUM_ORE = register("aluminium_ore", new ExperienceDroppingBlock(ConstantIntProvider.create(0), AbstractBlock.Settings.copy(Blocks.STONE).requiresTool().strength(3.0F, 3.0F)), settings());
+    Block DEEPSLATE_ALUMINIUM_ORE = register("deepslate_aluminium_ore", new ExperienceDroppingBlock(ConstantIntProvider.create(0), AbstractBlock.Settings.copy(ALUMINIUM_ORE).mapColor(MapColor.DEEPSLATE_GRAY).strength(4.5F, 3.0F).sounds(BlockSoundGroup.DEEPSLATE)), settings());
 
-    Block URANIUM_ORE = register("uranium_ore", new ExperienceDroppingBlock(AbstractBlock.Settings.copy(Blocks.STONE).requiresTool().strength(3.0F, 3.0F)), settings());
-    Block DEEPSLATE_URANIUM_ORE = register("deepslate_uranium_ore", new ExperienceDroppingBlock(AbstractBlock.Settings.copy(URANIUM_ORE).mapColor(MapColor.DEEPSLATE_GRAY).strength(4.5F, 3.0F).sounds(BlockSoundGroup.DEEPSLATE)), settings());
+    Block URANIUM_ORE = register("uranium_ore", new ExperienceDroppingBlock(ConstantIntProvider.create(0), AbstractBlock.Settings.copy(Blocks.STONE).requiresTool().strength(3.0F, 3.0F)), settings());
+    Block DEEPSLATE_URANIUM_ORE = register("deepslate_uranium_ore", new ExperienceDroppingBlock(ConstantIntProvider.create(0), AbstractBlock.Settings.copy(URANIUM_ORE).mapColor(MapColor.DEEPSLATE_GRAY).strength(4.5F, 3.0F).sounds(BlockSoundGroup.DEEPSLATE)), settings());
 
-    Block TIN_ORE = register("tin_ore", new ExperienceDroppingBlock(AbstractBlock.Settings.copy(Blocks.STONE).requiresTool().strength(3.0F, 3.0F)), settings());
-    Block DEEPSLATE_TIN_ORE = register("deepslate_tin_ore", new ExperienceDroppingBlock(AbstractBlock.Settings.copy(TIN_ORE).mapColor(MapColor.DEEPSLATE_GRAY).strength(4.5F, 3.0F).sounds(BlockSoundGroup.DEEPSLATE)), settings());
+    Block TIN_ORE = register("tin_ore", new ExperienceDroppingBlock(ConstantIntProvider.create(0), AbstractBlock.Settings.copy(Blocks.STONE).requiresTool().strength(3.0F, 3.0F)), settings());
+    Block DEEPSLATE_TIN_ORE = register("deepslate_tin_ore", new ExperienceDroppingBlock(ConstantIntProvider.create(0), AbstractBlock.Settings.copy(TIN_ORE).mapColor(MapColor.DEEPSLATE_GRAY).strength(4.5F, 3.0F).sounds(BlockSoundGroup.DEEPSLATE)), settings());
 
-    Block PLATINUM_ORE = register("platinum_ore", new ExperienceDroppingBlock(AbstractBlock.Settings.copy(Blocks.STONE).requiresTool().strength(3.0F, 3.0F)), settings());
-    Block DEEPSLATE_PLATINUM_ORE = register("deepslate_platinum_ore", new ExperienceDroppingBlock(AbstractBlock.Settings.copy(PLATINUM_ORE).mapColor(MapColor.DEEPSLATE_GRAY).strength(4.5F, 3.0F).sounds(BlockSoundGroup.DEEPSLATE)), settings());
+    Block PLATINUM_ORE = register("platinum_ore", new ExperienceDroppingBlock(ConstantIntProvider.create(0), AbstractBlock.Settings.copy(Blocks.STONE).requiresTool().strength(3.0F, 3.0F)), settings());
+    Block DEEPSLATE_PLATINUM_ORE = register("deepslate_platinum_ore", new ExperienceDroppingBlock(ConstantIntProvider.create(0), AbstractBlock.Settings.copy(PLATINUM_ORE).mapColor(MapColor.DEEPSLATE_GRAY).strength(4.5F, 3.0F).sounds(BlockSoundGroup.DEEPSLATE)), settings());
 
-    Block TITANIUM_ORE = register("titanium_ore", new ExperienceDroppingBlock(AbstractBlock.Settings.copy(Blocks.STONE).requiresTool().strength(3.0F, 3.0F)), settings());
-    Block DEEPSLATE_TITANIUM_ORE = register("deepslate_titanium_ore", new ExperienceDroppingBlock(AbstractBlock.Settings.copy(TITANIUM_ORE).mapColor(MapColor.DEEPSLATE_GRAY).strength(4.5F, 3.0F).sounds(BlockSoundGroup.DEEPSLATE)), settings());
+    Block TITANIUM_ORE = register("titanium_ore", new ExperienceDroppingBlock(ConstantIntProvider.create(0), AbstractBlock.Settings.copy(Blocks.STONE).requiresTool().strength(3.0F, 3.0F)), settings());
+    Block DEEPSLATE_TITANIUM_ORE = register("deepslate_titanium_ore", new ExperienceDroppingBlock(ConstantIntProvider.create(0), AbstractBlock.Settings.copy(TITANIUM_ORE).mapColor(MapColor.DEEPSLATE_GRAY).strength(4.5F, 3.0F).sounds(BlockSoundGroup.DEEPSLATE)), settings());
 
-    Block NICKEL_ORE = register("nickel_ore", new ExperienceDroppingBlock(AbstractBlock.Settings.copy(Blocks.STONE).requiresTool().strength(3.0F, 3.0F)), settings());
-    Block DEEPSLATE_NICKEL_ORE = register("deepslate_nickel_ore", new ExperienceDroppingBlock(AbstractBlock.Settings.copy(NICKEL_ORE).mapColor(MapColor.DEEPSLATE_GRAY).strength(4.5F, 3.0F).sounds(BlockSoundGroup.DEEPSLATE)), settings());
+    Block NICKEL_ORE = register("nickel_ore", new ExperienceDroppingBlock(ConstantIntProvider.create(0), AbstractBlock.Settings.copy(Blocks.STONE).requiresTool().strength(3.0F, 3.0F)), settings());
+    Block DEEPSLATE_NICKEL_ORE = register("deepslate_nickel_ore", new ExperienceDroppingBlock(ConstantIntProvider.create(0), AbstractBlock.Settings.copy(NICKEL_ORE).mapColor(MapColor.DEEPSLATE_GRAY).strength(4.5F, 3.0F).sounds(BlockSoundGroup.DEEPSLATE)), settings());
 
-    Block QUARTZ_ORE = register("quartz_ore", new ExperienceDroppingBlock(AbstractBlock.Settings.copy(Blocks.STONE).requiresTool().strength(3.0F, 3.0F)), settings());
-    Block DEEPSLATE_QUARTZ_ORE = register("deepslate_quartz_ore", new ExperienceDroppingBlock(AbstractBlock.Settings.copy(NICKEL_ORE).mapColor(MapColor.DEEPSLATE_GRAY).strength(4.5F, 3.0F).sounds(BlockSoundGroup.DEEPSLATE)), settings());
+    Block QUARTZ_ORE = register("quartz_ore", new ExperienceDroppingBlock(UniformIntProvider.create(0, 2), AbstractBlock.Settings.copy(Blocks.STONE).requiresTool().strength(3.0F, 3.0F)), settings());
+    Block DEEPSLATE_QUARTZ_ORE = register("deepslate_quartz_ore", new ExperienceDroppingBlock(UniformIntProvider.create(0, 2), AbstractBlock.Settings.copy(NICKEL_ORE).mapColor(MapColor.DEEPSLATE_GRAY).strength(4.5F, 3.0F).sounds(BlockSoundGroup.DEEPSLATE)), settings());
 
 
-    Block ANCIENT_DEBRIS_ORE = register("ancient_debris_ore", new ExperienceDroppingBlock(AbstractBlock.Settings.copy(Blocks.STONE).requiresTool().strength(3.0F, 3.0F)), settings());
+    Block ANCIENT_DEBRIS_ORE = register("ancient_debris_ore", new ExperienceDroppingBlock(ConstantIntProvider.create(0), AbstractBlock.Settings.copy(Blocks.STONE).requiresTool().strength(3.0F, 3.0F)), settings());
 
     Block STONE_SAMPLE = register("stone_sample", new SampleBlock(), settings());
 

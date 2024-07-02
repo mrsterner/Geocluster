@@ -20,7 +20,7 @@ public class SerializerUtils {
         if (string == null) {
             return Blocks.AIR.getDefaultState();
         }
-        Identifier r = new Identifier(string);
+        Identifier r = Identifier.of(string);
         return Objects.requireNonNull(Registries.BLOCK.get(r)).getDefaultState();
     }
 

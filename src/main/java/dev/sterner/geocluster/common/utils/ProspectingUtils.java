@@ -45,7 +45,7 @@ public class ProspectingUtils {
         detectionBlacklist = new HashSet<>();
 
         GeoclusterConfig.PROSPECTORS_PICK_DETECTION_BLACKLIST.forEach(s -> {
-            Block block = Registries.BLOCK.get(new Identifier(s));
+            Block block = Registries.BLOCK.get(Identifier.of(s));
             if (block != null) {
                 detectionBlacklist.add(block.getDefaultState());
             } else {

@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:smelting",
+  "category": "misc",
+  "cookingtime": 200,
+  "experience": 1.0,
+  "group": "nickel_ingot",
+  "ingredient": {
+    "item": "geocluster:raw_nickel"
+  },
+  "result": {
+    "id": "geocluster:nickel_ingot"
+  }
+}

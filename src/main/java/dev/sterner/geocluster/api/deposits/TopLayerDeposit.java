@@ -176,7 +176,7 @@ public class TopLayerDeposit extends Deposit implements IDeposit {
             int depth = json.get("depth").getAsInt();
             float sampleChance = json.get("chanceForSample").getAsFloat();
             int genWt = json.get("generationWeight").getAsInt();
-            TagKey<Biome> biomeTag = TagKey.of(RegistryKeys.BIOME, new Identifier(json.get("biomeTag").getAsString().replace("#", "")));
+            TagKey<Biome> biomeTag = TagKey.of(RegistryKeys.BIOME, Identifier.of(json.get("biomeTag").getAsString().replace("#", "")));
 
             HashSet<BlockState> blockStateMatchers = DepositUtils.getDefaultMatchers();
             if (json.has("blockStateMatchers")) {

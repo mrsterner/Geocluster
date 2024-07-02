@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_chunk": {
+      "conditions": {
+        "items": [
+          {
+            "items": "geocluster:stone_chunk"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "minecraft:cobblestone"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_chunk"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "minecraft:cobblestone"
+    ]
+  }
+}

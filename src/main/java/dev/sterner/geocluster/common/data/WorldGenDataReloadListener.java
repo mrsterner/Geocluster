@@ -11,7 +11,9 @@ import dev.sterner.geocluster.api.DepositCache;
 import dev.sterner.geocluster.api.deposits.*;
 import dev.sterner.geocluster.common.data.serializer.*;
 import dev.sterner.geocluster.common.utils.ProspectingUtils;
+import net.fabricmc.fabric.api.event.lifecycle.v1.CommonLifecycleEvents;
 import net.fabricmc.fabric.api.resource.IdentifiableResourceReloadListener;
+import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.resource.JsonDataLoader;
 import net.minecraft.resource.ResourceManager;
 import net.minecraft.util.Identifier;
@@ -60,41 +62,53 @@ public class WorldGenDataReloadListener extends JsonDataLoader implements Identi
             try {
                 JsonObject jsonobject = json.getAsJsonObject();
                 JsonObject config = jsonobject.get("config").getAsJsonObject();
-                Geocluster.LOGGER.info("Preparing to load deposit datafile {}", identifier.toString());
+                if (GeoclusterConfig.DEBUG_WORLD_GEN) {
+                    Geocluster.LOGGER.info("Preparing to load deposit datafile {}", identifier.toString());
+                }
 
                 switch (jsonobject.get("type").getAsString()) {
                     case "geocluster:deposit_dense" -> {
                         DenseDeposit denseDeposit = DenseSerializer.deserialize(config);
                         if (denseDeposit != null) {
-                            Geocluster.LOGGER.info(denseDeposit.toString());
+                            if (GeoclusterConfig.DEBUG_WORLD_GEN) {
+                                Geocluster.LOGGER.info(denseDeposit.toString());
+                            }
                             cache.addDeposit(denseDeposit);
                         }
                     }
                     case "geocluster:deposit_layer" -> {
                         LayerDeposit layerDeposit = LayerSerializer.deserialize(config);
                         if (layerDeposit != null) {
-                            Geocluster.LOGGER.info(layerDeposit.toString());
+                            if (GeoclusterConfig.DEBUG_WORLD_GEN) {
+                                Geocluster.LOGGER.info(layerDeposit.toString());
+                            }
                             cache.addDeposit(layerDeposit);
                         }
                     }
                     case "geocluster:deposit_top_layer" -> {
                         TopLayerDeposit topLayerDeposit = TopLayerSerializer.deserialize(config);
                         if (topLayerDeposit != null) {
-                            Geocluster.LOGGER.info(topLayerDeposit.toString());
+                            if (GeoclusterConfig.DEBUG_WORLD_GEN) {
+                                Geocluster.LOGGER.info(topLayerDeposit.toString());
+                            }
                             cache.addDeposit(topLayerDeposit);
                         }
                     }
                     case "geocluster:deposit_dike" -> {
                         DikeDeposit dikeDeposit = DikeSerializer.deserialize(config);
                         if (dikeDeposit != null) {
-                            Geocluster.LOGGER.info(dikeDeposit.toString());
+                            if (GeoclusterConfig.DEBUG_WORLD_GEN) {
+                                Geocluster.LOGGER.info(dikeDeposit.toString());
+                            }
                             cache.addDeposit(dikeDeposit);
                         }
                     }
                     case "geocluster:deposit_sparse" -> {
                         SparseDeposit sparseDeposit = SparseSerializer.deserialize(config);
                         if (sparseDeposit != null) {
-                            Geocluster.LOGGER.info(sparseDeposit.toString());
+                            if (GeoclusterConfig.DEBUG_WORLD_GEN) {
+                                Geocluster.LOGGER.info(sparseDeposit.toString());
+                            }
                             cache.addDeposit(sparseDeposit);
                         }
                     }

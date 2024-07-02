@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:smelting",
+  "category": "misc",
+  "cookingtime": 200,
+  "experience": 1.0,
+  "group": "titanium_ingot",
+  "ingredient": {
+    "item": "geocluster:raw_titanium"
+  },
+  "result": {
+    "id": "geocluster:titanium_ingot"
+  }
+}

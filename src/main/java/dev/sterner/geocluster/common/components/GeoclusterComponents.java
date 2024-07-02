@@ -1,10 +1,10 @@
 package dev.sterner.geocluster.common.components;
 
-import dev.onyxstudios.cca.api.v3.component.ComponentKey;
-import dev.onyxstudios.cca.api.v3.component.ComponentRegistry;
-import dev.onyxstudios.cca.api.v3.world.WorldComponentFactoryRegistry;
-import dev.onyxstudios.cca.api.v3.world.WorldComponentInitializer;
 import dev.sterner.geocluster.Geocluster;
+import org.ladysnake.cca.api.v3.component.ComponentKey;
+import org.ladysnake.cca.api.v3.component.ComponentRegistry;
+import org.ladysnake.cca.api.v3.world.WorldComponentFactoryRegistry;
+import org.ladysnake.cca.api.v3.world.WorldComponentInitializer;
 
 public class GeoclusterComponents implements WorldComponentInitializer {
     public static final ComponentKey<WorldChunkComponent> CHUNK = ComponentRegistry.getOrCreate(Geocluster.id("chunk"), WorldChunkComponent.class);

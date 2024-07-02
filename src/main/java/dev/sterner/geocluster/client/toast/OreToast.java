@@ -41,7 +41,7 @@ public class OreToast implements IOreToast {
             return Visibility.HIDE;
         } else {
 
-            ctx.drawTexture(new Identifier("textures/gui/toasts.png"), 0, 0, 0, 0, this.getWidth(), this.getHeight());
+            ctx.drawGuiTexture(Identifier.ofVanilla("toast/advancement"), 0, 0, this.getWidth(), this.getHeight());
             Pair<BlockState, Direction> pair = this.blockStates.get((int) (startTime / Math.max(1L, 5000L / (long) this.blockStates.size()) % (long) this.blockStates.size()));
             BlockState blockState = pair.getFirst();
             TextRenderer textRenderer = oreToastManager.client.textRenderer;

@@ -214,7 +214,7 @@ public class SparseDeposit extends Deposit implements IDeposit {
             int spread = json.get("spread").getAsInt();
             int size = json.get("size").getAsInt();
             int genWt = json.get("generationWeight").getAsInt();
-            TagKey<Biome> biomeTag = TagKey.of(RegistryKeys.BIOME, new Identifier(json.get("biomeTag").getAsString().replace("#", "")));
+            TagKey<Biome> biomeTag = TagKey.of(RegistryKeys.BIOME, Identifier.of(json.get("biomeTag").getAsString().replace("#", "")));
 
             HashSet<BlockState> blockStateMatchers = DepositUtils.getDefaultMatchers();
             if (json.has("blockStateMatchers")) {

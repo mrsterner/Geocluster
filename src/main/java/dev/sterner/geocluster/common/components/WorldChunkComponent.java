@@ -1,10 +1,11 @@
 package dev.sterner.geocluster.common.components;
 
-import dev.onyxstudios.cca.api.v3.component.sync.AutoSyncedComponent;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtList;
+import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.util.math.ChunkPos;
 import net.minecraft.world.World;
+import org.ladysnake.cca.api.v3.component.sync.AutoSyncedComponent;
 
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -29,7 +30,7 @@ public class WorldChunkComponent implements AutoSyncedComponent, IWorldChunkComp
     }
 
     @Override
-    public void readFromNbt(NbtCompound tag) {
+    public void readFromNbt(NbtCompound tag, RegistryWrapper.WrapperLookup registryLookup) {
         NbtList chunks = tag.getList("chunks", 10);
         chunks.forEach(x -> {
             NbtCompound comp = (NbtCompound) x;
@@ -39,7 +40,7 @@ public class WorldChunkComponent implements AutoSyncedComponent, IWorldChunkComp
     }
 
     @Override
-    public void writeToNbt(NbtCompound tag) {
+    public void writeToNbt(NbtCompound tag, RegistryWrapper.WrapperLookup registryLookup) {
         NbtCompound compound = new NbtCompound();
         NbtList chunks = new NbtList();
         this.generatedChunks.forEach(chunkPos -> {

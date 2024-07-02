@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "aluminium_ingot",
+  "key": {
+    "#": {
+      "item": "geocluster:aluminium_nugget"
+    }
+  },
+  "pattern": [
+    "###",
+    "###",
+    "###"
+  ],
+  "result": {
+    "count": 1,
+    "id": "geocluster:aluminium_ingot"
+  }
+}

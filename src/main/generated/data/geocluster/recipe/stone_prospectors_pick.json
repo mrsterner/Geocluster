@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "I": {
+      "item": "minecraft:cobblestone"
+    },
+    "N": {
+      "item": "geocluster:stone_chunk"
+    },
+    "S": {
+      "item": "minecraft:stick"
+    }
+  },
+  "pattern": [
+    "NI",
+    " S"
+  ],
+  "result": {
+    "count": 1,
+    "id": "geocluster:stone_prospectors_pick"
+  }
+}

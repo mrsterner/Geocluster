@@ -1,7 +1,7 @@
 package dev.sterner.geocluster.common.items;
 
 import dev.sterner.geocluster.GeoclusterConfig;
-import dev.sterner.geocluster.client.network.S2CProspectingPacket;
+import dev.sterner.geocluster.client.network.S2CProspectingPayload;
 import dev.sterner.geocluster.common.utils.GeoclusterUtils;
 import dev.sterner.geocluster.common.utils.ProspectingUtils;
 import net.minecraft.block.BlockState;
@@ -19,6 +19,8 @@ import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
 
 import java.util.HashSet;
+
+import static net.minecraft.entity.LivingEntity.getSlotForHand;
 
 public class ProspectorsPickItem extends Item {
     public static Item.Settings props = new Item.Settings().maxCount(1).maxDamage(1024);
@@ -52,7 +54,7 @@ public class ProspectorsPickItem extends Item {
             }
 
             if (!player.isCreative()) {
-                stack.damage(1, player, (x) -> x.sendToolBreakStatus(hand));
+                stack.damage(1, player, getSlotForHand(hand));
             }
 
             int range = TYPE == Type.IRON ? GeoclusterConfig.PROSPECTORS_PICK_RANGE : TYPE == Type.COPPER ? GeoclusterConfig.PROSPECTORS_PICK_RANGE - 1 : GeoclusterConfig.PROSPECTORS_PICK_RANGE - 2;
@@ -99,7 +101,7 @@ public class ProspectorsPickItem extends Item {
 
         var optional = foundBlockPos.stream().findAny();
         if (!foundBlocks.isEmpty()) {
-            S2CProspectingPacket.send(player, foundBlocks, facing.getOpposite().getName());
+            S2CProspectingPayload.send(player, foundBlocks, facing.getOpposite().getName());
             optional.ifPresent(blockPos -> world.playSound(null, blockPos, SoundEvents.BLOCK_ANVIL_PLACE, SoundCategory.PLAYERS, 0.15F, 2F));
             return;
         }
@@ -125,7 +127,7 @@ public class ProspectorsPickItem extends Item {
         }
 
         if (!foundBlocks.isEmpty()) {
-            S2CProspectingPacket.send(player, foundBlocks, "");
+            S2CProspectingPayload.send(player, foundBlocks, "");
             return;
         }
 

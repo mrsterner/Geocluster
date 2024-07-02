@@ -9,6 +9,7 @@ import net.fabricmc.fabric.api.event.registry.DynamicRegistryView;
 import net.minecraft.registry.*;
 import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.registry.tag.TagKey;
+import net.minecraft.util.Identifier;
 import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.world.gen.YOffset;
 import net.minecraft.world.gen.feature.*;
@@ -24,8 +25,12 @@ public class GeoclusterWorldgenRegistry {
     public static PlacedFeature PLACED_DEPOSIT_FEATURE;
     public static RegistryKey<PlacedFeature> PLACED_DEPOSIT_FEATURE_KEY;
 
+    public static RegistryKey<PlacedFeature> of(String id) {
+        return RegistryKey.of(RegistryKeys.PLACED_FEATURE, Geocluster.id(id));
+    }
+
     public static void init() {
-        PLACED_DEPOSIT_FEATURE_KEY = PlacedFeatures.of(Geocluster.id("deposits_placed").toString());
+        PLACED_DEPOSIT_FEATURE_KEY = of("deposits_placed");
 
         BiomeModification modifications = BiomeModifications.create(Geocluster.id("worldgen"));
         modifications.add(ModificationPhase.ADDITIONS, BiomeSelectors.all(), ctx -> {
@@ -42,9 +47,13 @@ public class GeoclusterWorldgenRegistry {
         });
     }
 
+    public static RegistryKey<ConfiguredFeature<?, ?>> ofConfigured(String id) {
+        return RegistryKey.of(RegistryKeys.CONFIGURED_FEATURE, Geocluster.id(id));
+    }
+
     public static void init(DynamicRegistryView registryView, Registry<ConfiguredFeature<?, ?>> configuredFeatures) {
         CONFIGURED_DEPOSIT_FEATURE = Registry.register(configuredFeatures, Geocluster.id("deposits_configured"), new ConfiguredFeature<>(DEPOSIT_FEATURE, DefaultFeatureConfig.INSTANCE));
-        CONFIGURED_DEPOSIT_FEATURE_KEY = ConfiguredFeatures.of(Geocluster.id("deposits_configured").toString());
+        CONFIGURED_DEPOSIT_FEATURE_KEY = ofConfigured("deposits_configured");
 
         registryView.getOptional(RegistryKeys.PLACED_FEATURE).ifPresent(registry -> {
             RegistryEntryLookup<ConfiguredFeature<?, ?>> entry = registryView.asDynamicRegistryManager().createRegistryLookup().getOrThrow(RegistryKeys.CONFIGURED_FEATURE);

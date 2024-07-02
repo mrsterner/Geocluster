@@ -1,5 +1,6 @@
 package dev.sterner.geocluster.common.blocks;
 
+import com.mojang.serialization.MapCodec;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.*;
 import net.minecraft.entity.Entity;
@@ -29,7 +30,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Random;
 
 public class SampleBlock extends HorizontalFacingBlock implements Waterloggable {
-
+    public static final MapCodec<SampleBlock> CODEC = createCodec((p -> new SampleBlock()));
     public static final BooleanProperty WATERLOGGED = Properties.WATERLOGGED;
     public static final DirectionProperty FACING = HorizontalFacingBlock.FACING;
     private static final Settings BASE_PROPS = FabricBlockSettings.create().strength(0.125F, 2F).sounds(BlockSoundGroup.GRAVEL).dynamicBounds().offset(OffsetType.XZ);
@@ -37,6 +38,11 @@ public class SampleBlock extends HorizontalFacingBlock implements Waterloggable 
     public SampleBlock() {
         super(BASE_PROPS);
         this.setDefaultState(this.getDefaultState().with(WATERLOGGED, Boolean.FALSE).with(FACING, Direction.NORTH));
+    }
+
+    @Override
+    protected MapCodec<SampleBlock> getCodec() {
+        return CODEC;
     }
 
     @Nullable
@@ -67,12 +73,11 @@ public class SampleBlock extends HorizontalFacingBlock implements Waterloggable 
         }
     }
 
-    @SuppressWarnings("deprecation")
     @Override
-    public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
+    protected ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, BlockHitResult hit) {
         if (!player.isSneaking()) {
             world.breakBlock(pos, true);
-            player.swingHand(hand);
+            player.swingHand(player.preferredHand);
             return ActionResult.SUCCESS;
         }
         return ActionResult.PASS;
@@ -107,4 +112,6 @@ public class SampleBlock extends HorizontalFacingBlock implements Waterloggable 
             world.scheduleFluidTick(pos, Fluids.WATER, Fluids.WATER.getTickRate(world));
         }
     }
+
+
 }

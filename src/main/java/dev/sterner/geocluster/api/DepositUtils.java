@@ -44,7 +44,7 @@ public class DepositUtils {
         if (defaultMatchersCached == null) {
             defaultMatchersCached = new HashSet<>();
             GeoclusterConfig.DEFAULT_REPLACEMENT_MATERIALS.forEach(s -> {
-                Block block = Registries.BLOCK.get(new Identifier(s));
+                Block block = Registries.BLOCK.get(Identifier.of(s));
                 if (!addDefaultMatcher(block)) {
                     Geocluster.LOGGER.warn(String.format(s + "&s is not a valid block. Please verify.", s));
                 }
