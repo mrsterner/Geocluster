@@ -43,11 +43,11 @@ public record S2CProspectingPayload(String string, NbtCompound nbt) implements C
                 if (clientPlayerEntity != null) {
                     if (!direction.equals("")) {
                         for (BlockState blockState : blocks) {
-                            ((IOreToastManager) client).getManager().add(new OreToast(blockState, Direction.byName(direction)));
+                            ((IOreToastManager) client).getManager().add(new OreToast(clientPlayerEntity, blockState, Direction.byName(direction)));
                         }
                     } else {
                         for (BlockState blockState : blocks) {
-                            ((IOreToastManager) client).getManager().add(new OreToast(blockState, null));
+                            ((IOreToastManager) client).getManager().add(new OreToast(clientPlayerEntity, blockState, null));
                         }
                     }
                 }
