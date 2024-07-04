@@ -13,6 +13,5 @@ public class GeoclusterDatagen implements DataGeneratorEntrypoint {
         pack.addProvider(GeoclusterRecipeProvider::new);
         pack.addProvider(GeoclusterTagProvider.GeoclusterBlockTags::new);
         pack.addProvider(GeoclusterTagProvider.GeoclusterItemTags::new);
-        pack.addProvider(GeoclusterTagProvider.GeoclusterBiomeTags::new);
     }
 }
